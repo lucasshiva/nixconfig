@@ -107,6 +107,16 @@
     neovim
   ];
 
+  virtualisation.podman = {
+    enable = true;
+    dockerCompat = true;
+  };
+
+  # Exposes Nix profile to Distrobox containers.
+  environment.etc."distrobox/distrobox.conf".text = ''
+    container_additional_volumes="/nix/store:/nix/store:ro /etc/profiles/per-user:/etc/profiles/per-user:ro /etc/static/profiles/per-user:/etc/static/profiles/per-user:ro"
+  '';
+
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave

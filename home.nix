@@ -13,6 +13,12 @@
     nixd
   ];
 
+  home.sessionPath = [
+    "$HOME/.local/bin"
+  ];
+
+  programs.bash.enable = true;
+
   programs.git = {
     enable = true;
     settings = {
@@ -24,7 +30,21 @@
 
   programs.vscode = {
     enable = true;
-    package = pkgs.vscode.fhs;
+  programs.distrobox = {
+    enable = true;
+    enableSystemdUnit = true;
+    containers = {
+      arch = {
+        hostname = "arch";
+        image = "archlinux:latest";
+        replace = true;
+        additional_packages = "uv";
+        exported_bins = [
+          "/usr/sbin/uv"
+        ];
+        exported_bins_path = "~/.local/bin";
+      };
+    };
   };
 
   home.stateVersion = "25.11";
