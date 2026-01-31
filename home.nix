@@ -8,6 +8,11 @@
   home.homeDirectory = "/home/lucas";
   xdg.enable = true;
 
+  home.packages = with pkgs; [
+    nixfmt
+    nixd
+  ];
+
   programs.git = {
     enable = true;
     settings = {
@@ -17,7 +22,10 @@
     };
   };
 
-  home.packages = with pkgs; [];
+  programs.vscode = {
+    enable = true;
+    package = pkgs.vscode.fhs;
+  };
 
   home.stateVersion = "25.11";
   programs.home-manager.enable = true;
