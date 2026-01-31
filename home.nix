@@ -5,7 +5,7 @@
 
 {
   imports = [
-    ./distrobox.nix
+    ./modules/distrobox.nix
   ];
 
   home.username = "lucas";
