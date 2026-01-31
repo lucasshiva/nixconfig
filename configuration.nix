@@ -96,6 +96,9 @@
   # Install firefox.
   programs.firefox.enable = true;
 
+  # For Flutter Web. Might migrate to Helium later on.
+  programs.chromium.enable = true;
+
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
@@ -107,6 +110,13 @@
     neovim
     ntfs3g
   ];
+
+  environment.variables = {
+    EDITOR = "nvim";
+    VISUAL = "nvim";
+    ANDROID_HOME = "$HOME/Android/Sdk"; # SDK is installed via Android Studio
+    CHROME_EXECUTABLE = "${pkgs.chromium}/bin/chromium";
+  };
 
   virtualisation.podman = {
     enable = true;

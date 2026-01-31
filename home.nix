@@ -24,6 +24,7 @@
 
   home.sessionPath = [
     "$HOME/.local/bin"
+    "$HOME/fvm/bin"
   ];
 
   programs.bash.enable = true;

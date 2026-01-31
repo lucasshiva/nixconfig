@@ -41,13 +41,37 @@
         hostname = "arch";
         image = "archlinux:latest";
         replace = true;
-        additional_packages = "uv bun dotnet-sdk dotnet-sdk-9.0 dotnet-targeting-pack dotnet-targeting-pack-9.0 aspnet-runtime aspnet-targeting-pack";
+        additional_packages = [
+          # Build tools
+          "base-devel"
+          "which"
+          "clang"
+          "cmake"
+          "ninja"
+          "pkgconf"
+          "gtk3"
+          "mesa-utils"
+
+          # Dev tools
+          "uv"
+          "bun"
+          "dotnet-sdk"
+          "dotnet-sdk-9.0"
+          "dotnet-targeting-pack"
+          "dotnet-targeting-pack-9.0"
+          "aspnet-runtime"
+          "aspnet-targeting-pack"
+        ];
         exported_bins = [
           "/usr/sbin/uv"
           "/usr/sbin/dotnet"
           "/usr/sbin/bun"
+          "/home/lucas/fvm/bin/fvm"
         ];
         exported_bins_path = "~/.local/bin";
+        pre_init_hooks = [
+          "curl -fsSL https://fvm.app/install.sh | bash"
+        ];
       };
     };
   };
