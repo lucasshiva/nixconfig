@@ -32,6 +32,11 @@
     enable = true;
     package = pkgs.vscode;
   };
+
+  programs.keepassxc = {
+    enable = true;
+  };
+
   programs.distrobox = {
     enable = true;
     enableSystemdUnit = true;
