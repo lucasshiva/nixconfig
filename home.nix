@@ -24,6 +24,8 @@
     # Utilities
     unzip
     unrar
+
+    firefox-devedition
   ];
 
   home.sessionPath = [
