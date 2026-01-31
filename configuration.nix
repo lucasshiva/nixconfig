@@ -42,6 +42,14 @@
   # Enable the X11 windowing system.
   # You can disable this if you're only using the Wayland session.
   services.xserver.enable = true;
+  services.xserver.videoDrivers = [ "nvidia" ];
+
+  hardware.graphics.enable = true;
+  hardware.nvidia.open = true;
+  hardware.nvidia.nvidiaSettings = true;
+
+  # For Wayland, is highly recommended to enable kernel mode settings (KMS).
+  hardware.nvidia.modesetting.enable = true;
 
   # Enable the KDE Plasma Desktop Environment.
   services.displayManager.sddm.enable = true;
