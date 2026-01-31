@@ -4,6 +4,10 @@
 }:
 
 {
+  imports = [
+    ./distrobox.nix
+  ];
+
   home.username = "lucas";
   home.homeDirectory = "/home/lucas";
   xdg.enable = true;
@@ -11,6 +15,8 @@
   home.packages = with pkgs; [
     nixfmt
     nixd
+    # IDEs
+    jetbrains.rider
   ];
 
   home.sessionPath = [
