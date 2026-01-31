@@ -20,6 +20,10 @@
     jetbrains.rider
     android-studio
     jetbrains.idea
+
+    # Utilities
+    unzip
+    unrar
   ];
 
   home.sessionPath = [
