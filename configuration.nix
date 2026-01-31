@@ -117,6 +117,18 @@
     container_additional_volumes="/nix/store:/nix/store:ro /etc/profiles/per-user:/etc/profiles/per-user:ro /etc/static/profiles/per-user:/etc/static/profiles/per-user:ro"
   '';
 
+  # Helps running prebuilt binaries.
+  # This is necessary to run `python` from a venv in `pkgs.vscode`.
+  programs.nix-ld = {
+    enable = true;
+
+    # Include libraries from steam by default.
+    # Add other libraries as needed. See https://wiki.nixos.org/wiki/Nix-ld
+    libraries = [
+      (pkgs.runCommand "steamrun-lib" { } "mkdir $out; ln -s ${pkgs.steam-run.fhsenv}/usr/lib64 $out/lib")
+    ];
+  };
+
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave
