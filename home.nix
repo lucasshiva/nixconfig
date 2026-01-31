@@ -15,8 +15,11 @@
   home.packages = with pkgs; [
     nixfmt
     nixd
+
     # IDEs
     jetbrains.rider
+    android-studio
+    jetbrains.idea
   ];
 
   home.sessionPath = [
@@ -41,23 +44,6 @@
 
   programs.keepassxc = {
     enable = true;
-  };
-
-  programs.distrobox = {
-    enable = true;
-    enableSystemdUnit = true;
-    containers = {
-      arch = {
-        hostname = "arch";
-        image = "archlinux:latest";
-        replace = true;
-        additional_packages = "uv";
-        exported_bins = [
-          "/usr/sbin/uv"
-        ];
-        exported_bins_path = "~/.local/bin";
-      };
-    };
   };
 
   home.stateVersion = "25.11";
