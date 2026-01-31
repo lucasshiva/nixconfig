@@ -13,10 +13,6 @@
     (pkgs.writeShellScriptBin "rider-arch" ''
       exec distrobox-enter arch -- rider "$@"
     '')
-
-    (pkgs.writeShellScriptBin "code-arch" ''
-      exec distrobox-enter arch -- code "$@"
-    '')
   ];
 
   xdg.desktopEntries = {
@@ -25,12 +21,6 @@
       exec = "distrobox-enter arch -- rider %u";
       icon = "rider";
       comment = ".NET IDE from JetBrains";
-    };
-    code-arch = {
-      name = "Visual Studio Code (Arch)";
-      exec = "distrobox-enter arch -- code %u";
-      icon = "code";
-      comment = "Text Editor";
     };
   };
 
