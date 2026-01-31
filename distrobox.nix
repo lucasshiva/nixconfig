@@ -41,10 +41,11 @@
         hostname = "arch";
         image = "archlinux:latest";
         replace = true;
-        additional_packages = "uv dotnet-sdk dotnet-sdk-9.0 dotnet-targeting-pack dotnet-targeting-pack-9.0 aspnet-runtime aspnet-targeting-pack";
+        additional_packages = "uv bun dotnet-sdk dotnet-sdk-9.0 dotnet-targeting-pack dotnet-targeting-pack-9.0 aspnet-runtime aspnet-targeting-pack";
         exported_bins = [
           "/usr/sbin/uv"
           "/usr/sbin/dotnet"
+          "/usr/sbin/bun"
         ];
         exported_bins_path = "~/.local/bin";
       };
