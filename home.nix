@@ -62,7 +62,17 @@
 
   programs.zsh = {
     enable = true;
-    autosuggestion.enable = true;
+    plugins = [
+      {
+        name = "fzf-tab";
+        src = pkgs.zsh-fzf-tab;
+        file = "share/fzf-tab/fzf-tab.plugin.zsh";
+      }
+    ];
+    autosuggestion = {
+      enable = true;
+      strategy = [ ];
+    };
     syntaxHighlighting.enable = true;
     enableCompletion = true;
     dotDir = "${config.xdg.configHome}/zsh";
