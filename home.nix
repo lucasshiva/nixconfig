@@ -93,6 +93,17 @@
     };
   };
 
+  # `cat` clone with syntax highlighting and git integration.
+  programs.bat = {
+    enable = true;
+    extraPackages = with pkgs.bat-extras; [
+      batdiff
+      batman
+      batgrep
+      prettybat
+    ];
+  };
+
   # A modern alternative for ls.
   programs.eza = {
     enable = true;
