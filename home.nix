@@ -43,6 +43,9 @@
     nerd-fonts.monaspace
     inter
     merriweather
+
+    # Osu - rhythm game
+    osu-lazer-bin
   ];
 
   home.sessionPath = [
@@ -189,6 +192,10 @@
       gamemode = true;
     };
   };
+
+  # Symlink my osu config and files.
+  home.file.".local/share/osu".source =
+    config.lib.file.mkOutOfStoreSymlink "/mnt/commondata/Apps/osu";
 
   home.stateVersion = "25.11";
   programs.home-manager.enable = true;
