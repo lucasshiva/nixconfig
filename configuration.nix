@@ -142,6 +142,9 @@
 
     # Disk benchmark tool. Must be installed system-wide.
     kdiskmark
+
+    # Disk space visualizer
+    kdePackages.filelight
   ];
 
   environment.variables = {
