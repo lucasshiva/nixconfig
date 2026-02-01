@@ -8,6 +8,7 @@
 {
   imports = [
     ./modules/distrobox.nix
+    ./modules/wine.nix
   ];
 
   home.username = "lucas";
