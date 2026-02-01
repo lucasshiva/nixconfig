@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  lib,
   ...
 }:
 
@@ -152,6 +153,14 @@
       init.defaultBranch = "main";
       merge.conflictStyle = "zdiff3"; # For `delta`.
     };
+  };
+
+  programs.starship = {
+    enable = true;
+    enableZshIntegration = true;
+    enableBashIntegration = true;
+    enableNushellIntegration = true;
+    settings = lib.importTOML ./modules/starship/starship.toml;
   };
 
   programs.vscode = {
