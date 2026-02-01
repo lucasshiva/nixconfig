@@ -93,6 +93,11 @@
     };
   };
 
+  # Fast text searcher. Can be used as a faster `grep` alternative.
+  programs.ripgrep = {
+    enable = true;
+  };
+
   # Fuzzy finder.
   # Automatically adds Ctrl+T for file search and Ctrl+R for command history search.
   programs.fzf = {
