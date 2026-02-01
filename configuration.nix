@@ -139,6 +139,9 @@
     # Steam
     steam-run # run commands in the same steam FHS environment.
     protonup-qt # Manage proton versions
+
+    # Disk benchmark tool. Must be installed system-wide.
+    kdiskmark
   ];
 
   environment.variables = {
