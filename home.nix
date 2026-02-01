@@ -66,6 +66,14 @@
     syntaxHighlighting.enable = true;
     enableCompletion = true;
     dotDir = "${config.xdg.configHome}/zsh";
+    history = {
+      size = 200000;
+      ignoreDups = true;
+      ignoreAllDups = true;
+      saveNoDups = true;
+      share = true;
+      extended = true;
+    };
   };
 
   programs.nushell = {
