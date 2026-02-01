@@ -93,6 +93,20 @@
     };
   };
 
+  # A modern alternative for ls.
+  programs.eza = {
+    enable = true;
+    enableBashIntegration = true;
+    enableZshIntegration = true;
+    extraOptions = [
+      "--header"
+      "--group-directories-first"
+    ];
+    icons = "auto"; # This requires a nerd font.
+    git = true;
+    colors = "always";
+  };
+
   # Fast text searcher. Can be used as a faster `grep` alternative.
   programs.ripgrep = {
     enable = true;
