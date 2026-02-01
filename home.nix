@@ -33,6 +33,11 @@
 
     # I sync obsidian via syncthing, so I don't need to enable it in home-manager.
     obsidian
+
+    # Fonts
+    nerd-fonts.monaspace
+    inter
+    merriweather
   ];
 
   home.sessionPath = [
