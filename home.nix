@@ -29,7 +29,10 @@
     firefox-devedition
 
     # Media
-    stremio
+
+    # Stremio requires `qtwebengine-5.15.19`, but it's insecure and building it takes too long.
+    # Until we find a solution, we don't use stremio.
+    # stremio
 
     # I sync obsidian via syncthing, so I don't need to enable it in home-manager.
     obsidian
