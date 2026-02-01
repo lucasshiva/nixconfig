@@ -20,6 +20,23 @@
 
   networking.hostName = "nixos"; # Define your hostname.
 
+  # Define a user account. Don't forget to set a password with ‘passwd’.
+  users.users.lucas = {
+    isNormalUser = true;
+    description = "Lucas";
+    shell = pkgs.zsh;
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
+    packages = with pkgs; [
+      kdePackages.kate
+    ];
+  };
+
+  # Enable it here to set as default, but configuration is done via home-manager.
+  programs.zsh.enable = true;
+
   networking.networkmanager.enable = true;
 
   # Set your time zone.
@@ -86,19 +103,6 @@
   services.xserver.xkb = {
     layout = "us";
     variant = "altgr-intl";
-  };
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.lucas = {
-    isNormalUser = true;
-    description = "Lucas";
-    extraGroups = [
-      "networkmanager"
-      "wheel"
-    ];
-    packages = with pkgs; [
-      kdePackages.kate
-    ];
   };
 
   # Enable CUPS to print documents.

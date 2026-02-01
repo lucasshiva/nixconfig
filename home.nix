@@ -1,4 +1,5 @@
 {
+  config,
   pkgs,
   ...
 }:
@@ -54,7 +55,25 @@
     nrs = "sudo nixos-rebuild switch --flake ~/nixconfig";
   };
 
-  programs.bash.enable = true;
+  programs.bash = {
+    enable = true;
+    enableCompletion = true;
+  };
+
+  programs.zsh = {
+    enable = true;
+    autosuggestion.enable = true;
+    syntaxHighlighting.enable = true;
+    enableCompletion = true;
+    dotDir = "${config.xdg.configHome}/zsh";
+  };
+
+  programs.nushell = {
+    enable = true;
+    settings = {
+      show_banner = false;
+    };
+  };
 
   programs.git = {
     enable = true;
