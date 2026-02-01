@@ -25,7 +25,11 @@
     unzip
     unrar
 
+    # Browser
     firefox-devedition
+
+    # Media
+    stremio
   ];
 
   home.sessionPath = [
