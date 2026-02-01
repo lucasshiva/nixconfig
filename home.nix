@@ -74,6 +74,24 @@
     enable = true;
   };
 
+  programs.mangohud = {
+    enable = true;
+    enableSessionWide = true;
+    settings = {
+      fps_limit = [
+        180
+        120
+        60
+      ];
+      toggle_fps_limit = "Shift_L+F1";
+      show_fps_limit = true;
+      cpu_temp = true;
+      gpu_temp = true;
+      vram = true;
+      gamemode = true;
+    };
+  };
+
   home.stateVersion = "25.11";
   programs.home-manager.enable = true;
 }
