@@ -93,6 +93,14 @@
     };
   };
 
+  # Fuzzy finder.
+  # Automatically adds Ctrl+T for file search and Ctrl+R for command history search.
+  programs.fzf = {
+    enable = true;
+    enableZshIntegration = true;
+    enableBashIntegration = true;
+  };
+
   # Syntax highlighting for git diffs.
   programs.delta = {
     enable = true;
