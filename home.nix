@@ -30,6 +30,9 @@
 
     # Media
     stremio
+
+    # I sync obsidian via syncthing, so I don't need to enable it in home-manager.
+    obsidian
   ];
 
   home.sessionPath = [
