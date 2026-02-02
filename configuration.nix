@@ -28,6 +28,7 @@
     extraGroups = [
       "networkmanager"
       "wheel"
+      "audio"
     ];
     packages = with pkgs; [
       kdePackages.kate
@@ -37,7 +38,11 @@
   # Enable it here to set as default, but configuration is done via home-manager.
   programs.zsh.enable = true;
 
+  # Internet
   networking.networkmanager.enable = true;
+
+  # Bluetooth
+  hardware.bluetooth.enable = true;
 
   # Set your time zone.
   time.timeZone = "America/Sao_Paulo";
