@@ -27,10 +27,10 @@ in
       export WINEPREFIX="$PREFIX"
       wineboot -u
       ln -s ${baseDir} "$PREFIX/dosdevices/f:"
-      winetricks -q allfonts cjkfonts
+      winetricks -q dotnet48 gdiplus allfonts cjkfonts wmp11
       touch "$PREFIX/.hm-installed"
 
-      echo "Calibre setup complete."
+      echo "MusicBee setup complete."
     '')
 
     # Calibre.
@@ -46,10 +46,12 @@ in
 
       export WINEPREFIX="$PREFIX"
       wineboot -u
-      winetricks -q dotnet48 gdiplus allfonts cjkfonts wmp11
+
+      # I don't think we need any more packages.
+      winetricks -q allfonts cjkfonts
       touch "$PREFIX/.hm-installed"
 
-      echo "MusicBee setup complete."
+      echo "Calibre setup complete."
     '')
   ];
 
