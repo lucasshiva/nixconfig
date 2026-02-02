@@ -11,6 +11,8 @@ in
     winetricks
 
     # MusicBee
+    # I've seen some guides install 'xmllite' and 'dotnet40' in the prefix as well.
+    # I've got MusicBee working without those, but I'm leaving it here in case we ever need it.
     (pkgs.writeShellScriptBin "setup-musicbee" ''
       set -e
       PREFIX="${prefixDir}/musicbee"
