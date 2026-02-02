@@ -82,6 +82,9 @@
   hardware.nvidia.open = true;
   hardware.nvidia.nvidiaSettings = true;
 
+  # Should help with sleep/hibernate problems.
+  hardware.nvidia.powerManagement.enable = true;
+
   # For Wayland, is highly recommended to enable kernel mode settings (KMS).
   hardware.nvidia.modesetting.enable = true;
 
