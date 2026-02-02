@@ -114,6 +114,20 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
+  services.printing.drivers = with pkgs; [
+    # For my EPSON L3250.
+    epson-escpr2
+
+    # Additional drivers in case I need it.
+    gutenprint # Many inkjets
+    hplip # HP
+    splix # Samsung
+  ];
+
+  # Automatical discovery of network printers via mDNS / IPP.
+  services.avahi.enable = true;
+  services.avahi.nssmdns4 = true;
+
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
