@@ -198,6 +198,24 @@
   home.file.".local/share/osu".source =
     config.lib.file.mkOutOfStoreSymlink "/mnt/commondata/Apps/osu";
 
+  # Fix issues with my 2.4ghz headset and the `snd_usb_audio` driver.
+  # This seems to be a bug where the right channel is always set to zero at boot.
+  home.file.".config/wireplumber/main.lua.d/50-h510.lua".text = ''
+    rule = {
+      matches = {
+        {
+          { "device.name", "equals", "alsa_card.usb-XiiSound_Technology_Corporation_H510-PRO_Wireless_headset-00" },
+        },
+      },
+      apply_properties = {
+        ["api.alsa.soft-mixer"] = true,
+        ["api.alsa.ignore-dB"] = true,
+      },
+    }
+
+    table.insert(alsa_monitor.rules, rule)
+  '';
+
   home.stateVersion = "25.11";
   programs.home-manager.enable = true;
 }

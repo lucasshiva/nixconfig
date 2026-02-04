@@ -169,6 +169,10 @@
 
     # Disk space visualizer
     kdePackages.filelight
+
+    # Utilities
+    usbutils
+    pavucontrol
   ];
 
   environment.variables = {
