@@ -55,8 +55,6 @@
   ];
 
   home.shellAliases = {
-    dea = "distrobox enter arch";
-    dca = "distrobox assemble create --file ~/.config/distrobox/containers.ini --replace";
     nrs = "sudo nixos-rebuild switch --flake ~/nixconfig";
   };
 
