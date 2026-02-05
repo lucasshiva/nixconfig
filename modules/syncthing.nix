@@ -1,14 +1,27 @@
-{ ... }:
+{ config, ... }:
 let
   syncPath = "/mnt/commondata/Sync";
   phonePath = "${syncPath}/POCO X7 Pro";
 in
 {
+
+  # Saving the key and cert files allow us to automatically connect to our devices.
+  # NOTE: This still needs more testing.
+  # See https://wiki.nixos.org/wiki/Syncthing#Declarative_node_IDs
+  sops.secrets."syncthing/key" = {
+    owner = "lucas";
+  };
+  sops.secrets."syncthing/cert" = {
+    owner = "lucas";
+  };
+
   services.syncthing = {
     enable = true;
     openDefaultPorts = true;
     user = "lucas";
     dataDir = "/home/lucas";
+    key = config.sops.secrets."syncthing/key".path;
+    cert = config.sops.secrets."syncthing/cert".path;
     settings.devices = {
       "Phone" = {
         id = "ARDTWJM-7LRLGSJ-XVK2RLJ-36730XN-5M55L4Y-KBIK2JK-P6JOSSA-2MY7LQB";

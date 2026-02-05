@@ -173,6 +173,10 @@
     # Utilities
     usbutils
     pavucontrol
+
+    # Secrets
+    age
+    sops
   ];
 
   environment.variables = {
@@ -205,6 +209,13 @@
   };
 
   zramSwap.enable = true;
+
+  # Secrets management
+  sops.defaultSopsFile = ./secrets/secrets.yaml;
+
+  # Save/backup file. I'm using KeePassXC for that.
+  sops.age.keyFile = "/home/lucas/.config/sops/age/keys.txt";
+  sops.age.generateKey = false;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
