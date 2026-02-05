@@ -22,9 +22,10 @@ in
     dataDir = "/home/lucas";
     key = config.sops.secrets."syncthing/key".path;
     cert = config.sops.secrets."syncthing/cert".path;
+    overrideDevices = true;
     settings.devices = {
       "Phone" = {
-        id = "ARDTWJM-7LRLGSJ-XVK2RLJ-36730XN-5M55L4Y-KBIK2JK-P6JOSSA-2MY7LQB";
+        id = "ARDTWJM-7LRLGSJ-XVK2RLJ-3673OXN-5M55L4Y-KBIK2JK-P6JOSSA-2MY7LQB";
       };
     };
     settings.folders = {
