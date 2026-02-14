@@ -92,6 +92,10 @@
       share = true;
       extended = true;
     };
+completionInit = ''
+      autoload -Uz compinit
+      compinit -u
+    '';
   };
 
   programs.nushell = {
