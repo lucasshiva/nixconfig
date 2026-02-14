@@ -70,6 +70,10 @@
           "jdk-openjdk"
           "jdk21-openjdk"
           "jdk17-openjdk"
+
+          # Docker
+          "podman"
+          "podman-docker"
         ];
         exported_bins = [
           "/usr/sbin/uv"
@@ -78,6 +82,7 @@
           "/usr/sbin/java"
           "/usr/sbin/javac"
           "/home/lucas/fvm/bin/fvm"
+          "/home/lucas/.aspire/bin/aspire"
         ];
         exported_bins_path = "~/.local/bin";
         pre_init_hooks = [
@@ -85,6 +90,7 @@
         ];
         init_hooks = [
           "archlinux-java set java-25-openjdk"
+          "curl -sSL https://aspire.dev/install.sh | bash"
         ];
       };
     };

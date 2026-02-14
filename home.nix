@@ -57,6 +57,7 @@
   home.sessionPath = [
     "$HOME/.local/bin"
     "$HOME/fvm/bin"
+"$HOME/.aspire/bin"
   ];
 
   home.shellAliases = {
