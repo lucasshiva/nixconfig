@@ -47,6 +47,11 @@
 
     # Osu - rhythm game
     osu-lazer-bin
+
+    # Spotdl
+    ffmpeg
+    spotdl
+    yt-dlp
   ];
 
   home.sessionPath = [
