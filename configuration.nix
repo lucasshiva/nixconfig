@@ -222,6 +222,12 @@
   sops.age.keyFile = "/home/lucas/.config/sops/age/keys.txt";
   sops.age.generateKey = false;
 
+  services.power-profiles-daemon.enable = true;
+  powerManagement = {
+    enable = true;
+    cpuFreqGovernor = "performance";
+  };
+
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave
