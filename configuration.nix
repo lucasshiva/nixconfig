@@ -29,7 +29,7 @@
       "networkmanager"
       "wheel"
       "audio"
-"libvirtd"
+      "libvirtd"
       "kvm"
     ];
     packages = with pkgs; [
@@ -168,6 +168,7 @@
 
     # Disk benchmark tool. Must be installed system-wide.
     kdiskmark
+    gparted
 
     # Disk space visualizer
     kdePackages.filelight
