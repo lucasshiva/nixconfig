@@ -1,18 +1,19 @@
 {
   config,
   pkgs,
-  lib,
+  username,
   ...
 }:
 
 {
   imports = [
-    ./modules/distrobox.nix
-    ./modules/wine.nix
+    ../../modules/distrobox.nix
+    ../../modules/wine.nix
+    ../../modules/starship
   ];
 
-  home.username = "lucas";
-  home.homeDirectory = "/home/lucas";
+  home.username = username;
+  home.homeDirectory = "/home/${username}";
   xdg.enable = true;
 
   home.packages = with pkgs; [
@@ -178,14 +179,6 @@
       init.defaultBranch = "main";
       merge.conflictStyle = "zdiff3"; # For `delta`.
     };
-  };
-
-  programs.starship = {
-    enable = true;
-    enableZshIntegration = true;
-    enableBashIntegration = true;
-    enableNushellIntegration = true;
-    settings = lib.importTOML ./modules/starship/starship.toml;
   };
 
   programs.vscode = {

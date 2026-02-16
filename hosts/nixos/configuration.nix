@@ -2,13 +2,13 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ pkgs, ... }:
+{ pkgs, username, ... }:
 
 {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    ./modules/syncthing.nix
+    ../../modules/syncthing.nix
   ];
 
   # Bootloader.
@@ -21,7 +21,7 @@
   networking.hostName = "nixos"; # Define your hostname.
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.lucas = {
+  users.users.${username} = {
     isNormalUser = true;
     description = "Lucas";
     shell = pkgs.zsh;
@@ -217,7 +217,7 @@
   zramSwap.enable = true;
 
   # Secrets management
-  sops.defaultSopsFile = ./secrets/secrets.yaml;
+  sops.defaultSopsFile = ../../secrets/secrets.yaml;
 
   # Save/backup file. I'm using KeePassXC for that.
   sops.age.keyFile = "/home/lucas/.config/sops/age/keys.txt";

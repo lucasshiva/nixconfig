@@ -15,26 +15,34 @@
 
   outputs =
     {
-      self,
       nixpkgs,
       home-manager,
       sops-nix,
       ...
     }@inputs:
+    let
+      username = "lucas";
+    in
     {
       nixosConfigurations = {
         nixos = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
-          specialArgs = { inherit inputs; };
+          specialArgs = {
+            inherit inputs;
+            inherit username;
+          };
           modules = [
-            ./configuration.nix
+            ./hosts/nixos/configuration.nix
             sops-nix.nixosModules.sops
             home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.users.lucas = ./home.nix;
-              home-manager.extraSpecialArgs = { inherit inputs; };
+              home-manager.users."${username}" = ./hosts/nixos/home.nix;
+              home-manager.extraSpecialArgs = {
+                inherit inputs;
+                inherit username;
+              };
             }
           ];
         };
