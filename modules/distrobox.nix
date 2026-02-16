@@ -6,6 +6,8 @@
 
   home.sessionPath = [
     "$HOME/.dotnet/tools"
+    "$HOME/fvm/bin"
+    "$HOME/.aspire/bin"
   ];
 
   home.packages = [
@@ -74,6 +76,10 @@
           # Docker
           "podman"
           "podman-docker"
+
+          # Node and NPM
+          "nodejs"
+          "npm"
         ];
         exported_bins = [
           "/usr/sbin/uv"
@@ -83,6 +89,8 @@
           "/usr/sbin/javac"
           "/home/lucas/fvm/bin/fvm"
           "/home/lucas/.aspire/bin/aspire"
+          "/usr/sbin/node"
+          "/usr/sbin/npm"
         ];
         exported_bins_path = "~/.local/bin";
         pre_init_hooks = [

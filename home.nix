@@ -68,8 +68,6 @@
 
   home.sessionPath = [
     "$HOME/.local/bin"
-    "$HOME/fvm/bin"
-"$HOME/.aspire/bin"
   ];
 
   home.shellAliases = {
@@ -105,7 +103,7 @@
       share = true;
       extended = true;
     };
-completionInit = ''
+    completionInit = ''
       autoload -Uz compinit
       compinit -u
     '';
@@ -218,6 +216,6 @@ completionInit = ''
   home.file.".local/share/osu".source =
     config.lib.file.mkOutOfStoreSymlink "/mnt/commondata/Apps/osu";
 
-    home.stateVersion = "25.11";
+  home.stateVersion = "25.11";
   programs.home-manager.enable = true;
 }
