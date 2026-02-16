@@ -29,6 +29,8 @@
       "networkmanager"
       "wheel"
       "audio"
+"libvirtd"
+      "kvm"
     ];
     packages = with pkgs; [
       kdePackages.kate
@@ -190,6 +192,9 @@
     enable = true;
     dockerCompat = true;
   };
+
+  virtualisation.libvirtd.enable = true;
+  programs.virt-manager.enable = true;
 
   # Exposes Nix profile to Distrobox containers.
   environment.etc."distrobox/distrobox.conf".text = ''
