@@ -64,6 +64,9 @@
     xz
     readline
     libffi
+
+    # dev shells
+    devenv
   ];
 
   home.sessionPath = [
@@ -215,6 +218,14 @@
   # Symlink my osu config and files.
   home.file.".local/share/osu".source =
     config.lib.file.mkOutOfStoreSymlink "/mnt/commondata/Apps/osu";
+
+  programs.direnv = {
+    enable = true;
+    enableBashIntegration = true;
+    enableFishIntegration = true;
+    enableZshIntegration = true;
+    enableNushellIntegration = true;
+  };
 
   home.stateVersion = "25.11";
   programs.home-manager.enable = true;

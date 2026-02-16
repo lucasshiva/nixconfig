@@ -247,5 +247,11 @@
     "flakes"
   ];
 
+  # For devenv cache.
+  nix.settings.trusted-users = [
+    "root"
+    "lucas" # my user
+  ];
+
   home-manager.backupFileExtension = "bak";
 }
