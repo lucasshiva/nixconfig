@@ -9,6 +9,8 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ../../modules/syncthing.nix
+    ../../modules/osu/nixos.nix
+    ../../modules/opentabletdriver/nixos.nix
   ];
 
   # Bootloader.
@@ -60,12 +62,6 @@
   # You can disable this if you're only using the Wayland session.
   services.xserver.enable = true;
   services.xserver.videoDrivers = [ "nvidia" ];
-
-  hardware.opentabletdriver.enable = true;
-
-  # Required by OpenTabletDriver
-  hardware.uinput.enable = true;
-  boot.kernelModules = [ "uinput" ];
 
   hardware.graphics = {
     enable = true;

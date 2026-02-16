@@ -10,6 +10,7 @@
     ../../modules/distrobox.nix
     ../../modules/wine.nix
     ../../modules/starship
+    ../../modules/osu/home.nix
   ];
 
   home.username = username;
@@ -45,9 +46,6 @@
     nerd-fonts.monaspace
     inter
     merriweather
-
-    # Osu - rhythm game
-    osu-lazer-bin
 
     # Spotdl
     ffmpeg
@@ -208,16 +206,18 @@
     };
   };
 
-  # Symlink my osu config and files.
-  home.file.".local/share/osu".source =
-    config.lib.file.mkOutOfStoreSymlink "/mnt/commondata/Apps/osu";
-
   programs.direnv = {
     enable = true;
     enableBashIntegration = true;
     enableFishIntegration = true;
     enableZshIntegration = true;
     enableNushellIntegration = true;
+  };
+
+  my.osu = {
+    enable = true;
+    symlinkFiles.enable = true;
+    enableTablet = true;
   };
 
   home.stateVersion = "25.11";
