@@ -52,6 +52,18 @@
     ffmpeg
     spotdl
     yt-dlp
+
+    # Build essentials
+    gcc
+    gnumake
+    binutils
+    pkg-config
+    openssl
+    zlib
+    bzip2
+    xz
+    readline
+    libffi
   ];
 
   home.sessionPath = [
