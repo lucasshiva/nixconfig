@@ -13,11 +13,5 @@
         description = "Shared osu data directory";
       };
     };
-
-    enableTablet = lib.mkOption {
-      type = lib.types.bool;
-      default = true;
-      description = "Enable tablet support automatically";
-    };
   };
 }

@@ -217,7 +217,6 @@
   my.osu = {
     enable = true;
     symlinkFiles.enable = true;
-    enableTablet = true;
   };
 
   home.stateVersion = "25.11";
