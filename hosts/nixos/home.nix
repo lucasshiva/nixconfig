@@ -66,7 +66,20 @@
 
     # dev shells
     devenv
+
+    # Application/browser chooser
+    junction
   ];
+
+  xdg.mimeApps = {
+    enable = true;
+
+    defaultApplications = {
+      "x-scheme-handler/http" = "re.sonny.Junction.desktop";
+      "x-scheme-handler/https" = "re.sonny.Junction.desktop";
+      "text/html" = "re.sonny.Junction.desktop";
+    };
+  };
 
   home.sessionPath = [
     "$HOME/.local/bin"
