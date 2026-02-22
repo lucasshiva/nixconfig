@@ -91,6 +91,7 @@
     extraPackages = with pkgs; [
       gamescope
       mangohud
+      dotnet-sdk_8
     ];
   };
 
