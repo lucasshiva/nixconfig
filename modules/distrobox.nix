@@ -63,10 +63,16 @@
           # Dotnet
           "dotnet-sdk"
           "dotnet-sdk-9.0"
+          "dotnet-sdk-8.0"
           "dotnet-targeting-pack"
+          "dotnet-targeting-pack-8.0"
           "dotnet-targeting-pack-9.0"
           "aspnet-runtime"
+          "aspnet-runtime-9.0"
+          "aspnet-runtime-8.0"
           "aspnet-targeting-pack"
+          "aspnet-targeting-pack-9.0"
+          "aspnet-targeting-pack-8.0"
 
           # Java
           "jdk-openjdk"
