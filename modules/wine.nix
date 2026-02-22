@@ -7,7 +7,7 @@ let
 in
 {
   home.packages = with pkgs; [
-    wineWowPackages.stable
+    wineWow64Packages.stable
     winetricks
 
     # MusicBee
