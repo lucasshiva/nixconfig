@@ -11,6 +11,7 @@
     ../../modules/wine.nix
     ../../modules/starship
     ../../modules/osu/home.nix
+    ../../modules/calibre/home.nix
   ];
 
   home.username = username;
@@ -231,6 +232,9 @@
     enable = true;
     symlinkFiles.enable = true;
   };
+
+  my.calibre.enable = true;
+  my.calibre.symlinkSettings.enable = true;
 
   home.stateVersion = "25.11";
   programs.home-manager.enable = true;

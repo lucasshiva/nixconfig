@@ -2,7 +2,6 @@
 let
   baseDir = "/mnt/commondata";
   musicBeeDir = "${baseDir}/Apps/MusicBee";
-  calibreDir = "${baseDir}/Apps/Calibre Portable";
   prefixDir = "${config.home.homeDirectory}/wineprefix";
 in
 {
@@ -32,27 +31,6 @@ in
 
       echo "MusicBee setup complete."
     '')
-
-    # Calibre.
-    # We use the portable version, so there's no need to map any drives.
-    (pkgs.writeShellScriptBin "setup-calibre" ''
-      set -e
-      PREFIX="${prefixDir}/calibre"
-
-      if [ -e "$PREFIX/.hm-installed" ]; then
-        echo "Calibre Wine Prefix already set up."
-        exit 0
-      fi
-
-      export WINEPREFIX="$PREFIX"
-      wineboot -u
-
-      # I don't think we need any more packages.
-      winetricks -q allfonts cjkfonts
-      touch "$PREFIX/.hm-installed"
-
-      echo "Calibre setup complete."
-    '')
   ];
 
   xdg.desktopEntries = {
@@ -67,18 +45,6 @@ in
       ];
       exec = ''
         env WINEPREFIX=${prefixDir}/musicbee wine "${musicBeeDir}/MusicBee.exe"
-      '';
-    };
-
-    calibre = {
-      name = "Calibre";
-      icon = "${calibreDir}/calibre.png";
-      comment = "E-book management";
-      categories = [
-        "Viewer"
-      ];
-      exec = ''
-        env WINEPREFIX=${prefixDir}/calibre wine "${calibreDir}/calibre-portable.exe"
       '';
     };
   };
