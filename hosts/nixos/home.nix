@@ -47,6 +47,8 @@
     nerd-fonts.monaspace
     inter
     merriweather
+    noto-fonts-cjk-sans
+    noto-fonts-cjk-serif
 
     # Spotdl
     ffmpeg
