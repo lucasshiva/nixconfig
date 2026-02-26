@@ -12,6 +12,7 @@
     ../../modules/starship
     ../../modules/osu/home.nix
     ../../modules/calibre/home.nix
+    ../../modules/fcitx5/home.nix
   ];
 
   home.username = username;
@@ -237,6 +238,14 @@
 
   my.calibre.enable = true;
   my.calibre.symlinkSettings.enable = true;
+
+  my.fcitx5 = {
+    enable = true;
+    languages = {
+      japanese = true;
+      korean = true;
+    };
+  };
 
   home.stateVersion = "25.11";
   programs.home-manager.enable = true;
