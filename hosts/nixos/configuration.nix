@@ -12,6 +12,7 @@
     ../../modules/osu/nixos.nix
     ../../modules/opentabletdriver/nixos.nix
     ../../modules/spotify/nixos.nix
+    ../../modules/nicotine/nixos.nix
   ];
 
   # Bootloader.
@@ -179,12 +180,10 @@
     # Secrets
     age
     sops
-
-    spotify
   ];
 
-  # Spotify local discovery
-  networking.firewall.enable = true;
+  # TODO: Disabled because I can't get UPnP working correctly. I'll try more later on.
+  networking.firewall.enable = false;
 
   environment.variables = {
     EDITOR = "nvim";
