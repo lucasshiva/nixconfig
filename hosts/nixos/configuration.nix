@@ -44,6 +44,7 @@
 
   # Internet
   networking.networkmanager.enable = true;
+  networking.enableIPv6 = false;
 
   # Bluetooth
   hardware.bluetooth.enable = true;
@@ -177,7 +178,12 @@
     # Secrets
     age
     sops
+
+    spotify
   ];
+
+  # Spotify local discovery
+  networking.firewall.allowedTCPPorts = [ 57621 ];
 
   environment.variables = {
     EDITOR = "nvim";
