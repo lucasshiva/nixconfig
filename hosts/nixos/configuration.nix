@@ -11,6 +11,7 @@
     ../../modules/syncthing.nix
     ../../modules/osu/nixos.nix
     ../../modules/opentabletdriver/nixos.nix
+    ../../modules/spotify/nixos.nix
   ];
 
   # Bootloader.
@@ -183,7 +184,7 @@
   ];
 
   # Spotify local discovery
-  networking.firewall.allowedTCPPorts = [ 57621 ];
+  networking.firewall.enable = true;
 
   environment.variables = {
     EDITOR = "nvim";
