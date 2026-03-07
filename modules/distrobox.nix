@@ -86,6 +86,8 @@
           # Node and NPM
           "nodejs"
           "npm"
+
+	  "typst"
         ];
         exported_bins = [
           "/usr/sbin/uv"
