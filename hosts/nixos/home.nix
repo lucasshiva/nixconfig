@@ -231,6 +231,10 @@
     enableNushellIntegration = true;
   };
 
+  programs.anki = {
+    enable = true;
+  };
+
   my.osu = {
     enable = true;
     symlinkFiles.enable = true;
