@@ -2,7 +2,12 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ pkgs, username, ... }:
+{
+  config,
+  pkgs,
+  username,
+  ...
+}:
 
 {
   imports = [
@@ -19,8 +24,9 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  # Use latest kernel.
-  boot.kernelPackages = pkgs.linuxPackages_6_18;
+  # We can't use latest kernel with NVIDIA drivers, so we stick with stable.
+  # We could also choose the version automatically based on whether NVIDIA is enabled or not.
+  boot.kernelPackages = pkgs.linuxPackages;
 
   networking.hostName = "nixos"; # Define your hostname.
 
@@ -64,7 +70,6 @@
   # Enable the X11 windowing system.
   # You can disable this if you're only using the Wayland session.
   services.xserver.enable = true;
-  services.xserver.videoDrivers = [ "nvidia" ];
 
   hardware.graphics = {
     enable = true;
@@ -77,14 +82,33 @@
     extraPackages32 = with pkgs; [ mangohud ];
   };
 
-  hardware.nvidia.open = true;
-  hardware.nvidia.nvidiaSettings = true;
+  # NVIDIA config
+  services.xserver.videoDrivers = [ "nvidia" ];
+  hardware.nvidia = {
+    # Use the NVidia open source kernel module (not to be confused with the
+    # independent third-party "nouveau" open source driver).
+    # Support is limited to the Turing and later architectures. Full list of
+    # supported GPUs is at:
+    # https://github.com/NVIDIA/open-gpu-kernel-modules#compatible-gpus
+    # Only available from driver 515.43.04+
+    open = true;
 
-  # Should help with sleep/hibernate problems.
-  hardware.nvidia.powerManagement.enable = true;
+    # Optionally, you may need to select the appropriate driver version for your specific GPU.
+    package = config.boot.kernelPackages.nvidiaPackages.latest;
 
-  # For Wayland, is highly recommended to enable kernel mode settings (KMS).
-  hardware.nvidia.modesetting.enable = true;
+    # Enable the Nvidia settings menu, accessible via `nvidia-settings`.
+    nvidiaSettings = true;
+
+    # For Wayland, is highly recommended to enable kernel mode settings (KMS).
+    modesetting.enable = true;
+
+    # Nvidia power management. Experimental, and can cause sleep/suspend to fail.
+    # Enable this if you have graphical corruption issues or application crashes after waking
+    # up from sleep. This fixes it by saving the entire VRAM memory to /tmp/ instead
+    # of just the bare essentials.
+    powerManagement.enable = true;
+
+  };
 
   # Also enables `steam-hardware` for Steam Controller or Valve Index.
   programs.steam = {
@@ -197,11 +221,11 @@
     dockerCompat = true;
   };
 
-# Wait for PR 496839 to release on the unstable branch to activate services again.
+  # Wait for PR 496839 to release on the unstable branch to activate services again.
   # Check on https://nixpkgs-tracker.ocfox.me/?pr=496839
   #
-  #   virtualisation.libvirtd.enable = true;
-#   programs.virt-manager.enable = true;
+  # virtualisation.libvirtd.enable = true;
+  # programs.virt-manager.enable = true;
 
   # Exposes Nix profile to Distrobox containers.
   environment.etc."distrobox/distrobox.conf".text = ''
