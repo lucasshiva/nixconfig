@@ -197,8 +197,11 @@
     dockerCompat = true;
   };
 
-  virtualisation.libvirtd.enable = true;
-  programs.virt-manager.enable = true;
+# Wait for PR 496839 to release on the unstable branch to activate services again.
+  # Check on https://nixpkgs-tracker.ocfox.me/?pr=496839
+  #
+  #   virtualisation.libvirtd.enable = true;
+#   programs.virt-manager.enable = true;
 
   # Exposes Nix profile to Distrobox containers.
   environment.etc."distrobox/distrobox.conf".text = ''
