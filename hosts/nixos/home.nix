@@ -73,6 +73,10 @@
 
     # Application/browser chooser
     junction
+
+    # To decompile Terraria and tModLoader
+    powershell
+    ilspycmd
   ];
 
   xdg.mimeApps = {
