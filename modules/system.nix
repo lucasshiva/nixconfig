@@ -6,5 +6,6 @@
     ./syncthing/system.nix
     ./opentabletdriver/system.nix
     ./spotify/system.nix
+    ./tailscale/system.nix
   ];
 }
