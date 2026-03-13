@@ -13,11 +13,7 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    ../../modules/syncthing.nix
-    ../../modules/osu/nixos.nix
-    ../../modules/opentabletdriver/nixos.nix
-    ../../modules/spotify/nixos.nix
-    ../../modules/nicotine/nixos.nix
+    ../../modules/system.nix
   ];
 
   # Bootloader.
@@ -209,8 +205,9 @@
     sops
   ];
 
-  # TODO: Disabled because I can't get UPnP working correctly. I'll try more later on.
-  networking.firewall.enable = false;
+  networking.firewall = {
+    enable = true;
+  };
 
   environment.variables = {
     EDITOR = "nvim";
