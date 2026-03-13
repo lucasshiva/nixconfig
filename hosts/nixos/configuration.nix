@@ -37,6 +37,7 @@
       "audio"
       "libvirtd"
       "kvm"
+      "podman"
     ];
     packages = with pkgs; [
       kdePackages.kate
@@ -219,6 +220,8 @@
   virtualisation.podman = {
     enable = true;
     dockerCompat = true;
+    dockerSocket.enable = true;
+    extraPackages = [ pkgs.podman-compose ];
   };
 
   virtualisation.libvirtd.enable = true;
