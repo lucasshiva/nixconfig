@@ -1,12 +1,17 @@
 {
+  lib,
   config,
   pkgs,
   username,
+  inputs,
   ...
 }:
 
 {
   imports = [
+    inputs.niri.homeModules.niri
+    inputs.noctalia.homeModules.default
+
     ../../modules/distrobox.nix
     ../../modules/wine.nix
     ../../modules/starship
@@ -19,65 +24,73 @@
   home.homeDirectory = "/home/${username}";
   xdg.enable = true;
 
-  home.packages = with pkgs; [
-    nixfmt
-    nixd
+  home.packages =
+    with pkgs;
+    [
+      nixfmt
+      nixd
 
-    # IDEs
-    jetbrains.rider
-    android-studio
-    jetbrains.idea
+      # IDEs
+      jetbrains.rider
+      android-studio
+      jetbrains.idea
 
-    # Utilities
-    unzip
-    unrar
+      # Utilities
+      unzip
+      unrar
 
-    # Browser
-    firefox-devedition
+      # Browser
+      firefox-devedition
 
-    # Media
+      # Media
 
-    # Stremio requires `qtwebengine-5.15.19`, but it's insecure and building it takes too long.
-    # Until we find a solution, we don't use stremio.
-    # stremio
+      # Stremio requires `qtwebengine-5.15.19`, but it's insecure and building it takes too long.
+      # Until we find a solution, we don't use stremio.
+      # stremio
 
-    # I sync obsidian via syncthing, so I don't need to enable it in home-manager.
-    obsidian
+      # I sync obsidian via syncthing, so I don't need to enable it in home-manager.
+      obsidian
 
-    # Fonts
-    nerd-fonts.monaspace
-    inter
-    merriweather
-    noto-fonts-cjk-sans
-    noto-fonts-cjk-serif
+      # Fonts
+      nerd-fonts.monaspace
+      inter
+      merriweather
+      noto-fonts-cjk-sans
+      noto-fonts-cjk-serif
 
-    # Spotdl
-    ffmpeg
-    spotdl
-    yt-dlp
+      # Spotdl
+      ffmpeg
+      spotdl
+      yt-dlp
 
-    # Build essentials
-    gcc
-    gnumake
-    binutils
-    pkg-config
-    openssl
-    zlib
-    bzip2
-    xz
-    readline
-    libffi
+      # Build essentials
+      gcc
+      gnumake
+      binutils
+      pkg-config
+      openssl
+      zlib
+      bzip2
+      xz
+      readline
+      libffi
 
-    # dev shells
-    devenv
+      # dev shells
+      devenv
 
-    # Application/browser chooser
-    junction
+      # Application/browser chooser
+      junction
 
-    # To decompile Terraria and tModLoader
-    powershell
-    ilspycmd
-  ];
+      # To decompile Terraria and tModLoader
+      powershell
+      ilspycmd
+
+      killall
+    ]
+    ++ lib.optionals config.programs.noctalia-shell.enable [
+      # Niri automatically runs this when xwayland support is required
+      (xwayland-satellite.override { withSystemd = false; })
+    ];
 
   xdg.mimeApps = {
     enable = true;
@@ -253,6 +266,50 @@
       japanese = true;
       korean = true;
     };
+  };
+
+  programs.niri = {
+    enable = true;
+    package = pkgs.niri;
+    config = ''
+      layout {
+        gaps 16
+      }
+
+      window-rule {
+        // Rounded corners for a modern look.
+        geometry-corner-radius 20
+
+        // Clips window contents to the rounded corner boundaries.
+        clip-to-geometry true
+      }
+
+      debug {
+        // Allows notification actions and window activation from Noctalia.
+        honor-xdg-activation-with-invalid-serial
+      }
+
+      binds {
+        Mod+T hotkey-overlay-title="Open a Terminal: konsole" { spawn "konsole"; }
+        Mod+F { maximize-column; }
+        Mod+Q repeat=false { close-window; }
+        Mod+O repeat=false { toggle-overview; }
+        Mod+Shift+E { quit; }
+      }
+    ''
+    + lib.optionalString config.programs.noctalia-shell.enable ''
+
+      spawn-at-startup "noctalia-shell"
+
+      layer-rule {
+        match namespace="^noctalia-overview*"
+        place-within-backdrop true
+      }
+    '';
+  };
+
+  programs.noctalia-shell = {
+    enable = true;
   };
 
   home.stateVersion = "25.11";
