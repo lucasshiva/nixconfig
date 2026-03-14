@@ -200,6 +200,7 @@
     # Utilities
     usbutils
     pavucontrol
+    dnsutils
 
     # Secrets
     age
