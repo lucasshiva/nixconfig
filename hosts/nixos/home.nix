@@ -57,6 +57,7 @@
       merriweather
       noto-fonts-cjk-sans
       noto-fonts-cjk-serif
+      font-awesome_7
 
       # Spotdl
       ffmpeg
