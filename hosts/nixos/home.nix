@@ -12,12 +12,7 @@
     inputs.niri.homeModules.niri
     inputs.noctalia.homeModules.default
 
-    ../../modules/distrobox.nix
-    ../../modules/wine.nix
-    ../../modules/starship
-    ../../modules/osu/home.nix
-    ../../modules/calibre/home.nix
-    ../../modules/fcitx5/home.nix
+    ../../modules/home.nix
   ];
 
   home.username = username;
