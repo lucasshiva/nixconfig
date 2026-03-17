@@ -86,6 +86,7 @@
       ilspycmd
 
       killall
+      typst
     ]
     ++ lib.optionals config.programs.noctalia-shell.enable [
       # Niri automatically runs this when xwayland support is required
