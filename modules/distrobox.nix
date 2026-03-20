@@ -36,6 +36,13 @@
       icon = "idea";
       comment = "Java, Kotlin, Groovy, and Scala IDE from JetBrains";
     };
+
+    zed-arch = {
+      name = "Zed (Arch)";
+      exec = "distrobox-enter arch -- zed %u";
+      icon = "zed";
+      comment = "Text Editor";
+    };
   };
 
   programs.distrobox = {
