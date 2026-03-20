@@ -215,6 +215,10 @@
     package = pkgs.vscode;
   };
 
+  programs.zed-editor = {
+    enable = true;
+  };
+
   programs.keepassxc = {
     enable = true;
   };
