@@ -251,6 +251,18 @@
 
   programs.anki = {
     enable = true;
+    profiles = {
+      "lucas" = {
+        default = true;
+        sync = {
+          autoSync = true;
+          syncMedia = true;
+          keyFile = "${config.xdg.configHome}/anki/keyFile";
+        };
+      };
+    };
+    theme = "dark";
+    uiScale = 1.6;
   };
 
   my.osu = {
