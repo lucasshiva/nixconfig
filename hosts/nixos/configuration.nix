@@ -212,7 +212,7 @@
   ];
 
   networking.firewall = {
-    enable = true;
+    enable = false;
   };
 
   environment.variables = {
