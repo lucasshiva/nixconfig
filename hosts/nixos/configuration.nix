@@ -49,7 +49,7 @@
 
   # Internet
   networking.networkmanager.enable = true;
-  networking.enableIPv6 = false;
+  networking.enableIPv6 = true;
 
   # Bluetooth
   hardware.bluetooth.enable = true;
