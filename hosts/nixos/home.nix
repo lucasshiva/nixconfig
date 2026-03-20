@@ -325,6 +325,18 @@
     enable = true;
   };
 
+  xdg.portal = {
+    enable = true;
+    xdgOpenUsePortal = true;
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-gnome
+      kdePackages.xdg-desktop-portal-kde
+    ];
+    config.common = {
+      "org.freedesktop.impl.portal.FileChooser" = "kde";
+    };
+  };
+
   home.stateVersion = "25.11";
   programs.home-manager.enable = true;
 }
