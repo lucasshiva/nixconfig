@@ -112,6 +112,7 @@
     enable = true;
     remotePlay.openFirewall = true;
     dedicatedServer.openFirewall = true;
+    localNetworkGameTransfers.openFirewall = true;
     extraPackages = with pkgs; [
       gamescope
       mangohud
@@ -136,6 +137,9 @@
     layout = "us";
     variant = "altgr-intl";
   };
+
+  # Might be helpful for hosting Steam games.
+  services.xserver.enableTCP = true;
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
