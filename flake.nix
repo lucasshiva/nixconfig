@@ -40,11 +40,12 @@
     }@inputs:
     let
       username = "lucas";
+      system = "x86_64-linux";
     in
     {
       nixosConfigurations = {
         nixos = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
+          system = system;
           specialArgs = {
             inherit inputs;
             inherit username;
@@ -62,6 +63,26 @@
                 inherit username;
               };
             }
+          ];
+        };
+      };
+
+      homeConfigurations = {
+        "${username}" = home-manager.lib.homeManagerConfiguration {
+
+          pkgs = import nixpkgs {
+            system = system;
+            config.allowUnfree = true;
+          };
+
+          extraSpecialArgs = {
+            inherit inputs;
+            inherit username;
+          };
+
+          modules = [
+            ./hosts/cachyos/home.nix
+            sops-nix.homeManagerModules.sops
           ];
         };
       };

@@ -8,5 +8,6 @@
     ./calibre/home.nix
     ./fcitx5/home.nix
     ./discord/home.nix
+    ./git/home.nix
   ];
 }
