@@ -107,86 +107,6 @@
     nrs = "sudo nixos-rebuild switch --flake ~/nixconfig";
   };
 
-  programs.bash = {
-    enable = true;
-    enableCompletion = true;
-  };
-
-  programs.zsh = {
-    enable = true;
-    plugins = [
-      {
-        name = "fzf-tab";
-        src = pkgs.zsh-fzf-tab;
-        file = "share/fzf-tab/fzf-tab.plugin.zsh";
-      }
-    ];
-    autosuggestion = {
-      enable = true;
-      strategy = [ ];
-    };
-    syntaxHighlighting.enable = true;
-    enableCompletion = true;
-    dotDir = "${config.xdg.configHome}/zsh";
-    history = {
-      size = 200000;
-      ignoreDups = true;
-      ignoreAllDups = true;
-      saveNoDups = true;
-      share = true;
-      extended = true;
-    };
-    completionInit = ''
-      autoload -Uz compinit
-      compinit -u
-    '';
-  };
-
-  programs.nushell = {
-    enable = true;
-    settings = {
-      show_banner = false;
-    };
-  };
-
-  # `cat` clone with syntax highlighting and git integration.
-  programs.bat = {
-    enable = true;
-    extraPackages = with pkgs.bat-extras; [
-      batdiff
-      batman
-      batgrep
-      prettybat
-    ];
-  };
-
-  # A modern alternative for ls.
-  programs.eza = {
-    enable = true;
-    enableBashIntegration = true;
-    enableZshIntegration = true;
-    extraOptions = [
-      "--header"
-      "--group-directories-first"
-    ];
-    icons = "auto"; # This requires a nerd font.
-    git = true;
-    colors = "always";
-  };
-
-  # Fast text searcher. Can be used as a faster `grep` alternative.
-  programs.ripgrep = {
-    enable = true;
-  };
-
-  # Fuzzy finder.
-  # Automatically adds Ctrl+T for file search and Ctrl+R for command history search.
-  programs.fzf = {
-    enable = true;
-    enableZshIntegration = true;
-    enableBashIntegration = true;
-  };
-
   programs.vscode = {
     enable = true;
     package = pkgs.vscode;
@@ -218,14 +138,6 @@
     };
   };
 
-  programs.direnv = {
-    enable = true;
-    enableBashIntegration = true;
-    enableFishIntegration = true;
-    enableZshIntegration = true;
-    enableNushellIntegration = true;
-  };
-
   programs.anki = {
     enable = true;
     profiles = {
@@ -240,6 +152,11 @@
     };
     theme = "dark";
     uiScale = 1.6;
+  };
+
+  my.shell = {
+    bash.enable = true;
+    zsh.enable = true;
   };
 
   my.osu = {
