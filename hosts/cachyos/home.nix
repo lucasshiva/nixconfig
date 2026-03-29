@@ -4,6 +4,9 @@
   imports = [
     ../../modules/git/home.nix
     ../../modules/shell/home.nix
+    ../../modules/calibre/home.nix
+    ../../modules/osu/home.nix
+    ../../modules/fcitx5/home.nix
   ];
 
   home.username = username;
@@ -57,6 +60,29 @@
       antialiasing = true;
       subpixelRendering = "rgb";
     };
+  };
+
+  # --- For Korean and Japanese inputs ---
+  my.fcitx5 = {
+    enable = true;
+    languages = {
+      japanese = true;
+      korean = true;
+    };
+  };
+
+  # --- osu! - rhythm game ---
+  my.osu = {
+    enable = true;
+    # We install osu via the AUR.
+    installPackage = false;
+    symlinkFiles.enable = true;
+  };
+
+  # --- Calibre ebook manager ---
+  my.calibre = {
+    enable = true;
+    symlinkSettings.enable = true;
   };
 
   home.stateVersion = "25.11";
