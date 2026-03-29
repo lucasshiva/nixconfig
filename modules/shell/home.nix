@@ -15,21 +15,11 @@ in
     nushell.enable = lib.mkEnableOption "Enable NuShell";
     addons = {
       direnv = lib.mkEnableOption "Enable Direnv";
-      starshipPrompt = lib.mkEnableOption "Enable Starship prompt" // {
-        default = true;
-      };
-      fzf = lib.mkEnableOption "Enable FZF - a command-line fuzzy finder" // {
-        default = true;
-      };
-      eza = lib.mkEnableOption "Enable Eza - a modern alternative for ls" // {
-        default = true;
-      };
-      bat = lib.mkEnableOption "Enable Bat - a cat clone with syntax highlighting" // {
-        default = true;
-      };
-      ripgrep = lib.mkEnableOption "Enable Ripgrep - a line-oriented search tool" // {
-        default = true;
-      };
+      starshipPrompt = lib.mkEnableOption "Enable Starship prompt";
+      fzf = lib.mkEnableOption "Enable FZF - a command-line fuzzy finder";
+      eza = lib.mkEnableOption "Enable Eza - a modern alternative for ls";
+      bat = lib.mkEnableOption "Enable Bat - a cat clone with syntax highlighting";
+      ripgrep = lib.mkEnableOption "Enable Ripgrep - a line-oriented search tool";
     };
   };
   config = {

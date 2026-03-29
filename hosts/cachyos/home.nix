@@ -29,6 +29,14 @@
   my.shell = {
     bash.enable = true;
     fish.enable = true;
+    addons = {
+      starshipPrompt = true;
+      fzf = true;
+      eza = true;
+      bat = true;
+      ripgrep = true;
+      direnv = true;
+    };
   };
 
   fonts = {

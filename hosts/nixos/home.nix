@@ -157,6 +157,14 @@
   my.shell = {
     bash.enable = true;
     zsh.enable = true;
+    addons = {
+      starshipPrompt = true;
+      fzf = true;
+      eza = true;
+      bat = true;
+      ripgrep = true;
+      direnv = true;
+    };
   };
 
   my.osu = {
