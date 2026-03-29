@@ -87,4 +87,12 @@
 
   home.stateVersion = "25.11";
   programs.home-manager.enable = true;
+
+  targets.genericLinux = {
+    # Enable settings that make Home Manager work better on Linux distributions other than NixOS.
+    enable = true;
+
+    # Enable GPU driver integration for non-NixOS systems.
+    gpu.enable = true;
+  };
 }
