@@ -7,7 +7,16 @@
     ../../modules/calibre/home.nix
     ../../modules/osu/home.nix
     ../../modules/fcitx5/home.nix
+    ../../modules/syncthing/home.nix
   ];
+
+  # SOPS - secrets manager
+  sops = {
+    defaultSopsFile = ../../secrets/secrets.yaml;
+    # Add private key, stored in KeePassXC, to this file.
+    age.keyFile = "/home/${username}/.age-key.txt";
+    age.generateKey = false;
+  };
 
   home.username = username;
   home.homeDirectory = "/home/${username}";
