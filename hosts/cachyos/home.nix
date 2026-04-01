@@ -49,6 +49,10 @@
       bat = true;
       ripgrep = true;
       direnv = true;
+      zoxide = true;
+    };
+    aliases = {
+      z = "zoxide";
     };
   };
 

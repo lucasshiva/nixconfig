@@ -20,9 +20,17 @@ in
       eza = lib.mkEnableOption "Enable Eza - a modern alternative for ls";
       bat = lib.mkEnableOption "Enable Bat - a cat clone with syntax highlighting";
       ripgrep = lib.mkEnableOption "Enable Ripgrep - a line-oriented search tool";
+      zoxide = lib.mkEnableOption "Enable Zoxide - a smarter cd command";
+    };
+    aliases = lib.mkOption {
+      type = lib.types.attrsOf lib.types.str;
+      default = { };
+      description = "Shell aliases";
     };
   };
   config = {
+    home.shellAliases = cfg.aliases;
+
     programs.bash = lib.mkIf cfg.bash.enable {
       enable = true;
       enableCompletion = true;
@@ -118,6 +126,15 @@ in
     };
 
     programs.direnv = lib.mkIf cfg.addons.direnv {
+      enable = true;
+      enableZshIntegration = cfg.zsh.enable;
+      enableBashIntegration = cfg.bash.enable;
+      enableFishIntegration = cfg.fish.enable;
+      enableNushellIntegration = cfg.nushell.enable;
+    };
+
+    # Smarter cd command.
+    programs.zoxide = lib.mkIf cfg.addons.zoxide {
       enable = true;
       enableZshIntegration = cfg.zsh.enable;
       enableBashIntegration = cfg.bash.enable;
