@@ -7,6 +7,7 @@
     ../../modules/calibre/home.nix
     ../../modules/osu/home.nix
     ../../modules/fcitx5/home.nix
+    ../../modules/wine.nix
     ../../modules/syncthing/home.nix
   ];
 
