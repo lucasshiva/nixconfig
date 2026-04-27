@@ -21,6 +21,7 @@
       user.email = "silva.lucasdev@gmail.com";
       init.defaultBranch = "main";
       merge.conflictStyle = "zdiff3"; # For `delta`.
+      push.autoSetupRemote = true;
     };
   };
 }
