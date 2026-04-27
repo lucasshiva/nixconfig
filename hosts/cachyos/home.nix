@@ -38,6 +38,10 @@
     nerd-fonts.jetbrains-mono
     nerd-fonts.dejavu-sans-mono
   ];
+  home.sessionPath = [
+    "$HOME/.local/bin"
+    "$HOME/.bun/bin"
+  ];
 
   my.shell = {
     bash.enable = true;
