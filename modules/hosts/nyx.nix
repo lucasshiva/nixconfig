@@ -25,9 +25,6 @@ in
         # Use latest kernel.
         boot.kernelPackages = pkgs.linuxPackages_latest;
 
-        # Set hostname
-        networking.hostName = hostname;
-
         # Enable networking
         networking.networkmanager.enable = true;
 
@@ -50,14 +47,6 @@ in
           layout = "us";
           variant = "altgr-intl";
           options = "compose:rwin";
-        };
-
-        users.users."${username}" = {
-          isNormalUser = true;
-          extraGroups = [
-            "networkmanager"
-            "wheel"
-          ];
         };
 
         # Timezone and locale settings
