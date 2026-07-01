@@ -10,9 +10,16 @@
       # Without this, we'd have to include aspects we're already including in the host.
       batteries.host-aspects
 
-      # Shell
+      # Shell config
       aspects.shell.zsh
       (batteries.user-shell "zsh")
+
+      # Cli tools - the same in every host
+      aspects.cli.bat
+      aspects.cli.eza
+      aspects.cli.fzf
+      aspects.cli.ripgrep
+      aspects.cli.zoxide
     ];
   };
 }
