@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ den, lib, ... }:
 let
   hostname = "nyx";
   username = "lucas";
@@ -9,6 +9,8 @@ in
   };
 
   den.aspects."${hostname}" = {
+    includes = [ den.aspects.desktop.gnome ];
+
     nixos =
       {
         pkgs,
@@ -27,17 +29,6 @@ in
 
         # Enable networking
         networking.networkmanager.enable = true;
-
-        # Enable the GNOME Desktop Environment.
-        services.displayManager.gdm.enable = true;
-        services.desktopManager.gnome.enable = true;
-
-        # Exclude some GNOME packages
-        services.gnome.games.enable = false;
-        environment.gnome.excludePackages = with pkgs; [
-          gnome-tour
-          gnome-user-docs
-        ];
 
         # Enable X11.
         services.xserver.enable = true;
