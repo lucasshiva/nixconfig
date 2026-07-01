@@ -11,7 +11,7 @@
       batteries.host-aspects
 
       # Shell config
-      aspects.shell.zsh
+      aspects.shell
       (batteries.user-shell "zsh")
 
       # Cli tools - the same in every host
