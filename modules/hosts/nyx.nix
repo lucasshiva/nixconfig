@@ -9,7 +9,10 @@ in
   };
 
   den.aspects."${hostname}" = {
-    includes = [ den.aspects.desktop.gnome ];
+    includes = [
+      den.aspects.boot.systemd-boot
+      den.aspects.desktop.gnome
+    ];
 
     nixos =
       {
@@ -19,10 +22,6 @@ in
       }:
       {
         imports = [ (modulesPath + "/profiles/qemu-guest.nix") ];
-
-        # Bootloader.
-        boot.loader.systemd-boot.enable = true;
-        boot.loader.efi.canTouchEfiVariables = true;
 
         # Use latest kernel.
         boot.kernelPackages = pkgs.linuxPackages_latest;
