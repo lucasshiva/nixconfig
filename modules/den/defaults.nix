@@ -14,6 +14,7 @@ in
       "nix-command"
       "flakes"
     ];
+    networking.networkmanager.enable = true;
 
     home-manager = {
       backupFileExtension = "backup";

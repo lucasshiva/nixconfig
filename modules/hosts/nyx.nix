@@ -26,9 +26,6 @@ in
         # Use latest kernel.
         boot.kernelPackages = pkgs.linuxPackages_latest;
 
-        # Enable networking
-        networking.networkmanager.enable = true;
-
         # Enable X11.
         services.xserver.enable = true;
 
