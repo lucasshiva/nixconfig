@@ -12,6 +12,7 @@
 
       # Shell config
       aspects.shell
+      aspects.shell.prompts.starship
       (batteries.user-shell "zsh")
 
       # Cli tools - the same in every host
