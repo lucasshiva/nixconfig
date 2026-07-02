@@ -21,6 +21,18 @@
       aspects.cli.fzf
       aspects.cli.ripgrep
       aspects.cli.zoxide
+
+      # Git related stuff
+      aspects.cli.git
     ];
+
+    homeManager =
+      { ... }:
+      {
+        my.git = {
+          user.name = "Lucas Silva";
+          user.email = "silva.lucasdev@gmail.com";
+        };
+      };
   };
 }
