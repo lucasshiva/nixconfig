@@ -9,9 +9,10 @@ in
   };
 
   den.aspects."${hostname}" = {
-    includes = [
-      den.aspects.boot.systemd-boot
-      den.aspects.desktop.gnome
+    includes = with den; [
+      aspects.core.fonts
+      aspects.boot.systemd-boot
+      aspects.desktop.gnome
     ];
 
     nixos =

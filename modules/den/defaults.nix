@@ -53,5 +53,8 @@ in
 
     # Sets the system hostname as defined in `den.hosts.<system>.hostName`.
     den.batteries.hostname
+
+    # Adds `isNixos` and `isDarwin` variables to `nixos` and `homeManager` configurations.
+    den.policies.host-guards
   ];
 }
