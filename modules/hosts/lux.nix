@@ -10,6 +10,7 @@ in
     includes = with den; [
       aspects.core.fonts
       aspects.desktop.gnome
+      aspects.gaming.osu
     ];
 
     homeManager =
@@ -17,6 +18,11 @@ in
       {
         # Install the home-manager CLI.
         programs.home-manager.enable = true;
+
+        my.osu = {
+          installPackage = false;
+          dataDir = "/mnt/commondata/Apps/osu";
+        };
       };
   };
 }

@@ -14,6 +14,8 @@ in
       aspects.boot.systemd-boot
       aspects.desktop.gnome
       aspects.apps.calibre
+      aspects.gaming.osu
+      aspects.hardware.opentabletdriver
     ];
 
     homeManager =
@@ -22,6 +24,7 @@ in
         # Don't wanna risk messing up my settings in the VM.
         # Will test this on bare metal later on.
         my.calibre.settingsDir = "/mnt/commondata/Apps/Calibre/Calibre Settings";
+        my.osu.dataDir = "/mnt/commondata/Apps/osu";
       };
 
     nixos =
