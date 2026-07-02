@@ -40,6 +40,11 @@ in
         # Timezone. We can hardcode it since this host is a PC.
         time.timeZone = "America/Sao_Paulo";
 
+        # Keeps sudo auth valid for one hour.
+        security.sudo.extraConfig = ''
+          Defaults timestamp_timeout=60
+        '';
+
         boot.initrd.availableKernelModules = [
           "ahci"
           "xhci_pci"
