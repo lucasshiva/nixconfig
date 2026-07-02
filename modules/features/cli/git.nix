@@ -25,6 +25,7 @@
               user.email = cfg.user.email;
               init.defaultBranch = "main";
               push.autoSetupRemote = true;
+              merge.conflictStyle = lib.mkIf config.programs.delta.enable "zdiff3";
             };
           };
         };

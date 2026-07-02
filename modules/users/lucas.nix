@@ -24,6 +24,7 @@
 
       # Git related stuff
       aspects.cli.git
+      aspects.cli.delta
     ];
 
     homeManager =
