@@ -44,17 +44,20 @@ in
     };
   };
 
-  den.default.includes = [
+  den.default.includes = with den; [
     # For NixOS: sets `users.users.<name>`
     # For Home Manager: sets `home.username`/`home.homeDirectory`.
     #
     # Works in both host-user and standalone home contexts.
-    den.batteries.define-user
+    batteries.define-user
 
     # Sets the system hostname as defined in `den.hosts.<system>.hostName`.
-    den.batteries.hostname
+    batteries.hostname
 
     # Adds `isNixos` and `isDarwin` variables to `nixos` and `homeManager` configurations.
-    den.policies.host-guards
+    policies.host-guards
+
+    # Includes nh (nix cli helper) by default.
+    aspects.nix.nh
   ];
 }
