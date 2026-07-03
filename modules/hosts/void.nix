@@ -1,6 +1,6 @@
 { den, lib, ... }:
 let
-  hostname = "nyx";
+  hostname = "void";
   username = "lucas";
 in
 {

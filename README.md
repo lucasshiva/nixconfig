@@ -23,8 +23,8 @@ My NixOS (and `home-manager`) configuration using the [Den](https://den.denful.d
 ## Hosts
 | Name | Machine | System | Users | Configuration |
 | --- | --- | --- | --- | --- |
-| nyx | Main | NixOS | lucas | System configuration + `home-manager`.
-| eris | Main | CachyOS | lucas | standalone `home-manager`.|
+| void | Main | NixOS | lucas | System configuration + `home-manager`.
+| astra | Main | CachyOS | lucas | standalone `home-manager`.|
 
 ## Usage
 To update the system, run:
