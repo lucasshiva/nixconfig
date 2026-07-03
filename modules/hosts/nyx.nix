@@ -17,6 +17,7 @@ in
       aspects.gaming.osu
       aspects.hardware.opentabletdriver
       aspects.apps.musicbee
+      aspects.services.spice-vdagent
     ];
 
     homeManager =
@@ -39,6 +40,9 @@ in
       }:
       {
         imports = [ (modulesPath + "/profiles/qemu-guest.nix") ];
+
+        services.spice-vdagentd.enable = true;
+        services.qemuGuest.enable = true;
 
         # Use latest kernel.
         boot.kernelPackages = pkgs.linuxPackages_latest;
