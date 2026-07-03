@@ -24,7 +24,7 @@ My NixOS (and `home-manager`) configuration using the [Den](https://den.denful.d
 | Name | Machine | System | Users | Configuration |
 | --- | --- | --- | --- | --- |
 | nyx | Main | NixOS | lucas | System configuration + `home-manager`.
-| lux | Main | CachyOS | lucas | standalone `home-manager`.|
+| eris | Main | CachyOS | lucas | standalone `home-manager`.|
 
 ## Usage
 To update the system, run:
@@ -47,7 +47,7 @@ For standalone `home-manager`, we have two options:
 1. First run on a new system:
 
 ```sh
-nix run github:nix-community/home-manager -- switch --flake .#lucas
+nix run github:nix-community/home-manager -- switch --flake .#<username>
 ```
 
 2. Build on an existing system:

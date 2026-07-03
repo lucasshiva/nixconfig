@@ -1,7 +1,7 @@
 { den, ... }:
 let
   username = "lucas";
-  hostname = "lux";
+  hostname = "astra";
 in
 {
   den.homes.x86_64-linux."${username}@${hostname}" = { };
