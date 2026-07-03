@@ -14,9 +14,10 @@ in
       aspects.boot.systemd-boot
       aspects.desktop.gnome
       aspects.apps.calibre
+      aspects.apps.musicbee
+      aspects.apps.firefox
       aspects.gaming.osu
       aspects.hardware.opentabletdriver
-      aspects.apps.musicbee
       aspects.services.spice-vdagent
     ];
 

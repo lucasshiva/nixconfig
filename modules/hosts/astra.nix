@@ -11,6 +11,7 @@ in
       aspects.core.fonts
       aspects.desktop.gnome
       aspects.gaming.osu
+      aspects.apps.firefox
     ];
 
     homeManager =
@@ -19,6 +20,7 @@ in
         # Install the home-manager CLI.
         programs.home-manager.enable = true;
 
+        my.firefox.installPackages = false;
         my.osu = {
           installPackage = false;
           dataDir = "/mnt/commondata/Apps/osu";
