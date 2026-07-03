@@ -69,9 +69,41 @@
 
               if [ ! -f "$prefix/.prefix-initialized" ]; then
                 echo "Setting up prefix. Ignore warnings about 64-bit prefix or wow64 mode."
+
+                if [ -e "$prefix" ] || [ -L "$prefix" ]; then
+                  echo "Removing incomplete MusicBee Wine prefix: $prefix"
+                  rm -rf -- "$prefix"
+                fi
+
                 mkdir -p $WINEPREFIX
                 wineboot -u
                 ln -sfn "$mount_point" "$WINEPREFIX/dosdevices/$drive_letter"
+
+                dotnet_payload_url="https://web.archive.org/web/2000/http://download.windowsupdate.com/msdownload/update/software/svpk/2011/02/windows6.1-kb976932-x86_c3516bc5c9e69fee6d9ac4f981f5b95977a8a2fa.exe"
+
+                # Ensure we're not getting an error from web.archive, which stops the script.
+                status_code="$(
+                  curl \
+                    --location \
+                    --silent \
+                    --output /dev/null \
+                    --write-out '%{http_code}' \
+                    --retry 3 \
+                    --retry-delay 5 \
+                    --retry-all-errors \
+                    "$dotnet_payload_url"
+                )"
+
+                if [ "$status_code" = "429" ]; then
+                  echo "web.archive.org is rate-limiting the required .NET download (HTTP 429)." >&2
+                  echo "Wait and run setup-musicbee again; the Wine prefix was not modified." >&2
+                  exit 1
+                fi
+
+                if [ "$status_code" -lt 200 ] || [ "$status_code" -ge 400 ]; then
+                  echo "Required .NET download is unavailable (HTTP $status_code)." >&2
+                  exit 1
+                fi
 
                 # Unset display to prevent wine from displaying configuration messages.
                 DISPLAY="" WAYLAND_DISPLAY="" winetricks --unattended dotnet48 xmllite gdiplus cjkfonts wmp11
