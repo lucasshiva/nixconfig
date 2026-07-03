@@ -16,15 +16,19 @@ in
       aspects.apps.calibre
       aspects.gaming.osu
       aspects.hardware.opentabletdriver
+      aspects.apps.musicbee
     ];
 
     homeManager =
       { ... }:
       {
-        # Don't wanna risk messing up my settings in the VM.
-        # Will test this on bare metal later on.
         my.calibre.settingsDir = "/mnt/commondata/Apps/Calibre/Calibre Settings";
         my.osu.dataDir = "/mnt/commondata/Apps/osu";
+        my.musicbee = {
+          portableAppDir = "/mnt/commondata/Apps/MusicBee";
+          libraryMountPoint = "/mnt/commondata";
+          libraryDriveLetter = "f";
+        };
       };
 
     nixos =
@@ -92,6 +96,16 @@ in
         # Make the config folder available in the VM.
         fileSystems."/home/${username}/nixconfig" = {
           device = "nixconfig";
+          fsType = "virtiofs";
+          options = [
+            "nofail"
+            "X-mount.mkdir"
+          ];
+        };
+
+        # Needed for some apps.
+        fileSystems."/mnt/commondata" = {
+          device = "commondata";
           fsType = "virtiofs";
           options = [
             "nofail"
