@@ -23,6 +23,7 @@ in
       aspects.gaming.osu
       aspects.hardware.opentabletdriver
 
+      # Not working on KDE. Needs more testing.
       aspects.services.spice-vdagent
     ];
 
@@ -47,7 +48,7 @@ in
       {
         imports = [ (modulesPath + "/profiles/qemu-guest.nix") ];
 
-        services.spice-vdagentd.enable = true;
+        # Maybe a specific module/aspect for qemu guests?
         services.qemuGuest.enable = true;
 
         # Use latest kernel.

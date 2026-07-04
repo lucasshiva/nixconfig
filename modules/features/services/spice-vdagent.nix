@@ -25,5 +25,11 @@
           Install.WantedBy = [ "graphical-session.target" ];
         };
       };
+
+    nixos =
+      { ... }:
+      {
+        services.spice-vdagentd.enable = true;
+      };
   };
 }
