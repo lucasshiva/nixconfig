@@ -12,12 +12,17 @@ in
     includes = with den; [
       aspects.core.fonts
       aspects.boot.systemd-boot
-      aspects.desktop.gnome
+
+      # Maybe later we could support multiple desktops at once
+      aspects.desktop.kde
+
       aspects.apps.calibre
       aspects.apps.musicbee
       aspects.apps.firefox
+
       aspects.gaming.osu
       aspects.hardware.opentabletdriver
+
       aspects.services.spice-vdagent
     ];
 
