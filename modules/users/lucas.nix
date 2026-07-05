@@ -28,8 +28,15 @@
     ];
 
     homeManager =
-      { ... }:
+      { pkgs, ... }:
       {
+        home.packages = with pkgs; [
+          # TODO: enable these packages globally for all users.
+          nixfmt
+          nil
+          nixd
+        ];
+
         my.git = {
           user.name = "Lucas Silva";
           user.email = "silva.lucasdev@gmail.com";

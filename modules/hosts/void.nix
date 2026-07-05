@@ -14,7 +14,8 @@ in
       aspects.boot.systemd-boot
 
       # Maybe later we could support multiple desktops at once
-      aspects.desktop.kde
+      aspects.desktop.niri
+      aspects.desktop.dms
 
       aspects.apps.calibre
       aspects.apps.musicbee
@@ -37,12 +38,16 @@ in
           libraryMountPoint = "/mnt/commondata";
           libraryDriveLetter = "f";
         };
+        my.dms = {
+          enableNiriIntegration = true;
+        };
       };
 
     nixos =
       {
         pkgs,
         modulesPath,
+        config,
         ...
       }:
       {
@@ -50,6 +55,34 @@ in
 
         # Maybe a specific module/aspect for qemu guests?
         services.qemuGuest.enable = true;
+
+        # Random stuff for graphics, niri, etc. Will fix later.
+        # I was not able to run niri-session in a VM, so now I have to start testing on bare metal.
+        hardware.graphics = {
+          enable = true;
+          enable32Bit = true;
+        };
+
+        systemd.user.services.niri.enableDefaultPath = false;
+        environment.systemPackages = [ pkgs.kitty ]; # Will configure this via home-manager.
+        services.gnome.gnome-keyring.enable = true; # Always nice to have.
+        security.polkit.enable = true; # Maybe we don't need this since DMS has a polkit?
+        environment.sessionVariables.NIXOS_OZONE_WL = "1";
+        xdg.portal.config.niri = {
+          "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ]; # or "kde"
+        };
+
+        # Replace with Dank Greeter.
+        # I think Noctalia also has a greeter, but only for v5. Worth checking it out.
+        services.greetd = {
+          enable = true;
+          settings = {
+            default_session = {
+              command = "${config.programs.niri.package}/bin/niri-session";
+              user = username;
+            };
+          };
+        };
 
         # Use latest kernel.
         boot.kernelPackages = pkgs.linuxPackages_latest;

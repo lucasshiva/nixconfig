@@ -9,7 +9,10 @@ in
   den.aspects.${username}.provides.${hostname} = {
     includes = with den; [
       aspects.core.fonts
-      aspects.desktop.gnome
+
+      aspects.desktop.niri
+      aspects.desktop.dms
+
       aspects.gaming.osu
       aspects.apps.firefox
     ];
@@ -25,6 +28,7 @@ in
           installPackage = false;
           dataDir = "/mnt/commondata/Apps/osu";
         };
+        my.dms.enableNiriIntegration = true;
       };
   };
 }
