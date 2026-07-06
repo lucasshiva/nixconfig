@@ -2,17 +2,27 @@
 {
   den.aspects.desktop.kde = {
     nixos =
-      { pkgs, config, ... }:
+      { pkgs, ... }:
       {
         services.desktopManager.plasma6.enable = true;
         services.displayManager.plasma-login-manager.enable = true;
 
-        # If we want to exclude packages.
+        # Exclude unwanted packages
         # environment.plasma6.excludePackages = with pkgs.kdePackages; [
-        #   plasma-browser-integration
         #   konsole
-        #   elisa
         # ];
+
+        # And add missing ones.
+        environment.systemPackages = with pkgs; [
+          kdePackages.filelight # Visualize disk space usage.
+        ];
+
+        # Fix Dolphin file associations on non-Plasma desktop environments, like Niri.
+        # See https://github.com/NixOS/nixpkgs/issues/409986
+        #
+        # Doesn't work for everyone.
+        environment.etc."xdg/menus/applications.menu".source =
+          "${pkgs.kdePackages.plasma-workspace}/etc/xdg/menus/plasma-applications.menu";
       };
   };
 }

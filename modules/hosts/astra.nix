@@ -9,12 +9,7 @@ in
   den.aspects.${username}.provides.${hostname} = {
     includes = with den; [
       aspects.core.fonts
-
-      aspects.desktop.niri
-      aspects.desktop.dms
-
       aspects.gaming.osu
-      aspects.apps.firefox
     ];
 
     homeManager =
@@ -23,12 +18,10 @@ in
         # Install the home-manager CLI.
         programs.home-manager.enable = true;
 
-        my.firefox.installPackages = false;
         my.osu = {
           installPackage = false;
-          dataDir = "/mnt/commondata/Apps/osu";
+          dataDir = "/mnt/data/Apps/osu";
         };
-        my.dms.enableNiriIntegration = true;
       };
   };
 }
