@@ -27,6 +27,7 @@ in
       #aspects.apps.calibre
       #aspects.apps.musicbee
       aspects.apps.firefox
+      aspects.apps.zed
 
       #aspects.gaming.osu
       #aspects.hardware.opentabletdriver
@@ -47,7 +48,6 @@ in
 
         home.packages = with pkgs; [
           neovim
-          zed-editor-fhs # TODO: move to its own module
         ];
       };
 
