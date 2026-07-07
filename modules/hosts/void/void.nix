@@ -15,14 +15,18 @@ in
       aspects.hardware.cpu.amd
       aspects.hardware.pc.ssd
 
-      # KDE already configures fontconfig in its nixos module.
-      # Maybe we add an option to only install font packages and not configure anything.
-      # Or an option to force our config instead and see if KDE picks it up by default.
+      # Maybe we don't need to manually manage fontconfig when using a DE.
+      # They all seem to add fonts and/or manage fontconfig themselves.
       aspects.core.fonts
       aspects.boot.systemd-boot
 
-      # Maybe later we could support multiple desktops at once
-      aspects.desktop.kde # TODO: Check out the kde config flake.
+      # KDE UI elements are rather slow on NixOS, so for now I'm going to be using something else.
+      # For more information, see https://github.com/NixOS/nixpkgs/issues/126590.
+      # The workaround did not work for me.
+      # aspects.desktop.kde
+
+      # I'm trying out Cosmic for now, but I'm probably going to be using GNOME and/or Niri instead.
+      aspects.desktop.cosmic
 
       aspects.apps.calibre
       aspects.apps.musicbee
@@ -53,6 +57,9 @@ in
     nixos =
       { pkgs, ... }:
       {
+        # Will disable later if I stop using Cosmic.
+        my.cosmic.autoLogin = true;
+
         # Use latest kernel.
         boot.kernelPackages = pkgs.linuxPackages_latest;
 

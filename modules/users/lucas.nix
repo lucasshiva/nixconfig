@@ -23,8 +23,10 @@
       aspects.cli.zoxide
 
       # Git related stuff
+      # Maybe move this to `aspects.git`
       aspects.cli.git
       aspects.cli.delta
+      # TODO: add `gh` later.
     ];
 
     homeManager =
