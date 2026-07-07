@@ -24,24 +24,24 @@ in
       # Maybe later we could support multiple desktops at once
       aspects.desktop.kde # TODO: Check out the kde config flake.
 
-      # aspects.apps.calibre
+      aspects.apps.calibre
       aspects.apps.musicbee
       aspects.apps.firefox
       aspects.apps.zed
 
-      #aspects.gaming.osu
-      #aspects.hardware.opentabletdriver
+      aspects.gaming.osu
+      aspects.hardware.opentabletdriver
     ];
 
     homeManager =
       { pkgs, ... }:
+      let
+        dataDrive = "/mnt/data";
+      in
       {
-        # -- Disabled for now. Will update it later --
-        #
-        #my.calibre.settingsDir = "/mnt/commondata/Apps/Calibre/Calibre Settings";
-        #my.osu.dataDir = "/mnt/commondata/Apps/osu";
-
-        my.musicbee.appDir = "/mnt/data/Apps/MusicBee";
+        my.calibre.settingsDir = "${dataDrive}/Apps/Calibre/Calibre Settings";
+        my.musicbee.appDir = "${dataDrive}/Apps/MusicBee";
+        my.osu.dataDir = "${dataDrive}/Apps/osu!";
 
         home.packages = with pkgs; [
           neovim

@@ -12,8 +12,17 @@
           # Settings live in a separate partition so that multiple OSes can share it.
           settingsDir = lib.mkOption {
             type = lib.types.str;
-            description = "Calibre settings directory";
+            description = ''
+              The directory where Calibre Settings is stored.
+
+              If the Library path is unchanged, Calibre will work without additional configuration.
+              Otherwise, we will be prompted to select a library on startup. This happens only once.
+
+              Technically, it is possible to set the Library path by updating the `global.py.json`
+              file, but I don't mind selecting it manually on startup on the first run.
+            '';
             default = ""; # Allows installing Calibre with default settings.
+            example = "/mnt/shared/Calibre/Calibre Settings";
           };
         };
 
