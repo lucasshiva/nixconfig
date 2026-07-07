@@ -18,6 +18,8 @@ in
       # Maybe we don't need to manually manage fontconfig when using a DE.
       # They all seem to add fonts and/or manage fontconfig themselves.
       aspects.core.fonts
+      aspects.swap.zram
+      aspects.sound.pipewire
       aspects.boot.systemd-boot
 
       # KDE UI elements are rather slow on NixOS, so for now I'm going to be using something else.
