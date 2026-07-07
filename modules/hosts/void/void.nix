@@ -24,8 +24,8 @@ in
       # Maybe later we could support multiple desktops at once
       aspects.desktop.kde # TODO: Check out the kde config flake.
 
-      #aspects.apps.calibre
-      #aspects.apps.musicbee
+      # aspects.apps.calibre
+      aspects.apps.musicbee
       aspects.apps.firefox
       aspects.apps.zed
 
@@ -40,14 +40,13 @@ in
         #
         #my.calibre.settingsDir = "/mnt/commondata/Apps/Calibre/Calibre Settings";
         #my.osu.dataDir = "/mnt/commondata/Apps/osu";
-        #my.musicbee = {
-        #  portableAppDir = "/mnt/commondata/Apps/MusicBee";
-        # libraryMountPoint = "/mnt/commondata";
-        #libraryDriveLetter = "f";
-        #};
+
+        my.musicbee.appDir = "/mnt/data/Apps/MusicBee";
 
         home.packages = with pkgs; [
           neovim
+          keepassxc
+          obsidian
         ];
       };
 

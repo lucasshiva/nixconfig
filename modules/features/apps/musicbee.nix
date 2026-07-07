@@ -8,29 +8,13 @@
       in
       {
         options.my.musicbee = {
-          portableAppDir = lib.mkOption {
+          appDir = lib.mkOption {
             type = lib.types.str;
             description = ''
               Directory containing an existing MusicBee Portable installation.
               This directory must contain `MusicBee.exe` and `MusicBee.png`.
             '';
-            example = "/mnt/commondata/Apps/MusicBee";
-          };
-          libraryMountPoint = lib.mkOption {
-            type = lib.types.str;
-            description = ''
-              Host directory exposed to MusicBee as a Windows drive.
-              This should be the mount point containing the music library.
-            '';
-            example = "/mnt/commondata";
-          };
-          libraryDriveLetter = lib.mkOption {
-            type = lib.types.str;
-            description = ''
-              Windows drive letter used to expose libraryMountPoint inside the MusicBee Wine prefix.
-              Use a single lowercase letter, without a colon.
-            '';
-            example = "f";
+            example = "/mnt/shared/MusicBee";
           };
           winePrefix = lib.mkOption {
             type = lib.types.str;
@@ -48,10 +32,44 @@
             (pkgs.writeShellScriptBin "setup-musicbee" ''
               set -euo pipefail
 
+              archive_base_url="https://web.archive.org/"
+              connect_timeout=15
+              request_timeout=30
+
+              echo "Checking whether web.archive.org is reachable..."
+
+              status_code="$(
+                curl \
+                  --silent \
+                  --show-error \
+                  --location \
+                  --connect-timeout "$connect_timeout" \
+                  --max-time "$request_timeout" \
+                  --output /dev/null \
+                  --write-out '%{http_code}' \
+                  "$archive_base_url" \
+                || true
+              )"
+
+              if [ -z "$status_code" ] || [ "$status_code" = "000" ]; then
+                echo "web.archive.org could not be reached." >&2
+                exit 1
+              fi
+
+              if [ "$status_code" = "429" ]; then
+                echo "web.archive.org is rate-limiting requests (HTTP 429)." >&2
+                exit 1
+              fi
+
+              if [ "$status_code" -lt 200 ] || [ "$status_code" -ge 400 ]; then
+                echo "web.archive.org returned an unexpected status (HTTP $status_code)." >&2
+                exit 1
+              fi
+
+              echo "web.archive.org is reachable (HTTP $status_code)."
+
               prefix="${cfg.winePrefix}"
-              app_dir="${cfg.portableAppDir}"
-              drive_letter="${cfg.libraryDriveLetter}:"
-              mount_point="${cfg.libraryMountPoint}"
+              app_dir="${cfg.appDir}"
 
               if [ ! -f "$app_dir/MusicBee.exe" ]; then
                 echo "MusicBee.exe was not found in: $app_dir" >&2
@@ -77,33 +95,6 @@
 
                 mkdir -p $WINEPREFIX
                 wineboot -u
-                ln -sfn "$mount_point" "$WINEPREFIX/dosdevices/$drive_letter"
-
-                dotnet_payload_url="https://web.archive.org/web/2000/http://download.windowsupdate.com/msdownload/update/software/svpk/2011/02/windows6.1-kb976932-x86_c3516bc5c9e69fee6d9ac4f981f5b95977a8a2fa.exe"
-
-                # Ensure we're not getting an error from web.archive, which stops the script.
-                status_code="$(
-                  curl \
-                    --location \
-                    --silent \
-                    --output /dev/null \
-                    --write-out '%{http_code}' \
-                    --retry 3 \
-                    --retry-delay 5 \
-                    --retry-all-errors \
-                    "$dotnet_payload_url"
-                )"
-
-                if [ "$status_code" = "429" ]; then
-                  echo "web.archive.org is rate-limiting the required .NET download (HTTP 429)." >&2
-                  echo "Wait and run setup-musicbee again; the Wine prefix was not modified." >&2
-                  exit 1
-                fi
-
-                if [ "$status_code" -lt 200 ] || [ "$status_code" -ge 400 ]; then
-                  echo "Required .NET download is unavailable (HTTP $status_code)." >&2
-                  exit 1
-                fi
 
                 # Unset display to prevent wine from displaying configuration messages.
                 DISPLAY="" WAYLAND_DISPLAY="" winetricks --unattended dotnet48 xmllite gdiplus cjkfonts wmp11
@@ -120,10 +111,10 @@
             musicbee = {
               type = "Application";
               name = "MusicBee";
-              icon = "${cfg.portableAppDir}/MusicBee.png";
+              icon = "${cfg.appDir}/MusicBee.png";
               comment = "The Ultimate Music Player and Manager";
               exec = ''
-                env WINEPREFIX=${cfg.winePrefix} wine "${cfg.portableAppDir}/MusicBee.exe"
+                env WINEPREFIX=${cfg.winePrefix} wine "${cfg.appDir}/MusicBee.exe"
               '';
               categories = [
                 "AudioVideo"
