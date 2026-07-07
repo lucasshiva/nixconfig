@@ -1,4 +1,4 @@
-{ ... }:
+{ lib, ... }:
 {
   den.aspects.cli.eza = {
     homeManager.programs.eza = {
@@ -12,7 +12,10 @@
       icons = "auto";
       git = true;
       colors = "always";
-      enableZshIntegration = true;
+      enableBashIntegration = lib.mkDefault true;
+      enableZshIntegration = lib.mkDefault true;
+      enableFishIntegration = lib.mkDefault true;
+      enableNushellIntegration = lib.mkDefault true;
     };
   };
 }
