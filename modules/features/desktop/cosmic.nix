@@ -5,7 +5,12 @@
     { user, ... }:
     {
       nixos =
-        { config, lib, ... }:
+        {
+          config,
+          lib,
+          pkgs,
+          ...
+        }:
         let
           cfg = config.my.cosmic;
         in
@@ -30,6 +35,10 @@
             # environment.cosmic.excludePackages = with pkgs; [
             #   cosmic-edit
             # ];
+            #
+            environment.systemPackages = with pkgs; [
+              cosmic-monitor
+            ];
 
             # Improve performance slightly by enabling System76's own scheduler
             # For more information, see https://github.com/pop-os/system76-scheduler
