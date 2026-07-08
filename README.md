@@ -27,35 +27,36 @@ My NixOS (and `home-manager`) configuration using the [Den](https://den.denful.d
 | astra | Home PC | CachyOS | lucas | standalone `home-manager`.|
 
 ## Usage
-To update the system, run:
+### Update
 
 ```sh
 nix flake update
 ```
 
-To build the system, we're using [nh](https://github.com/nix-community/nh) - a CLI helper.
+### Build
 
-For NixOS, run:
+First run on a new system:
 
 ```sh
+# NixOS
+sudo nixos-rebuild switch --flake .#<hostname>
+
+# Standalone home-manager
+nix run github:nix-community/home-manager -- switch --flake .#<username>@<hostname>
+```
+
+To build on an existing system, we're using [nh](https://github.com/nix-community/nh), a CLI helper for Nix commands.
+
+```nix
+# NixOS
 nh os switch .
 nh os switch .#hostname
-```
 
-For standalone `home-manager`, we have two options:
-
-1. First run on a new system:
-
-```sh
-nix run github:nix-community/home-manager -- switch --flake .#<username>
-```
-
-2. Build on an existing system:
-
-```sh
+# Standalone home-manager
 nh home switch .
-nh home switch .#username
+nh home switch .#username@<hostname>
 ```
+
 
 ## Secrets
 
