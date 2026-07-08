@@ -39,6 +39,8 @@ in
 
       aspects.gaming.osu
       aspects.hardware.opentabletdriver
+
+      aspects.services.syncthing
     ];
 
     homeManager =
