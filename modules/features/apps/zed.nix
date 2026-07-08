@@ -16,9 +16,13 @@
         userSettings = {
           git_panel = {
             dock = "left";
+            file_icons = true;
+            tree_view = true;
           };
           project_panel = {
             dock = "left";
+            auto_reveal_entries = false;
+            git_status_indicator = true;
           };
           icon_theme = "Material Icon Theme";
           ui_font_size = 16;
