@@ -2,12 +2,13 @@
 My NixOS (and `home-manager`) configuration using the [Den](https://den.denful.dev) framework.
 
 > [!WARNING]
-> This configuration is still a **work in progress**. I am currently developing and testing it in virtual machines before trying it out on bare metal.
+> This configuration is still a **work in progress**. 
+> I am still working on making it as composable and modular as possible, mostly for fun, but this means over-engineering things that should probably be hard-coded. You've been warned.
 
 ## Structure
 ```sh
 |—— modules/
-|—— |—— aspects/    # Reusable features
+|—— |—— features/   # Reusable features
 |—— |—— den/        # Den configuration and defaults
 |—— |—— hosts/      # Host definitions
 |—— |—— users/      # User definitions
