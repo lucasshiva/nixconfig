@@ -41,6 +41,7 @@ in
       aspects.hardware.opentabletdriver
 
       aspects.services.syncthing
+      aspects.secrets.sops
     ];
 
     homeManager =

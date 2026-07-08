@@ -1,0 +1,7 @@
+keys:
+  - &home_pc age1006l6k2g6uxnwye7yr3hqdwqn9nujg2yumsp8zn6r2redj9vfe4s5dfeqx
+creation_rules:
+  - path_regex: ^.*$
+    key_groups:
+      - age:
+          - *home_pc
