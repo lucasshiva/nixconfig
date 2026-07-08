@@ -35,12 +35,14 @@ in
       aspects.apps.firefox
       aspects.apps.zed
 
+      aspects.apps.terminals.kitty
+
       aspects.gaming.osu
       aspects.hardware.opentabletdriver
     ];
 
     homeManager =
-      { pkgs, ... }:
+      { pkgs, config, ... }:
       let
         dataDrive = "/mnt/data";
       in
@@ -48,6 +50,7 @@ in
         my.calibre.settingsDir = "${dataDrive}/Apps/Calibre/Calibre Settings";
         my.musicbee.appDir = "${dataDrive}/Apps/MusicBee";
         my.osu.dataDir = "${dataDrive}/Apps/osu!";
+        my.kitty.shell = config.programs.fish.package;
 
         home.packages = with pkgs; [
           neovim
@@ -86,7 +89,6 @@ in
         '';
 
         environment.systemPackages = with pkgs; [
-          kitty # Move to its own module
           kdiskmark
         ];
       };
