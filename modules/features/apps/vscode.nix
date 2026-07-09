@@ -3,6 +3,7 @@
     homeManager = { pkgs, ... }: {
       programs.vscode = {
         enable = true;
+        mutableExtensionsDir = true;
 
         # Add extension-specific dependencies. These are for rust.
         package = pkgs.vscode.fhsWithPackages (
