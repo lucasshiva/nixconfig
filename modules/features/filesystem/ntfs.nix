@@ -5,16 +5,16 @@
       # boot.kernelModules = [ "ntfs" ];
 
       # Ensure we're not adding `ntfs-3g` by enabling "ntfs";
-      boot.supportedFilesystems = lib.mkForce [
-        "btrfs"
-        "ext4"
-      ];
+      # boot.supportedFilesystems = lib.mkForce [
+      #   "btrfs"
+      #   "ext4"
+      # ];
 
       # Disable older ntfs modules
-      boot.blacklistedKernelModules = [
-        "ntfs3" # fast but always buggy
-        "ntfs-3g" # slow but super reliable
-      ];
+      # boot.blacklistedKernelModules = [
+      #   "ntfs3" # fast but always buggy
+      #   "ntfs-3g" # slow but super reliable
+      # ];
 
       # Userspace utilities for the new ntfs driver.
       environment.systemPackages = [ pkgs.ntfsprogs-plus ];
@@ -26,7 +26,7 @@
           "udisks2.conf" = {
             defaults = {
               encryption = "luks2";
-              ntfs_driver = "ntfs"; # new driver.
+              ntfs_driver = "ntfs-3g";
             };
             udisks2 = {
               modules = [

@@ -35,10 +35,15 @@ in
       aspects.apps.firefox
       aspects.apps.zed
 
+      # Maybe use different namespaces for the apps above too (browsers, music, books, etc.)
       aspects.apps.terminals.kitty
 
+      # We could make `opentabletdriver` opt-out instead of opt-in. In this case, it would be
+      # included automatically in osu.
       aspects.gaming.osu
       aspects.hardware.opentabletdriver
+
+      aspects.gaming.steam
 
       aspects.services.syncthing
       aspects.secrets.sops

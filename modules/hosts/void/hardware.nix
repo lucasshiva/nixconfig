@@ -46,7 +46,10 @@
         # Shared drive for media, code files, games, etc.
         fileSystems."/mnt/data" = {
           device = "/dev/disk/by-uuid/47BE680932B24776";
-          fsType = "ntfs"; # `ntfs` is the new driver available starting from kernel 7.1
+          # `ntfs` is the new driver available starting from kernel 7.1
+          # To use it, we have to blacklist ntfs-3g and ntfs3, but neither ntfs3 or the new drive
+          # work well with Steam games, so we're forced to use ntfs-3g.
+          fsType = "ntfs-3g";
           options = [
             "nofail"
             "uid=1000"
