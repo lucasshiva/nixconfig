@@ -45,16 +45,18 @@
 
         # Shared drive for media, code files, games, etc.
         fileSystems."/mnt/data" = {
-          device = "/dev/disk/by-uuid/47BE680932B24776";
+          device = "/dev/disk/by-uuid/a2033fec-beef-410c-bff8-dace057bea19";
           # `ntfs` is the new driver available starting from kernel 7.1
+          #
           # To use it, we have to blacklist ntfs-3g and ntfs3, but neither ntfs3 or the new drive
-          # work well with Steam games, so we're forced to use ntfs-3g.
-          fsType = "ntfs-3g";
+          # work well with Steam games, so we're forced to use ntfs-3g if we want ntfs support.
+          #
+          # I gave up on NTFS for now, so I'll be using ext4 as a shared drive between two linux
+          # systems: NixOS and CachyOS.
+          fsType = "ext4";
           options = [
+            "defaults"
             "nofail"
-            "uid=1000"
-            "gid=1000"
-            "rw"
           ];
         };
 
