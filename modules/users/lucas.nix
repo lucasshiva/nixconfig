@@ -21,6 +21,8 @@
       aspects.cli.fzf
       aspects.cli.ripgrep
       aspects.cli.zoxide
+      aspects.cli.direnv
+      aspects.cli.devenv
 
       # Git related stuff
       # Maybe move this to `aspects.git`
@@ -28,6 +30,13 @@
       aspects.cli.delta
       # TODO: add `gh` later.
     ];
+
+    nixos = { ... }: {
+      nix.settings.trusted-users = [
+        "root"
+        "@wheel"
+      ];
+    };
 
     homeManager =
       { pkgs, ... }:
