@@ -33,6 +33,7 @@ in
       aspects.apps.calibre
       aspects.apps.musicbee
       aspects.apps.firefox
+      aspects.apps.junction
 
       # Dev stuff - maybe put it under a `dev` namespace.
       aspects.apps.zed
