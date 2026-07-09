@@ -33,7 +33,10 @@ in
       aspects.apps.calibre
       aspects.apps.musicbee
       aspects.apps.firefox
+
+      # Dev stuff - maybe put it under a `dev` namespace.
       aspects.apps.zed
+      aspects.apps.vscode
 
       # Maybe use different namespaces for the apps above too (browsers, music, books, etc.)
       aspects.apps.terminals.kitty
@@ -99,6 +102,12 @@ in
         environment.systemPackages = with pkgs; [
           kdiskmark
         ];
+
+        # Helps with unpatched, dynamic binaries. The module already comes with a set of default
+        # libraries, but we can add our own based on our needs.
+        #
+        # See https://github.com/nix-community/nix-ld for usage.
+        programs.nix-ld.enable = true;
       };
   };
 }
