@@ -9,7 +9,7 @@ in
   den.aspects.${username}.provides.${hostname} = {
     includes = with shiv; [
       core.fonts
-      gaming.osu
+      apps.osu
     ];
 
     homeManager =
