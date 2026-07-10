@@ -1,6 +1,6 @@
 { lib, ... }:
 {
-  shiv.gaming.osu = {
+  shiv.apps.osu = {
     homeManager =
       {
         config,

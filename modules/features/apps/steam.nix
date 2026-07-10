@@ -1,5 +1,5 @@
 { ... }: {
-  shiv.gaming.steam = {
+  shiv.apps.steam = {
     nixos = { ... }: {
       programs.steam = {
         enable = true;

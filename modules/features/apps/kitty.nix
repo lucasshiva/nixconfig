@@ -1,5 +1,5 @@
 { ... }: {
-  shiv.apps.terminals.kitty = {
+  shiv.apps.kitty = {
     homeManager =
       {
         pkgs,

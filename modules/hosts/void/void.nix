@@ -34,20 +34,15 @@ in
       apps.musicbee
       apps.firefox
       apps.junction
-
-      # Dev stuff - maybe put it under a `dev` namespace.
       apps.zed
       apps.vscode
-
-      # Maybe use different namespaces for the apps above too (browsers, music, books, etc.)
-      apps.terminals.kitty
+      apps.kitty
+      apps.steam
 
       # We could make `opentabletdriver` opt-out instead of opt-in. In this case, it would be
       # included automatically in osu.
-      gaming.osu
+      apps.osu
       hardware.opentabletdriver
-
-      gaming.steam
 
       services.syncthing
       secrets.sops
