@@ -192,13 +192,17 @@ Disclaimer: It should be possible to run `sops` directly inside the `secrets` di
 ## References
 
 ### Configurations
-- [sarahlament](https://github.com/sarahlament/nix-configurations).
+
+#### Den
 - [quasigod](https://codeberg.org/quasigod/nixconfig).
 - [drupol](https://github.com/drupol/infra).
 - [neonvoidx](https://github.com/neonvoidx/nix).
 - [Gwenodai](https://github.com/Gwenodai/nixos).
 - [Sini](https://github.com/sini/nix-config).
 - [Vic](github.com/vic/vix)
+
+#### flake-parts
+- [sarahlament](https://github.com/sarahlament/nix-configurations).
 - [kiriwalawren](https://github.com/kiriwalawren/dotnix).
 - [wallago](https://github.com/wallago/nix-config).
 
