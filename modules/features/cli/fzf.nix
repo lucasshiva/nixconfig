@@ -1,6 +1,6 @@
 { lib, ... }:
 {
-  den.aspects.cli.fzf = {
+  shiv.cli.fzf = {
     homeManager.programs.fzf = {
       enable = true;
       enableBashIntegration = lib.mkDefault true;

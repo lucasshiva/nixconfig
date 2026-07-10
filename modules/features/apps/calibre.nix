@@ -1,6 +1,6 @@
 { lib, ... }:
 {
-  den.aspects.apps.calibre = {
+  shiv.apps.calibre = {
     homeManager =
       { config, ... }:
       let

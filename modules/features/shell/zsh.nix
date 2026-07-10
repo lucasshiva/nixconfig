@@ -1,6 +1,6 @@
 { lib, ... }:
 {
-  den.aspects.shell.zsh = {
+  shiv.shell.zsh = {
     homeManager =
       { config, pkgs, ... }:
       {

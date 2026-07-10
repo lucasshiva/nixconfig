@@ -1,5 +1,5 @@
 { ... }: {
-  den.aspects.hardware.pc.ssd = {
+  shiv.hardware.pc.ssd = {
     nixos = { pkgs, ... }: {
       services.fstrim.enable = true;
       environment.systemPackages = with pkgs; [

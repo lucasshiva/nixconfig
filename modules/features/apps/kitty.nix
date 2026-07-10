@@ -1,5 +1,5 @@
 { ... }: {
-  den.aspects.apps.terminals.kitty = {
+  shiv.apps.terminals.kitty = {
     homeManager =
       {
         pkgs,

@@ -1,5 +1,5 @@
 { ... }: {
-  den.aspects.shell.nushell = {
+  shiv.shell.nushell = {
     homeManager = { ... }: {
       programs.nushell = {
         enable = true;

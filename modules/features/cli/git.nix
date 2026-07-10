@@ -1,6 +1,6 @@
 { ... }:
 {
-  den.aspects.cli.git = {
+  shiv.cli.git = {
     homeManager =
       { config, lib, ... }:
       let

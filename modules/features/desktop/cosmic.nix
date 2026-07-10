@@ -1,5 +1,5 @@
 {
-  den.aspects.desktop.cosmic =
+  shiv.desktop.cosmic =
     # Requesting `user` on the `nixos` class module isn't working. Maybe on purpose.
     # For more information, see my issue at https://github.com/denful/den/issues/629
     { user, ... }:

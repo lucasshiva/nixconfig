@@ -1,6 +1,6 @@
 { ... }:
 {
-  den.aspects.desktop.niri.binds = {
+  shiv.desktop.niri.binds = {
     homeManager =
       {
         lib,

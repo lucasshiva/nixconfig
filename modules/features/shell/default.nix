@@ -1,7 +1,7 @@
-{ den, ... }:
+{ shiv, ... }:
 {
-  den.aspects.shell = {
-    includes = with den.aspects; [
+  shiv.shell = {
+    includes = with shiv; [
       # Bash is mostly to make sure that aliases, env vars, etc. are handled correctly.
       shell.bash
       shell.zsh

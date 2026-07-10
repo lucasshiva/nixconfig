@@ -1,6 +1,6 @@
 { lib, ... }:
 {
-  den.aspects.cli.bat = {
+  shiv.cli.bat = {
     homeManager =
       { pkgs, config, ... }:
       {

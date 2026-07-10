@@ -1,6 +1,6 @@
 { ... }:
 {
-  den.aspects.boot.systemd-boot = {
+  shiv.boot.systemd-boot = {
     nixos =
       { ... }:
       {

@@ -1,6 +1,6 @@
 { ... }:
 {
-  den.aspects.hardware.opentabletdriver = {
+  shiv.hardware.opentabletdriver = {
     nixos =
       { ... }:
       {

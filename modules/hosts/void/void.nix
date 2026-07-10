@@ -1,4 +1,4 @@
-{ den, ... }:
+{ shiv, ... }:
 let
   hostname = "void";
   username = "lucas";
@@ -9,48 +9,48 @@ in
   };
 
   den.aspects."${hostname}" = {
-    includes = with den; [
-      aspects."${hostname}".hardware # Hardware config for this host.
-      aspects.hardware.gpu.nvidia
-      aspects.hardware.cpu.amd
-      aspects.hardware.pc.ssd
+    includes = with shiv; [
+      void.hardware # Hardware config for this host.
+      hardware.gpu.nvidia
+      hardware.cpu.amd
+      hardware.pc.ssd
 
       # Maybe we don't need to manually manage fontconfig when using a DE.
       # They all seem to add fonts and/or manage fontconfig themselves.
-      aspects.core.fonts
-      aspects.swap.zram
-      aspects.sound.pipewire
-      aspects.boot.systemd-boot
+      core.fonts
+      swap.zram
+      sound.pipewire
+      boot.systemd-boot
 
       # KDE UI elements are rather slow on NixOS, so for now I'm going to be using something else.
       # For more information, see https://github.com/NixOS/nixpkgs/issues/126590.
       # The workaround did not work for me.
-      # aspects.desktop.kde
+      # desktop.kde
 
       # I'm trying out Cosmic for now, but I'm probably going to be using GNOME and/or Niri instead.
-      aspects.desktop.cosmic
+      desktop.cosmic
 
-      aspects.apps.calibre
-      aspects.apps.musicbee
-      aspects.apps.firefox
-      aspects.apps.junction
+      apps.calibre
+      apps.musicbee
+      apps.firefox
+      apps.junction
 
       # Dev stuff - maybe put it under a `dev` namespace.
-      aspects.apps.zed
-      aspects.apps.vscode
+      apps.zed
+      apps.vscode
 
       # Maybe use different namespaces for the apps above too (browsers, music, books, etc.)
-      aspects.apps.terminals.kitty
+      apps.terminals.kitty
 
       # We could make `opentabletdriver` opt-out instead of opt-in. In this case, it would be
       # included automatically in osu.
-      aspects.gaming.osu
-      aspects.hardware.opentabletdriver
+      gaming.osu
+      hardware.opentabletdriver
 
-      aspects.gaming.steam
+      gaming.steam
 
-      aspects.services.syncthing
-      aspects.secrets.sops
+      services.syncthing
+      secrets.sops
     ];
 
     homeManager =
@@ -108,6 +108,9 @@ in
         # libraries, but we can add our own based on our needs.
         #
         # See https://github.com/nix-community/nix-ld for usage.
+        #
+        # I will move this to some sort of base dev module to install common dev dependencies.
+        # And I want to add more libraries by default.
         programs.nix-ld.enable = true;
       };
   };

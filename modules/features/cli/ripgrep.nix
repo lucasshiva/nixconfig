@@ -1,6 +1,6 @@
 { ... }:
 {
-  den.aspects.cli.ripgrep = {
+  shiv.cli.ripgrep = {
     homeManager.programs.ripgrep.enable = true;
   };
 }

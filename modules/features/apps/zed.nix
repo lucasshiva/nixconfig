@@ -1,5 +1,5 @@
 { ... }: {
-  den.aspects.apps.zed = {
+  shiv.apps.zed = {
     homeManager = { pkgs, ... }: {
       programs.zed-editor = {
         enable = true;

@@ -1,7 +1,7 @@
-{ den, ... }: {
-  den.aspects.hardware.gpu.nvidia = {
+{ shiv, ... }: {
+  shiv.hardware.gpu.nvidia = {
     includes = [
-      den.aspects.hardware.diagnostics
+      shiv.hardware.diagnostics
     ];
     nixos =
       { config, pkgs, ... }:

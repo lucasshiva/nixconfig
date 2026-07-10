@@ -1,5 +1,5 @@
 { ... }: {
-  den.aspects.cli.direnv = {
+  shiv.cli.direnv = {
     homeManager = { lib, config, ... }: {
       programs.direnv = {
         enable = true;

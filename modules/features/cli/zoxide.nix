@@ -1,6 +1,6 @@
 { lib, ... }:
 {
-  den.aspects.cli.zoxide = {
+  shiv.cli.zoxide = {
     homeManager.programs.zoxide = {
       enable = true;
       enableBashIntegration = lib.mkDefault true;

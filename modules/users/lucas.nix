@@ -1,34 +1,34 @@
-{ den, ... }:
+{ shiv, den, ... }:
 {
   den.aspects.lucas = {
-    includes = with den; [
+    includes = with shiv; [
       # Marks user as the primary (admin-level) user.
       # On NixOS: adds `wheel` and `networkmanager` groups.
-      batteries.primary-user
+      den.batteries.primary-user
 
       # Forward all `homeManager` config to the user.
       # Without this, we'd have to include aspects we're already including in the host.
-      batteries.host-aspects
+      den.batteries.host-aspects
 
       # Shell config
-      aspects.shell
-      aspects.shell.prompts.starship
-      (batteries.user-shell "zsh")
+      shell
+      shell.prompts.starship
+      (den.batteries.user-shell "zsh")
 
       # Cli tools - the same in every host
-      aspects.cli.bat
-      aspects.cli.eza
-      aspects.cli.fzf
-      aspects.cli.ripgrep
-      aspects.cli.zoxide
-      aspects.cli.direnv
-      aspects.cli.devenv
-      aspects.cli.mise
+      cli.bat
+      cli.eza
+      cli.fzf
+      cli.ripgrep
+      cli.zoxide
+      cli.direnv
+      cli.devenv
+      cli.mise
 
       # Git related stuff
-      # Maybe move this to `aspects.git`
-      aspects.cli.git
-      aspects.cli.delta
+      # Maybe move this to `shiv.git`
+      cli.git
+      cli.delta
       # TODO: add `gh` later.
     ];
 

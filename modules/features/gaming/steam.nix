@@ -1,5 +1,5 @@
 { ... }: {
-  den.aspects.gaming.steam = {
+  shiv.gaming.steam = {
     nixos = { ... }: {
       programs.steam = {
         enable = true;

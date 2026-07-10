@@ -1,6 +1,6 @@
 { ... }:
 {
-  den.aspects.cli.delta = {
+  shiv.cli.delta = {
     homeManager =
       { config, ... }:
       {

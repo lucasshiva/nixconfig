@@ -1,5 +1,5 @@
 { ... }: {
-  den.aspects.sound.pipewire = {
+  shiv.sound.pipewire = {
     nixos = { ... }: {
       # Disable PulseAudio in favour of Pipewire.
       services.pulseaudio.enable = false;

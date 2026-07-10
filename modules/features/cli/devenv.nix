@@ -1,5 +1,5 @@
 { ... }: {
-  den.aspects.cli.devenv = {
+  shiv.cli.devenv = {
     homeManager = { lib, ... }: {
       programs.devenv = {
         enable = true;

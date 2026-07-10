@@ -1,5 +1,5 @@
 { ... }: {
-  den.aspects.apps.junction = {
+  shiv.apps.junction = {
     homeManager =
       { pkgs, ... }:
       let

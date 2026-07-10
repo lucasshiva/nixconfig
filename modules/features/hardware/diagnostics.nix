@@ -1,5 +1,5 @@
 { ... }: {
-  den.aspects.hardware.diagnostics = {
+  shiv.hardware.diagnostics = {
     nixos = { pkgs, ... }: {
       environment.systemPackages = with pkgs; [
         pciutils

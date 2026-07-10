@@ -1,6 +1,6 @@
 { ... }:
 {
-  den.aspects.nix.nh = {
+  shiv.nix.nh = {
     homeManager.programs.nh.enable = true;
   };
 }

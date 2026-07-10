@@ -41,7 +41,7 @@ let
   subpixelRendering = "rgb";
 in
 {
-  den.aspects.core.fonts = {
+  shiv.core.fonts = {
     nixos =
       { pkgs, config, ... }:
       {

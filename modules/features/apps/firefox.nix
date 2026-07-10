@@ -1,6 +1,6 @@
 { ... }:
 {
-  den.aspects.apps.firefox = {
+  shiv.apps.firefox = {
     # Enable default firefox system-wide.
     nixos.programs.firefox.enable = true;
 

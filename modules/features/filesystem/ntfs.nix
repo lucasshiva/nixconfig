@@ -8,7 +8,7 @@
 #
 # I won't be doing any of this for now because at the moment I don't really need NTFS anymore.
 { lib, ... }: {
-  den.aspects.filesystem.ntfs = {
+  shiv.filesystem.ntfs = {
     nixos = { pkgs, ... }: {
       # It seems like we don't need to enable the "ntfs" module for the new driver.
       # Or maybe it is enabled by default.

@@ -1,4 +1,4 @@
-{ den, ... }:
+{ den, shiv, ... }:
 let
   stateVersion = "26.05";
 in
@@ -58,6 +58,6 @@ in
     policies.host-guards
 
     # Includes nh (nix cli helper) by default.
-    aspects.nix.nh
+    shiv.nix.nh
   ];
 }

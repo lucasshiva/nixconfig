@@ -1,6 +1,6 @@
 { ... }:
 {
-  den.aspects.desktop.kde = {
+  shiv.desktop.kde = {
     nixos =
       { pkgs, ... }:
       {

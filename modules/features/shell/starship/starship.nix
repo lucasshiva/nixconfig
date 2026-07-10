@@ -1,6 +1,6 @@
 { lib, ... }:
 {
-  den.aspects.shell.prompts.starship = {
+  shiv.shell.prompts.starship = {
     homeManager =
       { config, ... }:
       let

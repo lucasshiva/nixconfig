@@ -6,7 +6,7 @@
   # <channel type="spicevmc">
   #   <target type="virtio" name="com.redhat.spice.0"/>
   # </channel>
-  den.aspects.services.spice-vdagent = {
+  shiv.services.spice-vdagent = {
     homeManager =
       { pkgs, ... }:
       {

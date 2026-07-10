@@ -1,7 +1,7 @@
-{ den, ... }: {
+{ shiv, ... }: {
 
-  den.aspects.void.hardware = {
-    includes = [ den.aspects.filesystem.ntfs ];
+  shiv.void.hardware = {
+    includes = [ shiv.filesystem.ntfs ];
     nixos =
       {
         config,

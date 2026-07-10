@@ -1,5 +1,5 @@
 { ... }: {
-  den.aspects.shell.fish.homeManager = { ... }: {
+  shiv.shell.fish.homeManager = { ... }: {
     programs.fish = {
       enable = true;
       interactiveShellInit = ''

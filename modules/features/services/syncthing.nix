@@ -1,5 +1,5 @@
 { ... }: {
-  den.aspects.services.syncthing = {
+  shiv.services.syncthing = {
     homeManager =
       { config, ... }:
       let

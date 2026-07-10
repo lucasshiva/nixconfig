@@ -1,4 +1,4 @@
-{ den, ... }:
+{ shiv, ... }:
 let
   username = "lucas";
   hostname = "astra";
@@ -7,9 +7,9 @@ in
   den.homes.x86_64-linux."${username}@${hostname}" = { };
 
   den.aspects.${username}.provides.${hostname} = {
-    includes = with den; [
-      aspects.core.fonts
-      aspects.gaming.osu
+    includes = with shiv; [
+      core.fonts
+      gaming.osu
     ];
 
     homeManager =

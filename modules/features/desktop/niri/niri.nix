@@ -1,12 +1,12 @@
 {
-  den,
+  shiv,
   inputs,
   lib,
   ...
 }:
 {
-  den.aspects.desktop.niri = {
-    includes = [ den.aspects.desktop.niri.binds ];
+  shiv.desktop.niri = {
+    includes = [ shiv.desktop.niri.binds ];
     nixos =
       { ... }:
       {

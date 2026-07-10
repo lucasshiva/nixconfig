@@ -1,5 +1,5 @@
 { inputs, ... }: {
-  den.aspects.secrets.sops.homeManager = { pkgs, config, ... }: {
+  shiv.secrets.sops.homeManager = { pkgs, config, ... }: {
     imports = [ inputs.sops-nix.homeManagerModules.sops ];
 
     home.packages = with pkgs; [

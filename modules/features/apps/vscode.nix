@@ -1,5 +1,5 @@
 { ... }: {
-  den.aspects.apps.vscode = {
+  shiv.apps.vscode = {
     homeManager = { pkgs, ... }: {
       programs.vscode = {
         enable = true;

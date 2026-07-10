@@ -1,6 +1,6 @@
 { ... }:
 {
-  den.aspects.shell.bash = {
+  shiv.shell.bash = {
     homeManager.programs.bash.enable = true;
   };
 }

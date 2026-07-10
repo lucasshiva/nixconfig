@@ -1,5 +1,5 @@
 { lib, ... }: {
-  den.aspects.cli.mise = {
+  shiv.cli.mise = {
     homeManager.programs.mise = {
       enable = true;
       enableFishIntegration = lib.mkDefault true;

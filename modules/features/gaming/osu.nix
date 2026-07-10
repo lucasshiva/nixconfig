@@ -1,6 +1,6 @@
 { lib, ... }:
 {
-  den.aspects.gaming.osu = {
+  shiv.gaming.osu = {
     homeManager =
       {
         config,

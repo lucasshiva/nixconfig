@@ -1,5 +1,5 @@
 { ... }: {
-  den.aspects.swap.zram = {
+  shiv.swap.zram = {
     nixos.zramSwap.enable = true;
   };
 }

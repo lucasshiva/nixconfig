@@ -1,6 +1,6 @@
 { lib, ... }:
 {
-  den.aspects.apps.musicbee = {
+  shiv.apps.musicbee = {
     homeManager =
       { config, pkgs, ... }:
       let

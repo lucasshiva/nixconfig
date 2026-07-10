@@ -1,6 +1,6 @@
 { inputs, ... }:
 {
-  den.aspects.desktop.dms = {
+  shiv.desktop.dms = {
     # Use DMS' polkit agent instead of niri-flake's one.
     # I'm not even sure if DMS polkit is enabled via the home-manager module. Maybe not.
     nixos.systemd.user.services.niri-flake-polkit.enable = false;

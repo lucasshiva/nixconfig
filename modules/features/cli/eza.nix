@@ -1,6 +1,6 @@
 { lib, ... }:
 {
-  den.aspects.cli.eza = {
+  shiv.cli.eza = {
     homeManager.programs.eza = {
       enable = true;
       extraOptions = [
