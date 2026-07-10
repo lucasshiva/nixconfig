@@ -23,6 +23,7 @@
       aspects.cli.zoxide
       aspects.cli.direnv
       aspects.cli.devenv
+      aspects.cli.mise
 
       # Git related stuff
       # Maybe move this to `aspects.git`
