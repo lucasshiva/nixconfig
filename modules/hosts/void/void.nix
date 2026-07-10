@@ -14,6 +14,7 @@ in
       hardware.gpu.nvidia
       hardware.cpu.amd
       hardware.pc.ssd
+      hardware.all-firmware
 
       # Maybe we don't need to manually manage fontconfig when using a DE.
       # They all seem to add fonts and/or manage fontconfig themselves.
@@ -74,8 +75,6 @@ in
 
         # Use latest kernel.
         boot.kernelPackages = pkgs.linuxPackages_latest;
-
-        hardware.enableAllFirmware = true;
 
         # Enable X11.
         services.xserver.enable = true;
