@@ -33,7 +33,7 @@
 
         config = {
           home.packages = lib.optionals cfg.installPackage [
-            # I'd prefer osu! table instead of lazer, but stable's support for linux isn't the best.
+            # I'd prefer osu! stable instead of lazer, but stable's support for linux isn't the best.
             pkgs.osu-lazer-bin
           ];
 
