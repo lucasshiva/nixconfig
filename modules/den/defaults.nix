@@ -5,6 +5,7 @@ in
 {
   den.default.homeManager = {
     home.stateVersion = stateVersion;
+    nixpkgs.config.allowUnfree = true;
   };
 
   den.default.nixos = {
