@@ -21,6 +21,7 @@
       cli.fzf
       cli.ripgrep
       cli.zoxide
+      cli.btop
       cli.direnv
       cli.devenv
       cli.mise
