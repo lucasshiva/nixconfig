@@ -39,6 +39,7 @@ in
       apps.vscode
       apps.kitty
       apps.steam
+      apps.android-studio
 
       # We could make `opentabletdriver` opt-out instead of opt-in. In this case, it would be
       # included automatically in osu.
