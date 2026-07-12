@@ -22,6 +22,7 @@ in
       swap.zram
       sound.pipewire
       boot.systemd-boot
+      dev.libs
 
       # KDE UI elements are rather slow on NixOS, so for now I'm going to be using something else.
       # For more information, see https://github.com/NixOS/nixpkgs/issues/126590.
@@ -98,15 +99,6 @@ in
         environment.systemPackages = with pkgs; [
           kdiskmark
         ];
-
-        # Helps with unpatched, dynamic binaries. The module already comes with a set of default
-        # libraries, but we can add our own based on our needs.
-        #
-        # See https://github.com/nix-community/nix-ld for usage.
-        #
-        # I will move this to some sort of base dev module to install common dev dependencies.
-        # And I want to add more libraries by default.
-        programs.nix-ld.enable = true;
       };
   };
 }
