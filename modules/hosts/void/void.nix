@@ -24,13 +24,9 @@ in
       boot.systemd-boot
       dev.libs
 
-      # KDE UI elements are rather slow on NixOS, so for now I'm going to be using something else.
-      # For more information, see https://github.com/NixOS/nixpkgs/issues/126590.
-      # The workaround did not work for me.
-      # desktop.kde
-
-      # I'm trying out Cosmic for now, but I'm probably going to be using GNOME and/or Niri instead.
-      desktop.cosmic
+      # KDE UI elements are rather slow on NixOS, see https://github.com/NixOS/nixpkgs/issues/126590.
+      # Sadly, I didn't feel any difference with the workaround, so I'm not doing it anymore.
+      desktop.kde
 
       apps.calibre
       apps.musicbee
@@ -72,9 +68,6 @@ in
     nixos =
       { pkgs, ... }:
       {
-        # Will disable later if I stop using Cosmic.
-        my.cosmic.autoLogin = true;
-
         # Use latest kernel.
         boot.kernelPackages = pkgs.linuxPackages_latest;
 
