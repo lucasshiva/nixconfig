@@ -78,8 +78,8 @@ in
         options.my.fonts = fontOptions;
 
         # Only runs on standalone home-manager.
-        config = lib.optionalAttrs (!isNixos) {
-          home.packages = (fontPackages pkgs);
+        config = {
+          home.packages = lib.mkIf (!isNixos) (fontPackages pkgs);
           fonts.fontconfig = {
             enable = true;
             hinting = hintingStyle;
