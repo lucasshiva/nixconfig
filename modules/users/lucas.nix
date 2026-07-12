@@ -15,7 +15,7 @@
       shell.prompts.starship
       (den.batteries.user-shell "zsh")
 
-      # Cli tools - the same in every host
+      # Cli tools - usually the same in every host
       cli.bat
       cli.eza
       cli.fzf
@@ -23,7 +23,6 @@
       cli.zoxide
       cli.btop
       cli.direnv
-      cli.devenv
       cli.mise
 
       # Git related stuff
@@ -54,6 +53,9 @@
           user.name = "Lucas Silva";
           user.email = "silva.lucasdev@gmail.com";
         };
+
+        # Enable home-manager CLI whenever possible
+        programs.home-manager.enable = true;
       };
   };
 }
