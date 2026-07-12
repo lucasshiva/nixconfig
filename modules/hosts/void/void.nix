@@ -8,6 +8,9 @@ in
     users."${username}" = { };
   };
 
+  # Would be nice if we could decide between running home-manager as a nixos module or standalone on the fly.
+  # den.homes.x86_64-linux."${username}@${hostname}" = { };
+
   den.aspects."${hostname}" = {
     includes = with shiv; [
       void.hardware # Hardware config for this host.
@@ -16,8 +19,7 @@ in
       hardware.pc.ssd
       hardware.all-firmware
 
-      # Maybe we don't need to manually manage fontconfig when using a DE.
-      # They all seem to add fonts and/or manage fontconfig themselves.
+      # Managing fontconfig ourselves is good for Window Managers and Distrobox.
       core.fonts
       swap.zram
       sound.pipewire
@@ -37,6 +39,7 @@ in
       apps.kitty
       apps.steam
       apps.android-studio
+      apps.distrobox
 
       # We could make `opentabletdriver` opt-out instead of opt-in. In this case, it would be
       # included automatically in osu.
@@ -57,11 +60,16 @@ in
         my.musicbee.appDir = "${dataDrive}/Apps/MusicBee";
         my.osu.dataDir = "${dataDrive}/Apps/osu!";
         my.kitty.shell = config.programs.fish.package;
+        my.distrobox = {
+          kdeIntegration = true;
+          flutter = true;
+        };
 
         home.packages = with pkgs; [
           neovim
           keepassxc
           obsidian
+          jetbrains.rider # Maybe install via JetBrains Toolbox instead?
         ];
       };
 
