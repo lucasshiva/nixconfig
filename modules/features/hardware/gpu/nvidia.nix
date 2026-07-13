@@ -4,7 +4,12 @@
       shiv.hardware.diagnostics
     ];
     nixos =
-      { config, pkgs, ... }:
+      {
+        lib,
+        config,
+        pkgs,
+        ...
+      }:
       {
         hardware.graphics = {
           enable = true;
@@ -32,7 +37,7 @@
           LIBVA_DRIVER_NAME = "nvidia";
           GBM_BACKEND = "nvidia-drm";
           __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-          NIXOS_OZONE_WL = "1"; # Fixes Chromium/Electron apps (like Discord) crashing on Wayland
+          NIXOS_OZONE_WL = lib.mkDefault "1"; # Fixes Chromium/Electron apps (like Discord) crashing on Wayland
         };
       };
   };

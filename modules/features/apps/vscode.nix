@@ -1,4 +1,4 @@
-{ ... }: {
+{ lib, ... }: {
   shiv.apps.vscode = {
     homeManager = { pkgs, ... }: {
       programs.vscode = {
@@ -18,7 +18,7 @@
 
       home.sessionVariables = {
         # Make VS Code run on Wayland native instead of Xwayland.
-        NIXOS_OZONE_WL = 1;
+        NIXOS_OZONE_WL = lib.mkDefault "1";
       };
     };
   };
