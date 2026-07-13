@@ -57,7 +57,6 @@
           home.packages = with pkgs; [
             xwayland-satellite
             qt6Packages.qt6ct # For qt 6 theming.
-            qt5Packages.qt5ct # For qt 5 theming.
           ];
 
           home.sessionVariables = {
