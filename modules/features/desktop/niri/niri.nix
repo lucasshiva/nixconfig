@@ -83,7 +83,7 @@
               };
 
               layout = {
-                gaps = 4;
+                gaps = 16;
                 default-column-width = {
                   proportion = 0.5;
                 };
@@ -96,7 +96,7 @@
                 {
                   geometry-corner-radius =
                     let
-                      r = 12.0;
+                      r = 16.0;
                     in
                     {
                       top-left = r;
