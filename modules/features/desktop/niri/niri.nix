@@ -93,6 +93,8 @@
                 focus-ring.width = 2;
               };
 
+              gestures.hot-corners.enable = false;
+
               window-rules = [
                 {
                   geometry-corner-radius =
