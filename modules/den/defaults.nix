@@ -60,5 +60,8 @@ in
 
     # Includes nh (nix cli helper) by default.
     shiv.nix.nh
+
+    # Overlays
+    shiv.overlays
   ];
 }

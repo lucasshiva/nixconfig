@@ -8,7 +8,8 @@
     homeManager =
       { pkgs, ... }:
       {
-        home.packages = [ pkgs.firefox-devedition ];
+        # Not as common, so we use stable to avoid missing the cache on rebuilds.
+        home.packages = [ pkgs.stable.firefox-devedition ];
       };
   };
 }
