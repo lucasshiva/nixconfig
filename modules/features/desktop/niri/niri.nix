@@ -7,6 +7,7 @@
 {
   shiv.desktop.niri = {
     includes = [ shiv.desktop.niri.binds ];
+
     nixos =
       { ... }:
       {
@@ -20,31 +21,23 @@
         # lets niri inherit the full PATH set up by niri-session.
         systemd.user.services.niri.enableDefaultPath = false;
 
-        services.gnome.gnome-keyring.enable = false; # Always nice to have.
-        #security.polkit.enable = true; # Maybe we don't need this since DMS has a polkit?
+        # Could enable this if we're not using KDE.
+        services.gnome.gnome-keyring.enable = false;
+
+        # Maybe we don't need this since DMS/Noctalia have polkit built-in?
+        security.polkit.enable = true;
 
         # If we're using `xdg-desktop-portal-gnome`, it will attempt to use Nautilus as the file picker,
         # which will fail if Nautilus is not installed.
         #
         # To work around this problem, you can force usage of the gtk or kde portals for file picker instead.
         xdg.portal.config.niri = {
-          "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ]; # or "kde"
+          "org.freedesktop.impl.portal.FileChooser" = [ "kde" ]; # or "gtk"
         };
-
-        # Replace with Dank Greeter.
-        # I think Noctalia also has a greeter, but only for v5. Worth checking it out.
-        # services.greetd = {
-        #   enable = true;
-        #   settings = {
-        #     default_session = {
-        #       command = "${config.programs.niri.package}/bin/niri-session";
-        #       user = username;
-        #     };
-        #   };
-        # };
 
         programs.niri.enable = true;
       };
+
     homeManager =
       { pkgs, ... }:
       {

@@ -29,6 +29,8 @@ in
       # KDE UI elements are rather slow on NixOS, see https://github.com/NixOS/nixpkgs/issues/126590.
       # Sadly, I didn't feel any difference with the workaround, so I'm not doing it anymore.
       desktop.kde
+      desktop.niri
+      desktop.noctalia
 
       apps.calibre
       apps.musicbee
@@ -74,8 +76,11 @@ in
       };
 
     nixos =
-      { pkgs, ... }:
+      { pkgs, lib, ... }:
       {
+        # Disable to use Noctalia Greeter.
+        services.displayManager.plasma-login-manager.enable = lib.mkForce false;
+
         # Use latest kernel.
         boot.kernelPackages = pkgs.linuxPackages_latest;
 
