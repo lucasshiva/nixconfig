@@ -1,11 +1,26 @@
 { inputs, lib, ... }: {
   shiv.desktop.noctalia = {
-    nixos = { pkgs, ... }: {
-      imports = [ inputs.noctalia-greeter.nixosModules.default ];
-      programs.noctalia-greeter = {
-        enable = true;
+
+    nixos =
+      { pkgs, ... }:
+      {
+        imports = [ inputs.noctalia-greeter.nixosModules.default ];
+
+        # Disable Niri Flake polkit - Noctalia has its own.
+        systemd.user.services.niri-flake-polkit.enable = false;
+
+        programs.noctalia-greeter = {
+          enable = true;
+          settings = {
+            output = {
+              name = "DP-3";
+            };
+            keyboard = {
+              layout = "us";
+            };
+          };
+        };
       };
-    };
 
     homeManager =
       { pkgs, config, ... }:
@@ -20,11 +35,27 @@
         programs.noctalia = {
           enable = true;
           settings = {
+            theme = {
+              mode = "dark";
+              source = "wallpaper";
+              builtin = "Catppuccin";
+              wallpaper_scheme = "m3-content";
+              templates.builtin_ids = [
+                "niri"
+                "gtk3"
+                "gtk4"
+                "qt"
+              ];
+            };
+
             wallpaper = {
               enabled = true;
               directory = wallpapers;
-              backdrop = {
-                enabled = false;
+              transition_duration = 1200; # default is 1500
+              transition_on_startup = true;
+              automation = {
+                enabled = true;
+                interval_seconds = 300;
               };
               default = "${wallpapers}/wallhaven-1pq7zg.jpg";
             };
@@ -32,6 +63,12 @@
             backdrop.enabled = true;
             audio.enable_overdrive = true;
             location.auto_locate = true;
+
+            bar.default = {
+              border = "on_surface";
+              border_width = 1.0;
+              margin_ends = 0;
+            };
 
             dock = {
               enabled = true;
@@ -43,19 +80,13 @@
 
             shell = {
               polkit_agent = true;
+              greeter_sync.auto_sync = false;
             };
 
             nightlight = {
               enabled = true;
               temperature_day = 4500;
               temperature_night = 3200;
-            };
-
-            theme = {
-              mode = "dark";
-              source = "builtin";
-              builtin = "Catppuccin";
-              templates.builtin_ids = [ "niri" ];
             };
           };
         };
@@ -122,6 +153,15 @@
             };
             "Mod+Y" = {
               action = noc "panel-toggle" "wallpaper";
+            };
+            "Mod+Shift+Y" = {
+              action = noc "wallpaper-next";
+            };
+            "Mod+Ctrl+Y" = {
+              action = noc "wallpaper-previous";
+            };
+            "Mod+Alt+Y" = {
+              action = noc "wallpaper-random";
             };
             "Mod+V" = {
               action = noc "panel-toggle" "clipboard";
