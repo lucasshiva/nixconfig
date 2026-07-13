@@ -62,6 +62,26 @@
             settings = {
               input.keyboard.xkb.options = "compose:rwin";
 
+              outputs = {
+                "DP-3" = {
+                  mode.width = 2560;
+                  mode.height = 1440;
+                  position.x = 0;
+                  position.y = 0;
+                };
+                "DP-2" = {
+                  mode.width = 1920;
+                  mode.height = 1080;
+                  position.x = 2560; # Right to DP-3.
+                  position.y = 0;
+                };
+                "HDMI-A-1" = {
+                  scale = 1.3;
+                  position.x = 2560; # Right to DP-3.
+                  position.y = 1080; # Below DP-2
+                };
+              };
+
               layout = {
                 gaps = 4;
                 default-column-width = {
