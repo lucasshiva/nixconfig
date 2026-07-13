@@ -24,7 +24,6 @@
         # Could enable this if we're not using KDE.
         services.gnome.gnome-keyring.enable = false;
 
-        # Maybe we don't need this since DMS/Noctalia have polkit built-in?
         security.polkit.enable = true;
 
         # If we're using `xdg-desktop-portal-gnome`, it will attempt to use Nautilus as the file picker,
@@ -55,7 +54,52 @@
 
         config = {
           # `programs.niri` comes from niri-flake.
-          home.packages = with pkgs; [ xwayland-satellite ];
+          home.packages = with pkgs; [
+            xwayland-satellite
+            qt6Packages.qt6ct # For qt 6 theming.
+            qt5Packages.qt5ct # For qt 5 theming.
+          ];
+
+          home.sessionVariables = {
+            # Qt
+            QT_QPA_PLATFORMTHEME = "qt6ct";
+
+            # GTK: prefer Wayland
+            GDK_BACKEND = "wayland,x11";
+
+            # Qt: prefer Wayland
+            QT_QPA_PLATFORM = "wayland;xcb";
+
+            # SDL
+            SDL_VIDEODRIVER = "wayland";
+
+            # Java (Swing/AWT)
+            _JAVA_AWT_WM_NONREPARENTING = "1";
+
+            # Mozilla (Firefox, Thunderbird)
+            MOZ_ENABLE_WAYLAND = "1";
+
+            # Electron apps default to Wayland without extra flags.
+            NIXOS_OZONE_WL = lib.mkDefault "1";
+          };
+
+          home.pointerCursor = {
+            gtk.enable = true;
+            x11.enable = true;
+
+            package = pkgs.bibata-cursors;
+            name = "Bibata-Modern-Classic";
+            size = 30;
+          };
+
+          gtk.enable = true;
+          qt.enable = true;
+
+          xdg.portal = {
+            enable = true;
+            xdgOpenUsePortal = true;
+          };
+
           programs.niri = {
             enable = true;
             package = pkgs.niri; # from nixpkgs to benefit from binary cache
