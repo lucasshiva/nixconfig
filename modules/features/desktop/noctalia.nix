@@ -55,7 +55,7 @@
               transition_on_startup = true;
               automation = {
                 enabled = true;
-                interval_seconds = 300;
+                interval_seconds = 600;
               };
               default = "${wallpapers}/wallhaven-1pq7zg.jpg";
             };
