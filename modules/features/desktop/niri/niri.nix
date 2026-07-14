@@ -19,10 +19,12 @@
         # NixOS otherwise injects a stripped PATH via Environment= on the niri.service
         # unit which shadows the imported user-manager PATH. Disabling the default
         # lets niri inherit the full PATH set up by niri-session.
+        #
+        # Enabling `programs.niri` from NixOS already sets this to false.
         systemd.user.services.niri.enableDefaultPath = false;
 
-        # Could enable this if we're not using KDE.
-        services.gnome.gnome-keyring.enable = false;
+        # I'm not sure if this conflicts with kwallet if KDE is installed.
+        services.gnome.gnome-keyring.enable = true;
 
         security.polkit.enable = true;
 
@@ -30,10 +32,24 @@
         # which will fail if Nautilus is not installed.
         #
         # To work around this problem, you can force usage of the gtk or kde portals for file picker instead.
-        xdg.portal.config.niri = {
-          "org.freedesktop.impl.portal.FileChooser" = [ "kde" ]; # or "gtk"
+        xdg.portal = {
+          enable = true;
+          config.niri = {
+            default = [
+              "gnome"
+              "gtk"
+            ];
+            "org.freedesktop.impl.portal.Access" = "gtk";
+            "org.freedesktop.impl.portal.FileChooser" = "gtk";
+            "org.freedesktop.impl.portal.Notification" = "gtk";
+            "org.freedesktop.impl.portal.Secret" = "gnome-keyring";
+          };
         };
 
+        # Enabling this sets the xdg config portal. I'm not even sure if we do need to enable it.
+        # I only did so because I wanted Niri available as an option in the greeter.
+        # But maybe we can simply add it to `environment.systemPackages` or `systemd.packages`.
+        # Reference: https://github.com/NixOS/nixpkgs/blob/nixos-26.05/nixos/modules/programs/wayland/niri.nix
         programs.niri.enable = true;
       };
 
@@ -93,11 +109,6 @@
 
           gtk.enable = true;
           qt.enable = true;
-
-          xdg.portal = {
-            enable = true;
-            xdgOpenUsePortal = true;
-          };
 
           programs.niri = {
             enable = true;
