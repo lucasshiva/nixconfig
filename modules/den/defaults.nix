@@ -39,7 +39,10 @@ in
 
     # Configure home-manager.
     home-manager = {
-      backupFileExtension = "backup";
+      backupCommand = ''
+        backup="$1.$(date +%s)"
+        mv "$1" "$backup"
+      '';
       useUserPackages = true;
       useGlobalPkgs = true;
     };
