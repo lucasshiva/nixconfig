@@ -181,6 +181,18 @@
             "XF86AudioMute" = {
               action = noc "volume-mute";
             };
+            "XF86AudioMicMute" = {
+              action = noc "mic-mute";
+            };
+            "XF86AudioPlay" = {
+              action = noc "media" "toggle";
+            };
+            "XF86AudioPrev" = {
+              action = noc "media" "next";
+            };
+            "XF86AudioNext" = {
+              action = noc "media" "previous";
+            };
             "XF86MonBrightnessUp" = {
               action = noc "brightness-up";
             };
