@@ -104,6 +104,7 @@
             package = pkgs.niri; # from nixpkgs to benefit from binary cache
             settings = {
               input.keyboard.xkb.options = "compose:rwin";
+              input.keyboard.numlock = true;
               hotkey-overlay.skip-at-startup = true;
 
               outputs = {
