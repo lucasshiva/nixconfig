@@ -1,3 +1,18 @@
+/*
+  Niri is a scrollable-tiling Wayland compositor. Some alternatives are:
+  - Hyprland
+  - MangoWC
+
+  I always have KDE on my system, so I don't need to configure Niri extensively to make it work
+  with Qt/KDE apps - KDE does most of the work for me. Because of that, this module includes the KDE
+  module by default.
+
+  We also use the KDE portal, but GNOME portal is included as a fallback, so Nautilus is a required
+  dependency together with KDE.
+
+  In standalone systems, we have to install KDE, Niri, and Nautilus.
+*/
+
 {
   shiv,
   inputs,
@@ -6,16 +21,15 @@
 }:
 {
   shiv.desktop.niri = {
-    includes = [ shiv.desktop.niri.binds ];
+    includes = [
+      shiv.desktop.kde
+      shiv.apps.kitty
+      shiv.desktop.niri.binds
+    ];
 
     nixos =
-      { ... }:
+      { pkgs, config, ... }:
       {
-        hardware.graphics = {
-          enable = true;
-          enable32Bit = true;
-        };
-
         # NixOS otherwise injects a stripped PATH via Environment= on the niri.service
         # unit which shadows the imported user-manager PATH. Disabling the default
         # lets niri inherit the full PATH set up by niri-session.
@@ -23,67 +37,106 @@
         # Enabling `programs.niri` from NixOS already sets this to false.
         systemd.user.services.niri.enableDefaultPath = false;
 
-        # I'm not sure if this conflicts with kwallet if KDE is installed.
-        services.gnome.gnome-keyring.enable = true;
+        # Enabled if for some reason KDE is disabled.
+        services.gnome.gnome-keyring.enable = !config.services.desktopManager.plasma6.enable;
 
+        # Ensure polkit is enabled, otherwise it won't work.
+        # This is also required by NetworkManager.
         security.polkit.enable = true;
 
-        # If we're using `xdg-desktop-portal-gnome`, it will attempt to use Nautilus as the file picker,
-        # which will fail if Nautilus is not installed.
-        #
-        # To work around this problem, you can force usage of the gtk or kde portals for file picker instead.
-        xdg.portal = {
-          enable = true;
-          config.niri = {
-            default = [
-              "gnome"
-              "gtk"
-            ];
-            "org.freedesktop.impl.portal.Access" = "gtk";
-            "org.freedesktop.impl.portal.FileChooser" = "gtk";
-            "org.freedesktop.impl.portal.Notification" = "gtk";
-            "org.freedesktop.impl.portal.Secret" = "gnome-keyring";
-          };
-        };
+        # Enabling Niri manually for now.
+        environment.systemPackages = [ pkgs.niri ];
+        systemd.packages = [ pkgs.niri ];
 
-        # Enabling this sets the xdg config portal. I'm not even sure if we do need to enable it.
-        # I only did so because I wanted Niri available as an option in the greeter.
-        # But maybe we can simply add it to `environment.systemPackages` or `systemd.packages`.
-        # Reference: https://github.com/NixOS/nixpkgs/blob/nixos-26.05/nixos/modules/programs/wayland/niri.nix
-        programs.niri.enable = true;
+        # Required for gnome portal to work. We don't need Nautilus as a normal package.
+        services.dbus.packages = [ pkgs.nautilus ];
       };
 
     homeManager =
-      { pkgs, ... }:
+      { pkgs, config, ... }:
+      let
+        cfg = config.my.niri;
+        inherit (lib) mkOption types;
+        cursor = {
+          package = pkgs.bibata-cursors;
+          name = "Bibata-Modern-Ice";
+          size = 32;
+        };
+      in
       {
         imports = [
-          inputs.niri.homeModules.niri
+          inputs.niri.homeModules.niri # Niri flake
         ];
 
         options.my.niri = {
-          term = lib.mkOption {
-            type = lib.types.package;
+          term = mkOption {
+            type = types.package;
             description = "Default terminal for Niri";
             default = pkgs.kitty;
+          };
+          layout = {
+            gaps = mkOption {
+              type = types.int;
+              default = 12;
+            };
+          };
+          windows = {
+            corner-radius = mkOption {
+              type = types.float;
+              default = 12.0;
+            };
           };
         };
 
         config = {
-          # `programs.niri` comes from niri-flake.
           home.packages = with pkgs; [
             xwayland-satellite
-            qt6Packages.qt6ct # For qt 6 theming.
+            # GTK theming. Select `adw-gtk3` and apply.
+            # Keep GTK 4 unchecked in Noctalia's templates as some apps have issues with it.
+            # See https://docs.noctalia.dev/v5/templates/official/gtk-qt/
+            nwg-look
+            adw-gtk3
+
+            kdePackages.knewstuff # Open color section in KDE settings outside of KDE.
+            kdePackages.ksvg # Open plasma style section in KDE settings outside of KDE.
+            kdePackages.kdeclarative # Open plasma style section in KDE settings outside of KDE.
           ];
 
-          home.sessionVariables = {
-            # Qt
-            QT_QPA_PLATFORMTHEME = "qt6ct";
+          xdg.portal = {
+            enable = true;
 
-            # GTK: prefer Wayland
-            GDK_BACKEND = "wayland,x11";
+            # NOTE: `configPackages` is ignored when `xdg.portal.config.niri` is defined.
+            config.niri = {
+              default = [
+                "kde"
+                "gnome"
+                "gtk"
+              ];
+              "org.freedesktop.impl.portal.Settings" = "kde;gnome;gtk";
+              "org.freedesktop.impl.portal.Access" = "kde;gnome;gtk";
+              "org.freedesktop.impl.portal.FileChooser" = "kde;gnome;gtk";
+              "org.freedesktop.impl.portal.Notification" = "kde;gnome;gtk";
+            };
+
+            extraPortals = [ pkgs.xdg-desktop-portal-gnome ];
+          };
+
+          home.sessionVariables = {
+            # REQUIRED: make sure portal uses KDE Qt platform theme
+            # QT_QPA_PLATFORMTHEME = "kde";
+            # QT_QPA_PLATFORMTHEME_QT6 = "kde";
+
+            # REQUIRED: helps fixing Dolphin default applications issue
+            XDG_MENU_PREFIX = "plasma-";
+
+            QT_AUTO_SCREEN_SCALE_FACTOR = "1";
+            QT_ENABLE_HIGHDPI_SCALING = "1";
+            QT_SCALE_FACTOR_ROUNDING_POLICY = "RoundPreferFloor";
 
             # Qt: prefer Wayland
             QT_QPA_PLATFORM = "wayland;xcb";
+
+            GTK_DECORATION_LAYOUT = "";
 
             # SDL
             SDL_VIDEODRIVER = "wayland";
@@ -96,27 +149,63 @@
 
             # Electron apps default to Wayland without extra flags.
             NIXOS_OZONE_WL = lib.mkDefault "1";
+            ELECTRON_OZONE_PLATFORM_HINT = "auto";
           };
 
           home.pointerCursor = {
+            package = cursor.package;
+            name = cursor.name;
+            size = cursor.size;
+
             gtk.enable = true;
             x11.enable = true;
-
-            package = pkgs.bibata-cursors;
-            name = "Bibata-Modern-Classic";
-            size = 30;
           };
 
           gtk.enable = true;
-          qt.enable = true;
+          qt = {
+            enable = true;
+            platformTheme.name = "kde";
+            style.name = "breeze";
+          };
 
           programs.niri = {
             enable = true;
             package = pkgs.niri; # from nixpkgs to benefit from binary cache
             settings = {
+              spawn-at-startup = [
+                # Niri (or Noctalia-Greeter) isn't setting XDG_CURRENT_DESKTOP on startup, so we do
+                # it ourselves to avoid issues with some apps (e.g. zed) not opening.
+                {
+                  command = [
+                    "dbus-update-activation-environment"
+                    "--systemd"
+                    "DISPLAY"
+                    "WAYLAND_DISPLAY"
+                    "XDG_CURRENT_DESKTOP=niri"
+                  ];
+                }
+                {
+                  command = [
+                    "systemctl"
+                    "--user"
+                    "import-environment"
+                    "DISPLAY"
+                    "WAYLAND_DISPLAY"
+                    "XDG_CURRENT_DESKTOP"
+                  ];
+                }
+              ];
+
+              cursor = {
+                theme = cursor.name;
+                size = cursor.size;
+              };
+
               input.keyboard.xkb.options = "compose:rwin";
               input.keyboard.numlock = true;
               hotkey-overlay.skip-at-startup = true;
+              gestures.hot-corners.enable = false;
+              prefer-no-csd = true;
 
               outputs = {
                 "DP-3" = {
@@ -124,6 +213,7 @@
                   mode.height = 1440;
                   position.x = 0;
                   position.y = 0;
+                  focus-at-startup = true;
                 };
                 "DP-2" = {
                   mode.width = 1920;
@@ -139,22 +229,22 @@
               };
 
               layout = {
-                gaps = 16;
+                gaps = cfg.layout.gaps;
                 default-column-width = {
                   proportion = 0.5;
                 };
                 always-center-single-column = true;
-                border.width = 2;
+                border.enable = false; # Border takes away space from windows, so we use focus-ring instead.
+                focus-ring.enable = true;
                 focus-ring.width = 2;
+                shadow.enable = true;
               };
-
-              gestures.hot-corners.enable = false;
 
               window-rules = [
                 {
                   geometry-corner-radius =
                     let
-                      r = 16.0;
+                      r = cfg.windows.corner-radius;
                     in
                     {
                       top-left = r;
@@ -163,8 +253,17 @@
                       bottom-right = r;
                     };
                   clip-to-geometry = true;
-                  tiled-state = true;
-                  draw-border-with-background = false;
+                }
+
+                {
+                  matches = [
+                    { app-id = "org.kde.haruna"; }
+                    { app-id = "org.kde.gwenview"; }
+                    { app-id = "qimgv"; }
+                    { app-id = "mpv"; }
+                    { title = "Steam Settings"; }
+                  ];
+                  open-floating = true;
                 }
               ];
             };

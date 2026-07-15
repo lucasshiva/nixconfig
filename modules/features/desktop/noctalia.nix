@@ -18,6 +18,11 @@
             keyboard = {
               layout = "us";
             };
+            cursor = {
+              theme = "Bibata-Modern-Ice";
+              size = 32;
+              path = "${pkgs.bibata-cursors}/share/icons";
+            };
           };
         };
       };
@@ -25,6 +30,7 @@
     homeManager =
       { pkgs, config, ... }:
       let
+        niri = config.my.niri;
         inherit (config.lib.niri.actions) spawn;
         wallpapers = "/mnt/data/Media/Pictures/Wallpapers";
         noc = spawn "noctalia" "msg";
@@ -35,43 +41,22 @@
         programs.noctalia = {
           enable = true;
           settings = {
-            theme = {
-              mode = "dark";
-              source = "wallpaper";
-              builtin = "Catppuccin";
-              wallpaper_scheme = "m3-content";
-              templates.builtin_ids = [
-                "niri"
-                "gtk3"
-                "gtk4"
-                "qt"
-              ];
-            };
-
-            wallpaper = {
-              enabled = true;
-              directory = wallpapers;
-              transition_duration = 1200; # default is 1500
-              transition_on_startup = true;
-              automation = {
-                enabled = true;
-                interval_seconds = 600;
-              };
-              default = "${wallpapers}/wallhaven-1pq7zg.jpg";
-            };
-
-            backdrop.enabled = true;
             audio.enable_overdrive = true;
-            location.auto_locate = true;
+
+            backdrop = {
+              enabled = true;
+              blur_intensity = 0.3;
+            };
 
             bar.default = {
-              background_opacity = 0.8;
-              border = "on_surface";
+              background_opacity = 0.3;
+              border = "primary";
               border_width = 1.0;
               capsule = true;
               capsule_opacity = 0.85;
-              capsule_padding = 8.0;
-              capsule_radius = 12;
+              capsule_padding = 10.0;
+              capsule_radius = "auto";
+              capsule_thickness = 0.7;
               center = [
                 "clock"
                 "weather"
@@ -92,9 +77,10 @@
               ];
               font_family = "DejaVu Sans Mono";
               icon_color = "primary";
-              margin_edge = 12;
-              margin_ends = 16;
-              scale = 1.05;
+              margin_edge = 8;
+              margin_ends = niri.layout.gaps; # Ensure the bar is the same width as the windows.
+              margin_opposite_edge = 4;
+              scale = 1;
               start = [
                 "launcher"
                 "workspaces"
@@ -102,51 +88,53 @@
                 "cpu"
                 "ram"
               ];
+              thickness = 42;
             };
 
             dock = {
               active_monitor_only = true;
               auto_hide = true;
               background_opacity = 0.8;
-              enabled = true;
+              enabled = false; # I don't really use it.
               margin_edge = 8;
               margin_ends = 8;
               reserve_space = false;
               show_dots = true;
             };
 
-            osd.kinds = {
-              media = false;
+            hooks = {
+              # Reload theme in KDE apps. Sadly, the CLI lacks a flag to force update an already
+              # selected theme.
+              colors_changed = ''
+                plasma-apply-colorscheme BreezeDark
+                plasma-apply-colorscheme noctalia
+              '';
             };
 
-            shell = {
-              app_icon_color = "on_surface_variant";
-              clipboard_history_max_entries = 1000;
-              polkit_agent = true;
-              greeter_sync.auto_sync = false;
+            idle = {
+              behavior_order = [
+                "lock"
+                "screen-off"
+                "lock-and-suspend"
+              ];
+              behavior.lock = {
+                action = "lock";
+                enabled = true;
+                timeout = 300.0;
+              };
+              behavior.lock-and-suspend = {
+                action = "lock_and_suspend";
+                enabled = true;
+                timeout = 900.0;
+              };
+              behavior.screen-off = {
+                action = "screen_off";
+                enabled = true;
+                timeout = 600.0;
+              };
             };
 
-            nightlight = {
-              enabled = true;
-              temperature_day = 4500;
-              temperature_night = 3200;
-            };
-
-            widget = {
-              active_window.show_empty_label = false;
-              clock = {
-                format = "{:%A, %H:%M}";
-                tooltip_format = "{:%A, %d de %B, %H:%M}";
-              };
-              media = {
-                art_size = 32;
-                max_length = 300;
-                title_scroll = "on_hover";
-              };
-              weather = {
-                show_condition = false;
-              };
-            };
+            location.auto_locate = true;
 
             lockscreen.widgets = {
               enabled = true;
@@ -177,31 +165,100 @@
                 type = "media_player";
               };
             };
+
+            nightlight = {
+              enabled = true;
+              temperature_day = 4500;
+              temperature_night = 3200;
+            };
+
+            osd.kinds = {
+              media = false;
+              lock_keys = false;
+            };
+
+            shell = {
+              app_icon_color = "on_surface_variant";
+              clipboard_history_max_entries = 1000;
+              polkit_agent = true;
+              greeter_sync.auto_sync = false;
+
+              session.actions = [
+                {
+                  action = "lock";
+                  countdown_seconds = 3.0;
+                }
+                {
+                  action = "lock_and_suspend";
+                  countdown_seconds = 3.0;
+                }
+                {
+                  action = "logout";
+                  countdown_seconds = 5.0;
+                }
+                {
+                  action = "reboot";
+                  countdown_seconds = 5.0;
+                }
+                {
+                  action = "shutdown";
+                  countdown_seconds = 5.0;
+                }
+              ];
+            };
+
+            system.monitor = {
+              cpu_poll_seconds = 3;
+              gpu_poll_seconds = 5;
+              memory_poll_seconds = 3;
+            };
+
+            theme = {
+              mode = "dark";
+              source = "wallpaper"; # I occasionally switch to `builtin` in Noctalia Settings.
+              builtin = "Catppuccin";
+              wallpaper_scheme = "m3-content";
+              templates.builtin_ids = [
+                "niri"
+                "gtk3"
+                "kcolorscheme"
+              ];
+            };
+
+            wallpaper = {
+              enabled = true;
+              directory = wallpapers;
+              transition_duration = 1500; # default is 1500
+              transition_on_startup = true;
+              automation = {
+                enabled = true;
+                interval_seconds = 600;
+              };
+              default = "${wallpapers}/wallhaven-1pq7zg.jpg";
+            };
+
+            widget = {
+              active_window.show_empty_label = false;
+              clock = {
+                format = "{:%A, %H:%M}";
+                tooltip_format = "{:%A, %d de %B, %H:%M}";
+              };
+              media = {
+                art_size = 32;
+                max_length = 300;
+                title_scroll = "on_hover";
+              };
+              weather = {
+                show_condition = false;
+              };
+            };
+
           };
         };
 
         programs.niri.settings = lib.mkIf config.programs.niri.enable {
           spawn-at-startup = [
             { command = [ "noctalia" ]; }
-            {
-              command = [
-                "dbus-update-activation-environment"
-                "--systemd"
-                "DISPLAY"
-                "WAYLAND_DISPLAY"
-                "XDG_CURRENT_DESKTOP=niri"
-              ];
-            }
-            {
-              command = [
-                "systemctl"
-                "--user"
-                "import-environment"
-                "DISPLAY"
-                "WAYLAND_DISPLAY"
-                "XDG_CURRENT_DESKTOP"
-              ];
-            }
           ];
 
           debug = {
