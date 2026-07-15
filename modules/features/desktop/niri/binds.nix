@@ -32,8 +32,8 @@
           };
           "Mod+F".action.maximize-column = [ ];
           "Mod+Shift+F".action.fullscreen-window = [ ];
-          "Mod+Shift+T".action.toggle-window-floating = [ ];
-          "Mod+Shift+V".action.switch-focus-between-floating-and-tiling = [ ];
+          "Mod+Alt+F".action.toggle-window-floating = [ ];
+          "Mod+Alt+V".action.switch-focus-between-floating-and-tiling = [ ];
           "Mod+W".action.toggle-column-tabbed-display = [ ];
 
           # Focus navigation.
