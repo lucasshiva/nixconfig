@@ -11,12 +11,16 @@
         # Exclude unwanted packages
         environment.plasma6.excludePackages = with pkgs.kdePackages; [
           konsole
+          gwenview
         ];
 
         # And add missing ones.
         environment.systemPackages = with pkgs; [
           kdePackages.filelight # Visualize disk space usage.s
           ffmpegthumbnailer # video thumbnailer.
+          kdePackages.merkuro # Calendar, contacts, emails
+          qimgv # Super fast image viewer
+          haruna # Video player
         ];
 
         # Fix Dolphin file associations on non-Plasma desktop environments, like Niri.
