@@ -188,22 +188,37 @@
                 {
                   action = "lock";
                   countdown_seconds = 3.0;
+                  enabled = true;
+                  shortcut = "1";
+                  variant = "default";
                 }
                 {
                   action = "lock_and_suspend";
                   countdown_seconds = 3.0;
+                  enabled = true;
+                  shortcut = "2";
+                  variant = "default";
                 }
                 {
                   action = "logout";
                   countdown_seconds = 5.0;
+                  enabled = true;
+                  shortcut = "3";
+                  variant = "default";
                 }
                 {
                   action = "reboot";
                   countdown_seconds = 5.0;
+                  enabled = true;
+                  shortcut = "4";
+                  variant = "default";
                 }
                 {
                   action = "shutdown";
                   countdown_seconds = 5.0;
+                  enabled = true;
+                  shortcut = "5";
+                  variant = "destructive";
                 }
               ];
             };
