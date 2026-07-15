@@ -24,6 +24,7 @@
       cli.btop
       cli.direnv
       cli.mise
+      cli.yazi
 
       # Git related stuff
       # Maybe move this to `shiv.git`
