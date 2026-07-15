@@ -49,11 +49,12 @@
             };
 
             bar.default = {
-              background_opacity = 0.3;
+              background_opacity = 0.95;
               border = "primary";
               border_width = 1.0;
               capsule = true;
-              capsule_opacity = 0.85;
+              capsule_fill = "on_secondary";
+              capsule_opacity = 1.0;
               capsule_padding = 10.0;
               capsule_radius = "auto";
               capsule_thickness = 0.7;
