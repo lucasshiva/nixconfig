@@ -350,10 +350,10 @@
               action = noc "media" "toggle";
             };
             "XF86AudioPrev" = {
-              action = noc "media" "next";
+              action = noc "media" "previous";
             };
             "XF86AudioNext" = {
-              action = noc "media" "previous";
+              action = noc "media" "next";
             };
             "XF86MonBrightnessUp" = {
               action = noc "brightness-up";
