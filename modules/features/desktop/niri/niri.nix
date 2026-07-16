@@ -206,9 +206,12 @@
                 theme = cursor.name;
                 size = cursor.size;
               };
-
-              input.keyboard.xkb.options = "compose:rwin";
               input.keyboard.numlock = true;
+              input.keyboard.xkb = {
+                options = "compose:rwin";
+                layout = "us(altgr-intl)";
+                model = "pc105";
+              };
               hotkey-overlay.skip-at-startup = true;
               gestures.hot-corners.enable = false;
               prefer-no-csd = true;
