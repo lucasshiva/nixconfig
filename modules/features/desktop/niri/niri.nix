@@ -10,7 +10,9 @@
   We also use the KDE portal, but GNOME portal is included as a fallback, so Nautilus is a required
   dependency together with KDE.
 
-  In standalone systems, we have to install KDE, Niri, and Nautilus.
+  In standalone systems, we have to install KDE, Niri, and Nautilus via the distro's package
+  manager (e.g. pacman) in order for them to be available system-wide, but their configuration
+  can be done via home-manager.
 */
 
 {
@@ -22,8 +24,11 @@
 {
   shiv.desktop.niri = {
     includes = [
-      shiv.desktop.kde
-      shiv.apps.kitty
+      shiv.desktop.kde # KDE for apps and theming integration
+      shiv.desktop.noctalia # I don't see myself leaving Noctalia.
+      shiv.apps.kitty # Default terminal - only here so we don't forget to add a terminal.
+
+      # Niri imports - maybe add more niri-related aspects later.
       shiv.desktop.niri.binds
     ];
 
@@ -65,7 +70,7 @@
       in
       {
         imports = [
-          inputs.niri.homeModules.niri # Niri flake
+          inputs.niri.homeModules.niri # From Niri flake
         ];
 
         options.my.niri = {
@@ -153,6 +158,7 @@
           };
 
           home.pointerCursor = {
+            enable = true;
             package = cursor.package;
             name = cursor.name;
             size = cursor.size;

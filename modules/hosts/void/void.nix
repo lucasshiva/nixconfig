@@ -30,7 +30,6 @@ in
       # Sadly, I didn't feel any difference with the workaround, so I'm not doing it anymore.
       desktop.kde
       desktop.niri
-      desktop.noctalia
 
       apps.calibre
       apps.musicbee
