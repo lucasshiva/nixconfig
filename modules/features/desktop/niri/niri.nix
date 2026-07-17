@@ -268,6 +268,7 @@
                   matches = [
                     { app-id = "org.kde.haruna"; }
                     { app-id = "org.kde.gwenview"; }
+                    { app-id = "re.sonny.Junction"; }
                     { app-id = "qimgv"; }
                     { app-id = "mpv"; }
                     { title = "Steam Settings"; }
