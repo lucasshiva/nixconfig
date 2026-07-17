@@ -41,6 +41,7 @@ in
       apps.steam
       apps.android-studio
       apps.distrobox
+      apps.discord
 
       # We could make `opentabletdriver` opt-out instead of opt-in. In this case, it would be
       # included automatically in osu.
