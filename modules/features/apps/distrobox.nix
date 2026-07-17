@@ -127,7 +127,12 @@ in
                   "mkdir -p ${binsPath}"
                   "export SHELL=${lib.getExe pkgs.fish}"
                 ];
+                # init_hooks = [
+                #   # "yay -S visual-studio-code-bin --needed --noconfirm"
+                # ];
+                # exported_apps = [ "code" ];
                 additional_packages = [
+                  "yay"
                   "base-devel"
                   "mpv"
                 ]

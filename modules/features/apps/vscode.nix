@@ -2,7 +2,7 @@
   shiv.apps.vscode = {
     homeManager = { pkgs, ... }: {
       programs.vscode = {
-        enable = true;
+        enable = false;
         mutableExtensionsDir = true;
 
         # Add extension-specific dependencies. These are for rust.
@@ -12,6 +12,7 @@
             zlib
             openssl.dev
             pkg-config
+            clang
           ]
         );
       };
