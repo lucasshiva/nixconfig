@@ -55,6 +55,9 @@
 
         # Required for gnome portal to work. We don't need Nautilus as a normal package.
         services.dbus.packages = [ pkgs.nautilus ];
+
+        # Disable KDE login manager in favor of Noctalia Greeter.
+        services.displayManager.plasma-login-manager.enable = lib.mkForce false;
       };
 
     homeManager =
@@ -271,9 +274,24 @@
                     { app-id = "re.sonny.Junction"; }
                     { app-id = "qimgv"; }
                     { app-id = "mpv"; }
+                    { title = "Welcome to Android Studio"; }
+                    { title = "Welcome to Rider"; }
+                    { title = "Welcome to IntelliJ IDEA"; }
                     { title = "Steam Settings"; }
                   ];
                   open-floating = true;
+                }
+
+                {
+                  matches = [
+                    { app-id = "Emulator"; }
+                  ];
+                  default-column-width = {
+                    fixed = 410;
+                  };
+                  default-window-height = {
+                    fixed = 912;
+                  };
                 }
               ];
             };
