@@ -38,6 +38,9 @@
           GBM_BACKEND = "nvidia-drm";
           __GLX_VENDOR_LIBRARY_NAME = "nvidia";
           NIXOS_OZONE_WL = lib.mkDefault "1"; # Fixes Chromium/Electron apps (like Discord) crashing on Wayland
+
+          # Solves "libEGL warning: egl: failed to create dri2 screen"
+          __EGL_EXTERNAL_PLATFORM_CONFIG_DIRS = "/run/opengl-driver/share/egl/egl_external_platform.d";
         };
       };
   };
