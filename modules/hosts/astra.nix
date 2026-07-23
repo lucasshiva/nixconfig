@@ -23,6 +23,9 @@ in
       apps.zed # Doesn't run perfectly. Complains about emulated GPU.
       apps.kitty # Seems okay.
 
+      # Variables for Android SDK.
+      dev.android
+
       /*
         Some issues with Noctalia Greeter not being to authenticate after coming back from sleep
         Niri itself seems fine though.

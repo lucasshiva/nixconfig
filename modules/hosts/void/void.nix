@@ -24,7 +24,9 @@ in
       swap.zram
       sound.pipewire
       boot.systemd-boot
+
       dev.libs
+      dev.android
 
       # KDE UI elements are rather slow on NixOS, see https://github.com/NixOS/nixpkgs/issues/126590.
       # Sadly, I didn't feel any difference with the workaround, so I'm not doing it anymore.
@@ -39,7 +41,6 @@ in
       apps.vscode
       apps.kitty
       apps.steam
-      apps.android-studio
       apps.distrobox
       apps.discord
 
@@ -71,16 +72,13 @@ in
           neovim
           keepassxc
           obsidian
-          jetbrains.rider # Maybe install via JetBrains Toolbox instead?
+          jetbrains-toolbox
         ];
       };
 
     nixos =
       { pkgs, lib, ... }:
       {
-        # Disable to use Noctalia Greeter.
-        services.displayManager.plasma-login-manager.enable = lib.mkForce false;
-
         # Use latest kernel.
         boot.kernelPackages = pkgs.linuxPackages_latest;
 
