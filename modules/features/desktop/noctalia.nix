@@ -36,10 +36,20 @@
         noc = spawn "noctalia" "msg";
       in
       {
-        imports = [ inputs.noctalia.homeModules.default ];
+        imports = [
+          inputs.noctalia.homeModules.default
+          inputs.pam-shim.homeModules.default
+        ];
+
+        pamShim.enable = true;
 
         programs.noctalia = {
           enable = true;
+          # Authentication wasn't working on CachyOS because PAM is broken on non-NixOS distros
+          # See https://github.com/nix-community/home-manager/issues/7027
+          package =
+            config.lib.pamShim.replacePam
+              inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default;
           settings = {
             audio.enable_overdrive = true;
 
