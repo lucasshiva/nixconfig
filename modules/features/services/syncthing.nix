@@ -10,7 +10,7 @@
 
         # I've been repeating this a lot, so maybe we can move this to `den.schema`, making it
         # available for both users and hosts.
-        dataDrive = "/mnt/data";
+        dataDrive = "/mnt/ntfs";
 
         # Essentially maps to my phone's internal storage.
         phonePath = "${dataDrive}/Devices/POCO X7 Pro";

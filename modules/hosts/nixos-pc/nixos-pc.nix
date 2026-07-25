@@ -1,6 +1,6 @@
 { shiv, ... }:
 let
-  hostname = "void";
+  hostname = "nixos-pc";
   username = "lucas";
 in
 {
@@ -13,7 +13,7 @@ in
 
   den.aspects."${hostname}" = {
     includes = with shiv; [
-      void.hardware # Hardware config for this host.
+      nixos-pc.hardware # Hardware config for this host.
       hardware.gpu.nvidia
       hardware.cpu.amd
       hardware.pc.ssd
@@ -25,7 +25,7 @@ in
       sound.pipewire
       boot.systemd-boot
 
-      dev.libs
+      # dev.libs
       dev.android
 
       # KDE UI elements are rather slow on NixOS, see https://github.com/NixOS/nixpkgs/issues/126590.
@@ -38,7 +38,7 @@ in
       apps.firefox
       apps.junction
       apps.zed
-      apps.vscode
+      # apps.vscode
       apps.kitty
       apps.steam
       apps.distrobox
@@ -56,7 +56,7 @@ in
     homeManager =
       { pkgs, config, ... }:
       let
-        dataDrive = "/mnt/data";
+        dataDrive = "/mnt/ntfs";
       in
       {
         my.calibre.settingsDir = "${dataDrive}/Apps/Calibre/Calibre Settings";

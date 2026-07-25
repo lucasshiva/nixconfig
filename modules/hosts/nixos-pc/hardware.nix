@@ -1,6 +1,6 @@
 { ... }: {
 
-  shiv.void.hardware = {
+  shiv.nixos-pc.hardware = {
     nixos =
       {
         config,

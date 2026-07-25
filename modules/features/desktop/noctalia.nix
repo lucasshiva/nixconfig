@@ -29,7 +29,7 @@
       let
         niri = config.my.niri;
         inherit (config.lib.niri.actions) spawn;
-        wallpapers = "/mnt/data/Media/Pictures/Wallpapers";
+        wallpapers = "/mnt/ntfs/Media/Pictures/Wallpapers";
         noc = spawn "noctalia" "msg";
       in
       {

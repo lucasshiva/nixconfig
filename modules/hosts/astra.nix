@@ -42,7 +42,7 @@ in
     homeManager =
       { pkgs, config, ... }:
       let
-        appsDir = "/mnt/data/Apps";
+        appsDir = "/mnt/ntfs/Apps";
       in
       {
         # Install the home-manager CLI.
