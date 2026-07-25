@@ -25,7 +25,7 @@ in
       sound.pipewire
       boot.systemd-boot
 
-      # dev.libs
+      dev.libs
       dev.android
 
       # KDE UI elements are rather slow on NixOS, see https://github.com/NixOS/nixpkgs/issues/126590.
@@ -38,10 +38,10 @@ in
       apps.firefox
       apps.junction
       apps.zed
-      # apps.vscode
+      apps.vscode
       apps.kitty
       apps.steam
-      apps.distrobox
+      # apps.distrobox
       apps.discord
 
       # We could make `opentabletdriver` opt-out instead of opt-in. In this case, it would be
@@ -50,6 +50,7 @@ in
       hardware.opentabletdriver
 
       services.syncthing
+      services.podman
       secrets.sops
     ];
 
@@ -63,10 +64,10 @@ in
         my.musicbee.appDir = "${dataDrive}/Apps/MusicBee";
         my.osu.dataDir = "${dataDrive}/Apps/osu!";
         my.kitty.shell = config.programs.fish.package;
-        my.distrobox = {
-          kdeIntegration = true;
-          flutter = true;
-        };
+        # my.distrobox = {
+        #   kdeIntegration = true;
+        #   flutter = true;
+        # };
 
         home.packages = with pkgs; [
           neovim

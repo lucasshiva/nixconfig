@@ -49,8 +49,16 @@ in
               libgbm
               wayland
               fontconfig
+              pkg-config
             ];
         };
+
+        environment.systemPackages = with pkgs; [
+          pkg-config
+          clang
+          cmake
+          ninja
+        ];
       };
   };
 }

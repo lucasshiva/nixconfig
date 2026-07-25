@@ -110,23 +110,23 @@ in
             DOTNET_CLI_TELEMETRY_OPTOUT = 1;
           };
 
-          # programs.bash.initExtra = ''
-          #   if [ -f /run/.containerenv ]; then
-          #     export DBUS_SESSION_BUS_ADDRESS="unix:path=run/user/$(id -u)/bus"
-          #   fi
-          # '';
+          programs.bash.initExtra = ''
+            if [ -f /run/.containerenv ]; then
+              export DBUS_SESSION_BUS_ADDRESS="unix:path=run/user/$(id -u)/bus"
+            fi
+          '';
 
-          # programs.zsh.initContent = ''
-          #   if [ -f /run/.containerenv ]; then
-          #     export DBUS_SESSION_BUS_ADDRESS="unix:path=run/user/$(id -u)/bus"
-          #   fi
-          # '';
+          programs.zsh.initContent = ''
+            if [ -f /run/.containerenv ]; then
+              export DBUS_SESSION_BUS_ADDRESS="unix:path=run/user/$(id -u)/bus"
+            fi
+          '';
 
-          # programs.fish.shellInit = ''
-          #   if test -f /run/.containerenv
-          #       set -gx DBUS_SESSION_BUS_ADDRESS "unix:path=run/user/"(id -u)"/bus"
-          #   end
-          # '';
+          programs.fish.shellInit = ''
+            if test -f /run/.containerenv
+                set -gx DBUS_SESSION_BUS_ADDRESS "unix:path=run/user/"(id -u)"/bus"
+            end
+          '';
 
           programs.distrobox = {
             enable = true;
@@ -153,6 +153,8 @@ in
                   "mpv"
                   "xdg-utils"
                   "xdg-user-dirs"
+                  "pnpm"
+                  "rustup"
                   "jdk25-openjdk" # Java.
                   "webkit2gtk-4.1" # Tauri dependency
                 ]
