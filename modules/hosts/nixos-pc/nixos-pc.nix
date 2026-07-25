@@ -27,6 +27,7 @@ in
 
       dev.libs
       dev.android
+      dev.java
 
       # KDE UI elements are rather slow on NixOS, see https://github.com/NixOS/nixpkgs/issues/126590.
       # Sadly, I didn't feel any difference with the workaround, so I'm not doing it anymore.
