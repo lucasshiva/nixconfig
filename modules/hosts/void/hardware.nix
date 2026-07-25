@@ -1,7 +1,6 @@
-{ shiv, ... }: {
+{ ... }: {
 
   shiv.void.hardware = {
-    includes = [ shiv.filesystem.ntfs ];
     nixos =
       {
         config,
@@ -27,37 +26,20 @@
         boot.extraModulePackages = [ ];
 
         fileSystems."/" = {
-          device = "/dev/disk/by-uuid/a5b59700-b267-41a2-a221-1f70705f6e6d";
+          device = "/dev/disk/by-uuid/accdbb04-407f-4df8-bf08-1dd23d9665c2";
           fsType = "btrfs";
         };
 
         fileSystems."/home" = {
-          device = "/dev/disk/by-uuid/a5b59700-b267-41a2-a221-1f70705f6e6d";
+          device = "/dev/disk/by-uuid/accdbb04-407f-4df8-bf08-1dd23d9665c2";
           fsType = "btrfs";
           options = [ "subvol=home" ];
         };
 
         fileSystems."/nix" = {
-          device = "/dev/disk/by-uuid/a5b59700-b267-41a2-a221-1f70705f6e6d";
+          device = "/dev/disk/by-uuid/accdbb04-407f-4df8-bf08-1dd23d9665c2";
           fsType = "btrfs";
           options = [ "subvol=nix" ];
-        };
-
-        # Shared drive for media, code files, games, etc.
-        fileSystems."/mnt/data" = {
-          device = "/dev/disk/by-uuid/a2033fec-beef-410c-bff8-dace057bea19";
-          # `ntfs` is the new driver available starting from kernel 7.1
-          #
-          # To use it, we have to blacklist ntfs-3g and ntfs3, but neither ntfs3 or the new drive
-          # work well with Steam games, so we're forced to use ntfs-3g if we want ntfs support.
-          #
-          # I gave up on NTFS for now, so I'll be using ext4 as a shared drive between two linux
-          # systems: NixOS and CachyOS.
-          fsType = "ext4";
-          options = [
-            "defaults"
-            "nofail"
-          ];
         };
 
         fileSystems."/boot" = {
@@ -66,6 +48,31 @@
           options = [
             "fmask=0077"
             "dmask=0077"
+          ];
+        };
+
+        # Shared drive for Linux systems. Usually keep my code projects in here.
+        fileSystems."/mnt/data" = {
+          device = "/dev/disk/by-uuid/18d15419-79f7-4d2d-a7b1-5cde3440fb98";
+          fsType = "ext4";
+          options = [
+            "defaults"
+            "rw"
+            "uid=1000"
+            "gid=1000"
+            "nofail"
+          ];
+        };
+
+        fileSystems."/mnt/ntfs" = {
+          device = "/dev/disk/by-uuid/38AA46B56314746E";
+          fsType = "ntfs-3g";
+          options = [
+            "defaults"
+            "rw"
+            "uid=1000"
+            "gid=1000"
+            "nofail"
           ];
         };
 
