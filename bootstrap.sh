@@ -3,8 +3,8 @@ set -euo pipefail
 
 # --- Defaults for my setup, can be overriden from the command line ---
 FORCE=false
-KP_DATABASE_FILE="/mnt/data/Apps/KeePass/Passwords.kdbx"
-KP_KEY_FILE="/mnt/data/Documents/keepass/kp-keyfile.keyx"
+KP_DATABASE_FILE="/mnt/ntfs/Apps/KeePass/Passwords.kdbx"
+KP_KEY_FILE="/mnt/ntfs/Documents/keepass/kp-keyfile.keyx"
 KP_ENTRY="id_ed25519"
 KP_ENTRY_ATTRIBUTE="PRIVATE_KEY"
 TARGET_USER="${USER}"
