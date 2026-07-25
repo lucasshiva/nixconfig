@@ -8,6 +8,8 @@ in
 
   den.aspects.${username}.provides.${hostname} = {
     includes = with shiv; [
+      hardware.gpu.nvidia
+
       core.fonts
       services.syncthing
 
@@ -70,6 +72,7 @@ in
 
           # Automatically handles linking GPU drivers and OpenGL for non-NixOS
           gpu.enable = true;
+          gpu.nvidia.enable = false;
         };
       };
   };

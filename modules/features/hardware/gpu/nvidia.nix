@@ -3,6 +3,7 @@
     includes = [
       shiv.hardware.diagnostics
     ];
+
     nixos =
       {
         lib,
@@ -43,5 +44,16 @@
           __EGL_EXTERNAL_PLATFORM_CONFIG_DIRS = "/run/opengl-driver/share/egl/egl_external_platform.d";
         };
       };
+
+    homeManager = { ... }: {
+      home.sessionVariables = {
+        __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+        #__EGL_VENDOR_LIBRARY_FILENAMES = "/usr/share/glvnd/egl_vendor.d/10_nvidia.json";
+        LIBVA_DRIVER_NAME = "nvidia";
+        GBM_BACKEND = "nvidia-drm";
+        #LD_LIBRARY_PATH = "/usr/lib";
+        #VK_ICD_FILENAMES = "/usr/share/vulkan/icd.d/nvidia_icd.json";
+      };
+    };
   };
 }

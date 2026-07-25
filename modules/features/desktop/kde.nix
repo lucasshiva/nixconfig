@@ -21,6 +21,7 @@
           kdePackages.merkuro # Calendar, contacts, emails
           qimgv # Super fast image viewer
           haruna # Video player
+          kdePackages.partitionmanager # Partition manager.
         ];
 
         # Fix Dolphin file associations on non-Plasma desktop environments, like Niri.

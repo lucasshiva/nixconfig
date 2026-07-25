@@ -181,29 +181,29 @@
             enable = true;
             package = pkgs.niri; # from nixpkgs to benefit from binary cache
             settings = {
-              spawn-at-startup = [
-                # Niri (or Noctalia-Greeter) isn't setting XDG_CURRENT_DESKTOP on startup, so we do
-                # it ourselves to avoid issues with some apps (e.g. zed) not opening.
-                {
-                  command = [
-                    "dbus-update-activation-environment"
-                    "--systemd"
-                    "DISPLAY"
-                    "WAYLAND_DISPLAY"
-                    "XDG_CURRENT_DESKTOP=niri"
-                  ];
-                }
-                {
-                  command = [
-                    "systemctl"
-                    "--user"
-                    "import-environment"
-                    "DISPLAY"
-                    "WAYLAND_DISPLAY"
-                    "XDG_CURRENT_DESKTOP"
-                  ];
-                }
-              ];
+              # spawn-at-startup = [
+              #   # Niri (or Noctalia-Greeter) isn't setting XDG_CURRENT_DESKTOP on startup, so we do
+              #   # it ourselves to avoid issues with some apps (e.g. zed) not opening.
+              #   {
+              #     command = [
+              #       "dbus-update-activation-environment"
+              #       "--systemd"
+              #       "DISPLAY"
+              #       "WAYLAND_DISPLAY"
+              #       "XDG_CURRENT_DESKTOP=niri"
+              #     ];
+              #   }
+              #   {
+              #     command = [
+              #       "systemctl"
+              #       "--user"
+              #       "import-environment"
+              #       "DISPLAY"
+              #       "WAYLAND_DISPLAY"
+              #       "XDG_CURRENT_DESKTOP"
+              #     ];
+              #   }
+              # ];
 
               cursor = {
                 theme = cursor.name;

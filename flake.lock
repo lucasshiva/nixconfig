@@ -229,26 +229,6 @@
         "type": "github"
       }
     },
-    "pam-shim": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1767830048,
-        "narHash": "sha256-BZBldTfFfnxWBIKL4Wak8h1WS0l2iSf3KByXTt5CjIQ=",
-        "owner": "Cu3PO42",
-        "repo": "pam_shim",
-        "rev": "b01fbf816165c41186bc9758b72d874e5d1aa502",
-        "type": "github"
-      },
-      "original": {
-        "owner": "Cu3PO42",
-        "repo": "pam_shim",
-        "type": "github"
-      }
-    },
     "root": {
       "inputs": {
         "den": "den",
@@ -263,7 +243,6 @@
         "nixpkgs-stable": "nixpkgs-stable_2",
         "noctalia": "noctalia",
         "noctalia-greeter": "noctalia-greeter",
-        "pam-shim": "pam-shim",
         "sops-nix": "sops-nix"
       }
     },

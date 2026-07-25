@@ -34,11 +34,6 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    pam-shim = {
-        url = "github:Cu3PO42/pam_shim";
-        inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   nixConfig = {

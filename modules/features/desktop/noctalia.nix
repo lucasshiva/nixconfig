@@ -12,9 +12,6 @@
         programs.noctalia-greeter = {
           enable = true;
           settings = {
-            output = {
-              name = "DP-3";
-            };
             keyboard = {
               layout = "us";
             };
@@ -36,20 +33,17 @@
         noc = spawn "noctalia" "msg";
       in
       {
-        imports = [
-          inputs.noctalia.homeModules.default
-          inputs.pam-shim.homeModules.default
-        ];
+        imports = [ inputs.noctalia.homeModules.default ];
 
-        pamShim.enable = true;
+        #pamShim.enable = true;
 
         programs.noctalia = {
           enable = true;
           # Authentication wasn't working on CachyOS because PAM is broken on non-NixOS distros
           # See https://github.com/nix-community/home-manager/issues/7027
-          package =
-            config.lib.pamShim.replacePam
-              inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default;
+          #package =
+          #config.lib.pamShim.replacePam
+          #inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default;
           settings = {
             audio.enable_overdrive = true;
 

@@ -3,8 +3,10 @@ let
   # I don't know how well Distrobox works under a normal distro host, but on NixOS the integration
   # isn't very good.
   volumes = [
-    # Nix store
+    # Nix config
     "/nix/store:/nix/store:ro"
+    # "/etc/nix:/etc/nix:ro"
+    # "/run/current-system:/run/current-system:ro"
 
     # Home Manager profile
     "/etc/profiles/per-user:/etc/profiles/per-user:ro"
@@ -25,6 +27,21 @@ in
       environment.etc."distrobox/distrobox.conf".text = ''
         container_additional_volumes="${lib.concatStringsSep " " volumes}"
       '';
+
+      users.users.lucas = {
+        subUidRanges = [
+          {
+            startUid = 100000;
+            count = 65536;
+          }
+        ];
+        subGidRanges = [
+          {
+            startGid = 100000;
+            count = 65536;
+          }
+        ];
+      };
     };
 
     homeManager =
@@ -45,8 +62,6 @@ in
             type = types.bool;
             description = ''
               Install Flutter dev dependencies in the container.
-
-              Android SDKs are managed on the host via Android Studio.
             '';
             default = false;
           };
@@ -88,29 +103,30 @@ in
           home.shellAliases = {
             dbd = "distrobox enter dev";
             dba = "distrobox assemble create --file ~/.config/distrobox/containers.ini";
+            dbe = "distrobox-host-exec";
           };
 
           home.sessionVariables = optionalAttrs cfg.dotnet {
             DOTNET_CLI_TELEMETRY_OPTOUT = 1;
           };
 
-          programs.bash.initExtra = ''
-            if [ -f /run/.containerenv ]; then
-              export DBUS_SESSION_BUS_ADDRESS="unix:path=/run/host/run/user/$(id -u)/bus"
-            fi
-          '';
+          # programs.bash.initExtra = ''
+          #   if [ -f /run/.containerenv ]; then
+          #     export DBUS_SESSION_BUS_ADDRESS="unix:path=run/user/$(id -u)/bus"
+          #   fi
+          # '';
 
-          programs.zsh.initContent = ''
-            if [ -f /run/.containerenv ]; then
-              export DBUS_SESSION_BUS_ADDRESS="unix:path=/run/host/run/user/$(id -u)/bus"
-            fi
-          '';
+          # programs.zsh.initContent = ''
+          #   if [ -f /run/.containerenv ]; then
+          #     export DBUS_SESSION_BUS_ADDRESS="unix:path=run/user/$(id -u)/bus"
+          #   fi
+          # '';
 
-          programs.fish.shellInit = ''
-            if test -f /run/.containerenv
-                set -gx DBUS_SESSION_BUS_ADDRESS "unix:path=/run/host/run/user/"(id -u)"/bus"
-            end
-          '';
+          # programs.fish.shellInit = ''
+          #   if test -f /run/.containerenv
+          #       set -gx DBUS_SESSION_BUS_ADDRESS "unix:path=run/user/"(id -u)"/bus"
+          #   end
+          # '';
 
           programs.distrobox = {
             enable = true;
@@ -135,13 +151,16 @@ in
                   "yay"
                   "base-devel"
                   "mpv"
+                  "xdg-utils"
+                  "xdg-user-dirs"
+                  "jdk25-openjdk" # Java.
+                  "webkit2gtk-4.1" # Tauri dependency
                 ]
                 ++ optionals cfg.kdeIntegration [
                   "qt5-tools"
                   "qt6-tools"
                   "qt6-wayland"
                   "qt6-base"
-                  "xdg-utils"
 
                   # Fixes theme issues, like IDEs using wrong cursors, font sizing, etc.
                   "breeze"
