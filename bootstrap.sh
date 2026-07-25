@@ -195,7 +195,7 @@ is_nixos() {
 rebuild_system() {
     if is_nixos; then
         info "NixOS detected. Running nixos-rebuild switch..."
-        sudo nixos-rebuild switch --flake .
+        sudo nixos-rebuild switch --flake .#${TARGET_HOST}
         ok "System rebuilt via nixos-rebuild."
         return 0
     fi
@@ -204,7 +204,7 @@ rebuild_system() {
 
     if command -v home-manager >/dev/null 2>&1; then
         info "home-manager found on PATH. Running home-manager switch..."
-        home-manager switch --flake . -b backup
+        home-manager switch --flake ."${TARGET_USER}@${TARGET_HOST}" -b backup
     else
         info "home-manager not found. Bootstrapping via nix run..."
         nix run github:nix-community/home-manager -- switch \
