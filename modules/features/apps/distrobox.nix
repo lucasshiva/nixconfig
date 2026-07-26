@@ -27,21 +27,6 @@ in
       environment.etc."distrobox/distrobox.conf".text = ''
         container_additional_volumes="${lib.concatStringsSep " " volumes}"
       '';
-
-      users.users.lucas = {
-        subUidRanges = [
-          {
-            startUid = 100000;
-            count = 65536;
-          }
-        ];
-        subGidRanges = [
-          {
-            startGid = 100000;
-            count = 65536;
-          }
-        ];
-      };
     };
 
     homeManager =
@@ -143,14 +128,12 @@ in
                   "mkdir -p ${binsPath}"
                   "export SHELL=${lib.getExe pkgs.fish}"
                 ];
-                # init_hooks = [
-                #   # "yay -S visual-studio-code-bin --needed --noconfirm"
-                # ];
-                # exported_apps = [ "code" ];
                 additional_packages = [
                   "yay"
                   "base-devel"
                   "mpv"
+                  "mesa"
+                  "mesa-utils"
                   "xdg-utils"
                   "xdg-user-dirs"
                   "pnpm"
@@ -177,7 +160,6 @@ in
                   "ninja"
                   "pkgconf"
                   "gtk3"
-                  "mesa-utils"
                 ]
                 ++ optionals cfg.dotnet [
                   # Install latest .NET packages. For previous versions (8.0, 9.0, etc.), suffix
