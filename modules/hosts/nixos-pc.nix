@@ -69,6 +69,7 @@ in
           keepassxc
           obsidian
           jetbrains-toolbox
+          fooyin
         ];
       };
 
