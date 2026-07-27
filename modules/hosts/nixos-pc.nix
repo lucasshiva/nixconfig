@@ -24,8 +24,8 @@ in
       sound.pipewire
       boot.systemd-boot
 
-      # Def-related config
-      dev.android
+      # Dev-related config
+      dev.android # Configure PATH for Android SKDs. The SKDs are managed via Android Studio.
 
       # KDE UI elements are rather slow on NixOS, see https://github.com/NixOS/nixpkgs/issues/126590.
       # Sadly, I didn't feel any difference with the workaround, so I'm not doing it anymore.
@@ -38,6 +38,7 @@ in
       apps.firefox
       apps.junction
       apps.zed
+      apps.vscode
       apps.kitty
       apps.steam
       apps.discord
@@ -62,15 +63,12 @@ in
         my.musicbee.appDir = "${dataDrive}/Apps/MusicBee";
         my.osu.dataDir = "${dataDrive}/Apps/osu!";
         my.kitty.shell = config.programs.fish.package;
-        # my.distrobox = {
-        #   kdeIntegration = true;
-        #   flutter = true;
-        # };
 
         home.packages = with pkgs; [
           neovim
           keepassxc
           obsidian
+          jetbrains-toolbox
         ];
       };
 
