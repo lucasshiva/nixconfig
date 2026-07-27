@@ -13,7 +13,6 @@ in
 
   den.aspects."${hostname}" = {
     includes = with shiv; [
-      nixos-pc.hardware # Hardware config for this host.
       hardware.gpu.nvidia
       hardware.cpu.amd
       hardware.pc.ssd
@@ -25,21 +24,20 @@ in
       sound.pipewire
       boot.systemd-boot
 
-      # dev.libs
+      # Def-related config
       dev.android
-      # dev.java
 
       # KDE UI elements are rather slow on NixOS, see https://github.com/NixOS/nixpkgs/issues/126590.
       # Sadly, I didn't feel any difference with the workaround, so I'm not doing it anymore.
       desktop.kde
       desktop.niri
+      desktop.noctalia
 
       apps.calibre
       apps.musicbee
       apps.firefox
       apps.junction
       apps.zed
-      # apps.vscode
       apps.kitty
       apps.steam
       apps.distrobox
@@ -74,7 +72,6 @@ in
           neovim
           keepassxc
           obsidian
-          jetbrains-toolbox
         ];
       };
 
@@ -123,24 +120,24 @@ in
         boot.extraModulePackages = [ ];
 
         fileSystems."/" = {
-          device = "/dev/disk/by-uuid/accdbb04-407f-4df8-bf08-1dd23d9665c2";
+          device = "/dev/disk/by-uuid/176a3952-2cfa-414c-8e8e-486e60a0c0e3";
           fsType = "btrfs";
         };
 
         fileSystems."/home" = {
-          device = "/dev/disk/by-uuid/accdbb04-407f-4df8-bf08-1dd23d9665c2";
+          device = "/dev/disk/by-uuid/176a3952-2cfa-414c-8e8e-486e60a0c0e3";
           fsType = "btrfs";
           options = [ "subvol=home" ];
         };
 
         fileSystems."/nix" = {
-          device = "/dev/disk/by-uuid/accdbb04-407f-4df8-bf08-1dd23d9665c2";
+          device = "/dev/disk/by-uuid/176a3952-2cfa-414c-8e8e-486e60a0c0e3";
           fsType = "btrfs";
           options = [ "subvol=nix" ];
         };
 
         fileSystems."/boot" = {
-          device = "/dev/disk/by-uuid/5315-7A73";
+          device = "/dev/disk/by-uuid/C1B4-1550";
           fsType = "vfat";
           options = [
             "fmask=0077"

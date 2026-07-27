@@ -18,11 +18,6 @@
     den.url = "github:denful/den";
     import-tree.url = "github:vic/import-tree";
 
-    niri = {
-      url = "github:epireyn/niri-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     noctalia.url = "github:noctalia-dev/noctalia/cachix";
 
     noctalia-greeter = {
