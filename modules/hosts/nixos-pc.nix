@@ -40,7 +40,6 @@ in
       apps.zed
       apps.kitty
       apps.steam
-      apps.distrobox
       apps.discord
 
       # We could make `opentabletdriver` opt-out instead of opt-in. In this case, it would be
