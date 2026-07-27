@@ -50,6 +50,7 @@ in
               wayland
               fontconfig
               pkg-config
+              libXtst # Required for KMP JVM target.
             ];
         };
 
