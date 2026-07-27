@@ -1,6 +1,6 @@
 { ... }: {
   shiv.apps.zed = {
-    homeManager = { pkgs, ... }: {
+    homeManager = { ... }: {
       programs.zed-editor = {
         enable = true;
         # Might be useful
@@ -37,7 +37,7 @@
             background_coloring = "disabled";
             coloring = "indent_aware";
           };
-          "preferred_line_length" = 100;
+          preferred_line_length = 100;
           theme = {
             mode = "dark";
             light = "Catppuccin Latte - No Italics";
