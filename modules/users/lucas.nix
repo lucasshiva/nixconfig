@@ -13,7 +13,7 @@
       # Shell config
       shell
       shell.prompts.starship
-      (den.batteries.user-shell "zsh")
+      (den.batteries.user-shell "fish")
 
       # Cli tools - usually the same in every host
       cli.bat
