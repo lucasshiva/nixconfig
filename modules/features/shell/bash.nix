@@ -3,10 +3,14 @@
   shiv.shell.bash = {
     homeManager.programs.bash = {
       enable = true;
-      initExtra = ''
-        # Start fish for interactive TTY sessions, unless explicitly disabled.
-        if [[ $- == *i* ]] && command -v fish >/dev/null && [[ -z "$BASH_NO_FISH" ]]; then
-          exec fish
+
+      # Use fish on TTYs. Also avoid it on nix-shells as for some reason it can't find the packages.
+      profileExtra = ''
+        if [[ $- == *i* ]] \
+           && command -v fish >/dev/null \
+           && [[ -z "$BASH_NO_FISH" ]] \
+           && [[ -z "$IN_NIX_SHELL" ]]; then
+            exec fish
         fi
       '';
     };
