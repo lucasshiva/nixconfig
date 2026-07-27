@@ -36,6 +36,45 @@
         cfg = config.my.noctalia;
         niri = config.my.niri;
         wallpapers = "/mnt/ntfs/Media/Pictures/Wallpapers";
+        niriConfig = ''
+          include "noctalia.kdl" optional=true
+          spawn-at-startup "noctalia"
+
+          window-rule {
+              match app-id="dev.noctalia.Noctalia"
+              open-floating true
+          }
+          layer-rule {
+              match namespace="^noctalia-backdrop"
+              place-within-backdrop true
+          }
+          debug { honor-xdg-activation-with-invalid-serial; }
+        '';
+        niriBinds = ''
+          binds {
+            Mod+Y { spawn "noctalia" "msg" "panel-toggle" "wallpaper"; }
+            Mod+Alt+Y { spawn "noctalia" "msg" "wallpaper-random"; }
+            Mod+Ctrl+Y { spawn "noctalia" "msg" "wallpaper-previous"; }
+            Mod+Shift+Y { spawn "noctalia" "msg" "wallpaper-next"; }
+
+            Mod+Comma { spawn "noctalia" "msg" "settings-toggle"; }
+            Mod+L { spawn "noctalia" "msg" "session" "lock"; }
+            Mod+S { spawn "noctalia" "msg" "panel-toggle" "control-center"; }
+            Mod+Space hotkey-overlay-title="Application launcher" { spawn "noctalia" "msg" "panel-toggle" "launcher"; }
+            Mod+V { spawn "noctalia" "msg" "panel-toggle" "clipboard"; }
+            Mod+X { spawn "noctalia" "msg" "panel-toggle" "session"; }
+
+            XF86AudioLowerVolume { spawn "noctalia" "msg" "volume-down"; }
+            XF86AudioMicMute { spawn "noctalia" "msg" "mic-mute"; }
+            XF86AudioMute { spawn "noctalia" "msg" "volume-mute"; }
+            XF86AudioNext { spawn "noctalia" "msg" "media" "next"; }
+            XF86AudioPlay { spawn "noctalia" "msg" "media" "toggle"; }
+            XF86AudioPrev { spawn "noctalia" "msg" "media" "previous"; }
+            XF86AudioRaiseVolume { spawn "noctalia" "msg" "volume-up"; }
+            XF86MonBrightnessDown { spawn "noctalia" "msg" "brightness-down"; }
+            XF86MonBrightnessUp { spawn "noctalia" "msg" "brightness-up"; }
+          }
+        '';
       in
       {
         options.my.noctalia = {
@@ -47,6 +86,9 @@
         };
 
         config = lib.mkIf cfg.enable {
+          my.niri.extraBinds = lib.mkIf niri.enable niriBinds;
+          my.niri.extraConfig = lib.mkIf niri.enable niriConfig;
+
           home.file.".config/noctalia/config.toml".text = ''
             [audio]
             enable_overdrive = true
