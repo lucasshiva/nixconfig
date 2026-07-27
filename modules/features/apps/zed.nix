@@ -43,6 +43,12 @@
             light = "Catppuccin Latte - No Italics";
             dark = "Catppuccin Mocha - No Italics";
           };
+          languages = {
+            Nix = {
+              format_on_save = "on";
+              formatter.external.command = "nixfmt";
+            };
+          };
         };
       };
     };
