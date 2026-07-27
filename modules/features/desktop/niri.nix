@@ -46,7 +46,7 @@
       };
       noctaliaConfig = ''
         include "noctalia.kdl" optional=true
-	include "noctalia-binds.kdl" optional=true
+        include "noctalia-binds.kdl" optional=true
         spawn-at-startup "noctalia"
         window-rule {
             geometry-corner-radius ${builtins.toString cfg.corner-radius}
@@ -88,132 +88,132 @@
         }
       '';
       niriConfig = ''
-          input {
-            keyboard {
-              xkb {
-                layout "us(altgr-intl)"
-                model "pc105"
-                options "compose:rwin"
-              }
-              numlock
+        input {
+          keyboard {
+            xkb {
+              layout "us(altgr-intl)"
+              model "pc105"
+              options "compose:rwin"
             }
+            numlock
+          }
+        }
+
+        output "DP-2" {
+          mode "1920x1080"
+          position x=2560 y=0
+        }
+
+        output "DP-3" {
+          mode "2560x1440"
+          position x=0 y=0
+          focus-at-startup
+        }
+
+        output "HDMI-A-1" {
+          position x=2560 y=1080
+          scale 1.3
+        }
+
+        screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
+        prefer-no-csd
+        layout {
+            gaps ${builtins.toString cfg.gaps}
+            focus-ring { width 2; }
+            border { off; }
+            default-column-width { proportion 0.5; }
+            center-focused-column "never"
+            always-center-single-column
+        }
+        cursor {
+            xcursor-theme "${cursor.name}"
+            xcursor-size ${builtins.toString cursor.size}
+        }
+        hotkey-overlay { skip-at-startup; }
+
+        binds {
+            Alt+Print { screenshot-window; }
+            Alt+XF86Launch1 { screenshot-window; }
+            Ctrl+Print { screenshot-screen; }
+            Ctrl+XF86Launch1 { screenshot-screen; }
+            Mod+Alt+Down { focus-monitor-down; }
+            Mod+Alt+F { toggle-window-floating; }
+            Mod+Alt+Left { focus-monitor-left; }
+            Mod+Alt+Right { focus-monitor-right; }
+            Mod+Alt+Up { focus-monitor-up; }
+            Mod+Alt+V { switch-focus-between-floating-and-tiling; }
+            Mod+BracketLeft { consume-or-expel-window-left; }
+            Mod+BracketRight { consume-or-expel-window-right; }
+            Mod+C { center-column; }
+            Mod+Ctrl+C { center-visible-columns; }
+            Mod+Ctrl+Down { move-column-to-workspace-down; }
+            Mod+Ctrl+End { focus-column-last; }
+            Mod+Ctrl+F { expand-column-to-available-width; }
+            Mod+Ctrl+Home { focus-column-first; }
+            "Mod+Ctrl+Page_Down" { move-workspace-down; }
+            "Mod+Ctrl+Page_Up" { move-workspace-up; }
+            Mod+Ctrl+R { reset-window-height; }
+            Mod+Ctrl+Up { move-column-to-workspace-up; }
+            Mod+Down { focus-window-down; }
+            Mod+End { focus-column-last; }
+            Mod+Equal { set-column-width "+10%"; }
+            Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
+            Mod+F { maximize-column; }
+            Mod+Home { focus-column-first; }
+            Mod+Left { focus-column-left; }
+            Mod+Minus { set-column-width "-10%"; }
+            Mod+O repeat=false { toggle-overview; }
+            "Mod+Page_Down" { focus-workspace-down; }
+            "Mod+Page_Up" { focus-workspace-up; }
+            Mod+Period { expel-window-from-column; }
+            Mod+Q repeat=false { close-window; }
+            Mod+R { switch-preset-column-width; }
+            Mod+Right { focus-column-right; }
+            Mod+Shift+Alt+Down { move-column-to-monitor-down; }
+            Mod+Shift+Alt+Left { move-column-to-monitor-left; }
+            Mod+Shift+Alt+Right { move-column-to-monitor-right; }
+            Mod+Shift+Alt+Up { move-column-to-monitor-up; }
+            Mod+Shift+Down { move-window-down; }
+            Mod+Shift+E { quit; }
+            Mod+Shift+Equal { set-window-height "+10%"; }
+            Mod+Shift+F { fullscreen-window; }
+            Mod+Shift+Left { move-column-left; }
+            Mod+Shift+Minus { set-window-height "-10%"; }
+            Mod+Shift+P { power-off-monitors; }
+            Mod+Shift+R { switch-preset-window-height; }
+            Mod+Shift+Right { move-column-right; }
+            Mod+Shift+Slash { show-hotkey-overlay; }
+            Mod+Shift+Up { move-window-up; }
+            Mod+T hotkey-overlay-title="Open terminal: kitty" { spawn "${lib.getExe pkgs.kitty}"; }
+            Mod+Tab repeat=false { toggle-overview; }
+            Mod+Up { focus-window-up; }
+            Mod+W { toggle-column-tabbed-display; }
+            Print { screenshot; }
+            XF86Launch1 { screenshot; }
           }
 
-          output "DP-2" {
-            mode "1920x1080"
-            position x=2560 y=0
+          window-rule {
+              match app-id="org.kde.haruna"
+              match app-id="org.kde.gwenview"
+              match app-id="re.sonny.Junction"
+              match app-id="qimgv"
+              match app-id="mpv"
+              match title="Welcome to Android Studio"
+              match title="Welcome to Rider"
+              match title="Welcome to IntelliJ IDEA"
+              match title="Steam Settings"
+              open-floating true
           }
-
-          output "DP-3" {
-            mode "2560x1440"
-            position x=0 y=0
-            focus-at-startup
+          window-rule {
+              match app-id="Emulator"
+              default-column-width { fixed 410; }
+              default-window-height { fixed 912; }
           }
-
-          output "HDMI-A-1" {
-            position x=2560 y=1080
-            scale 1.3
+          gestures {
+            hot-corners { off; };
           }
-
-          screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
-          prefer-no-csd
-          layout {
-              gaps ${builtins.toString cfg.gaps}
-              focus-ring { width 2; }
-              border { off; }
-              default-column-width { proportion 0.5; }
-              center-focused-column "never"
-              always-center-single-column
-          }
-          cursor {
-              xcursor-theme "${cursor.name}"
-              xcursor-size ${builtins.toString cursor.size}
-          }
-          hotkey-overlay { skip-at-startup; }
-
-          binds {
-              Alt+Print { screenshot-window; }
-              Alt+XF86Launch1 { screenshot-window; }
-              Ctrl+Print { screenshot-screen; }
-              Ctrl+XF86Launch1 { screenshot-screen; }
-              Mod+Alt+Down { focus-monitor-down; }
-              Mod+Alt+F { toggle-window-floating; }
-              Mod+Alt+Left { focus-monitor-left; }
-              Mod+Alt+Right { focus-monitor-right; }
-              Mod+Alt+Up { focus-monitor-up; }
-              Mod+Alt+V { switch-focus-between-floating-and-tiling; }
-              Mod+BracketLeft { consume-or-expel-window-left; }
-              Mod+BracketRight { consume-or-expel-window-right; }
-              Mod+C { center-column; }
-              Mod+Ctrl+C { center-visible-columns; }
-              Mod+Ctrl+Down { move-column-to-workspace-down; }
-              Mod+Ctrl+End { focus-column-last; }
-              Mod+Ctrl+F { expand-column-to-available-width; }
-              Mod+Ctrl+Home { focus-column-first; }
-              "Mod+Ctrl+Page_Down" { move-workspace-down; }
-              "Mod+Ctrl+Page_Up" { move-workspace-up; }
-              Mod+Ctrl+R { reset-window-height; }
-              Mod+Ctrl+Up { move-column-to-workspace-up; }
-              Mod+Down { focus-window-down; }
-              Mod+End { focus-column-last; }
-              Mod+Equal { set-column-width "+10%"; }
-              Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
-              Mod+F { maximize-column; }
-              Mod+Home { focus-column-first; }
-              Mod+Left { focus-column-left; }
-              Mod+Minus { set-column-width "-10%"; }
-              Mod+O repeat=false { toggle-overview; }
-              "Mod+Page_Down" { focus-workspace-down; }
-              "Mod+Page_Up" { focus-workspace-up; }
-              Mod+Period { expel-window-from-column; }
-              Mod+Q repeat=false { close-window; }
-              Mod+R { switch-preset-column-width; }
-              Mod+Right { focus-column-right; }
-              Mod+Shift+Alt+Down { move-column-to-monitor-down; }
-              Mod+Shift+Alt+Left { move-column-to-monitor-left; }
-              Mod+Shift+Alt+Right { move-column-to-monitor-right; }
-              Mod+Shift+Alt+Up { move-column-to-monitor-up; }
-              Mod+Shift+Down { move-window-down; }
-              Mod+Shift+E { quit; }
-              Mod+Shift+Equal { set-window-height "+10%"; }
-              Mod+Shift+F { fullscreen-window; }
-              Mod+Shift+Left { move-column-left; }
-              Mod+Shift+Minus { set-window-height "-10%"; }
-              Mod+Shift+P { power-off-monitors; }
-              Mod+Shift+R { switch-preset-window-height; }
-              Mod+Shift+Right { move-column-right; }
-              Mod+Shift+Slash { show-hotkey-overlay; }
-              Mod+Shift+Up { move-window-up; }
-              Mod+T hotkey-overlay-title="Open terminal: kitty" { spawn "${lib.getExe pkgs.kitty}"; }
-              Mod+Tab repeat=false { toggle-overview; }
-              Mod+Up { focus-window-up; }
-              Mod+W { toggle-column-tabbed-display; }
-              Print { screenshot; }
-              XF86Launch1 { screenshot; }
-            }
-
-            window-rule {
-                match app-id="org.kde.haruna"
-                match app-id="org.kde.gwenview"
-                match app-id="re.sonny.Junction"
-                match app-id="qimgv"
-                match app-id="mpv"
-                match title="Welcome to Android Studio"
-                match title="Welcome to Rider"
-                match title="Welcome to IntelliJ IDEA"
-                match title="Steam Settings"
-                open-floating true
-            }
-            window-rule {
-                match app-id="Emulator"
-                default-column-width { fixed 410; }
-                default-window-height { fixed 912; }
-            }
-            gestures {
-              hot-corners { off; };
-            }
-        ''
-        + lib.optionalString isNoctaliaEnabled noctaliaConfig;
+      ''
+      + lib.optionalString isNoctaliaEnabled noctaliaConfig;
     in
     {
       options.my.niri = {
@@ -233,7 +233,7 @@
 
       config = lib.mkIf cfg.enable {
         home.file.".config/niri/config.kdl".text = niriConfig;
-	home.file.".config/niri/noctalia-binds.kdl".text = noctaliaBinds;
+        home.file.".config/niri/noctalia-binds.kdl".text = noctaliaBinds;
         home.packages = with pkgs; [
           xwayland-satellite
 

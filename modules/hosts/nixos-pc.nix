@@ -74,7 +74,13 @@ in
       };
 
     nixos =
-      { pkgs, modulesPath, lib, config, ... }:
+      {
+        pkgs,
+        modulesPath,
+        lib,
+        config,
+        ...
+      }:
       {
         # Use latest kernel.
         boot.kernelPackages = pkgs.linuxPackages_latest;

@@ -24,7 +24,6 @@
         };
       };
 
-
       # Seems to solve some permission issues on containers.
       users.users.${user.userName} = {
         subUidRanges = [
