@@ -27,6 +27,10 @@ in
       # Dev-related config
       dev.android # Configure PATH for Android SKDs. The SKDs are managed via Android Studio.
 
+      # Still required to open dynamically-linked binaries, like from JetBrains Toolbox.
+      # To not depend too much on this, we could refactor to module to expose a small set of libs.
+      dev.libs
+
       # KDE UI elements are rather slow on NixOS, see https://github.com/NixOS/nixpkgs/issues/126590.
       # Sadly, I didn't feel any difference with the workaround, so I'm not doing it anymore.
       desktop.kde
