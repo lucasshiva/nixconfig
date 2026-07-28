@@ -51,7 +51,6 @@
           debug { honor-xdg-activation-with-invalid-serial; }
         '';
         niriBinds = ''
-          binds {
             Mod+Y { spawn "noctalia" "msg" "panel-toggle" "wallpaper"; }
             Mod+Alt+Y { spawn "noctalia" "msg" "wallpaper-random"; }
             Mod+Ctrl+Y { spawn "noctalia" "msg" "wallpaper-previous"; }
@@ -73,7 +72,6 @@
             XF86AudioRaiseVolume { spawn "noctalia" "msg" "volume-up"; }
             XF86MonBrightnessDown { spawn "noctalia" "msg" "brightness-down"; }
             XF86MonBrightnessUp { spawn "noctalia" "msg" "brightness-up"; }
-          }
         '';
       in
       {
