@@ -1,10 +1,11 @@
-{ lib, ... }:
+{ ... }:
 {
   shiv.apps.osu = {
     homeManager =
       {
         config,
         pkgs,
+        lib, # Putting it here due to `lib.hm`.
         ...
       }:
       let
@@ -37,10 +38,12 @@
             pkgs.osu-lazer-bin
           ];
 
-          assertions = lib.optional (cfg.dataDir != "") {
-            assertion = builtins.pathExists cfg.dataDir;
-            message = "osu.dataDir does not exist: ${cfg.dataDir}";
-          };
+          home.activation.checkOsuDataDir = lib.hm.dag.entryBefore [ "linkGeneration" ] ''
+            if [ ! -d "${cfg.dataDir}" ]; then
+              echo "error: osu.dataDir does not exist: ${cfg.dataDir}" >&2
+              exit 1
+            fi
+          '';
 
           home.file.".local/share/osu" = {
             source = lib.mkIf (cfg.dataDir != "") (mkOutOfStoreSymlink cfg.dataDir);
