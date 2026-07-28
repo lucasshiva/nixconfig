@@ -78,13 +78,19 @@ setup_nix() {
         return 0
     fi
 
+    info "Configuring /etc/nix/nix.conf"
+    configure_nix_conf
+
     info "Installing Nix via pacman..."
     sudo pacman -Syu --needed --noconfirm nix
 
     info "Enabling nix-daemon.service..."
     sudo systemctl enable --now nix-daemon.service
 
-    configure_nix_conf
+    # Add a channel and update it to create /nix/store.
+    info "Setting up channel"
+    nix-channel --add https://channels.nixos.org/nixpkgs-unstable
+    nix-channel --update
 
     ok "Nix setup complete."
 }
