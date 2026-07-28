@@ -6,10 +6,11 @@ in
 {
   den.homes.x86_64-linux."${username}@${hostname}" = { };
 
+  # This host/home is usually a CachyOS machine.
+  # Check the `cachyos.sh` script for packages installed via pacman.
   den.aspects.${username}.provides.${hostname} = {
     includes = with shiv; [
       hardware.gpu.nvidia
-
       core.fonts
       services.syncthing
 
@@ -17,26 +18,15 @@ in
       # perfectly, while others might not even run at all.
       apps.osu
       apps.calibre # Works perfectly.
-
-      # Fine, but not on Niri. Moving the window with Super + Mouse makes it disappear but keeps it alive in the background. Certainly a Wine issue.
-      apps.musicbee
-
       apps.junction # Also fine, just had to set it as floating on Niri.
-      apps.zed # Doesn't run perfectly. Complains about emulated GPU.
       apps.kitty # Seems okay.
 
       # Variables for Android SDK.
       dev.android
 
-      /*
-        Some issues with Noctalia Greeter not being to authenticate after coming back from sleep
-        Niri itself seems fine though.
-
-        As for KDE, it is better in some cases, worse in others. In NixOS, I get a basic Qt portal,
-        but in Arch I actually get Dolphin. That's a plus for Arch. However, it seems like KWallet
-        isn't running by default, so I installed gnome-keyring as well. This needs more testing.
-      */
+      # No issues when installing via pacman.
       desktop.niri
+      desktop.noctalia
     ];
 
     homeManager =
@@ -53,18 +43,15 @@ in
         nixpkgs.config.allowUnfree = true;
 
         my.osu = {
-          installPackage = true;
+          installPackage = false; # Will install via pacman/yay
           dataDir = "${appsDir}/osu";
         };
 
         my.calibre.settingsDir = "${appsDir}/Calibre/Calibre Settings";
-        my.musicbee.appDir = "${appsDir}/MusicBee";
-        my.kitty.shell = config.programs.fish.package;
 
-        home.packages = with pkgs; [
-          keepassxc
-          obsidian
-        ];
+        # I will probably move kitty to pacman as well, just in case it needs better GPU support.
+        # But this means a slight refactor of its aspect.
+        my.kitty.shell = config.programs.fish.package;
 
         targets.genericLinux = {
           # Fixes generic Linux integration (icons, XDG base directories, etc.)
@@ -72,7 +59,7 @@ in
 
           # Automatically handles linking GPU drivers and OpenGL for non-NixOS
           gpu.enable = true;
-          gpu.nvidia.enable = false;
+          #gpu.nvidia.enable = false;
         };
       };
   };
