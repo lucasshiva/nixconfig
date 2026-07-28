@@ -15,7 +15,8 @@
       inputs.nixpkgs-lib.follows = "nixpkgs-lib";
     };
 
-    den.url = "github:denful/den";
+    # See https://github.com/denful/den/issues/639.
+    den.url = "github:denful/den?rev=84b514929d25c7b2f8e9cfba5ff87d395c2b9263";
     import-tree.url = "github:vic/import-tree";
 
     noctalia.url = "github:noctalia-dev/noctalia/cachix";
