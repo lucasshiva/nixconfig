@@ -44,7 +44,7 @@ in
 
         my.osu = {
           installPackage = false; # Will install via pacman/yay
-          dataDir = "${appsDir}/osu";
+          dataDir = "${appsDir}/osu!";
         };
 
         my.calibre.settingsDir = "${appsDir}/Calibre/Calibre Settings";

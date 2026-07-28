@@ -8,8 +8,8 @@
         ...
       }:
       let
+        inherit (config.lib.file) mkOutOfStoreSymlink;
         cfg = config.my.osu;
-        mkOutOfStoreSymlink = config.lib.file.mkOutOfStoreSymlink;
       in
       {
         options.my.osu = {
@@ -37,9 +37,15 @@
             pkgs.osu-lazer-bin
           ];
 
-          home.file.".local/share/osu".source = lib.mkIf (cfg.dataDir != "") (
-            mkOutOfStoreSymlink cfg.dataDir
-          );
+          assertions = lib.optional (cfg.dataDir != "") {
+            assertion = builtins.pathExists cfg.dataDir;
+            message = "osu.dataDir does not exist: ${cfg.dataDir}";
+          };
+
+          home.file.".local/share/osu" = {
+            source = lib.mkIf (cfg.dataDir != "") (mkOutOfStoreSymlink cfg.dataDir);
+            recursive = true;
+          };
         };
       };
   };
